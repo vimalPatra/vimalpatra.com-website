@@ -1,0 +1,754 @@
+
+/*===================================
+        =custom css
+====================================*/
+
+
+/* Parallax base styles  =parallax
+--------------------------------------------- */
+
+.parallax {
+    position: relative;
+    width: 100%;
+
+    &__group{
+        padding: .1px 0;
+
+        &:nth-child(odd) .parallax__layer .main{
+            float: right;
+            margin-right: 1.5em;
+        }
+        &:nth-child(even) .parallax__layer .main{
+            float: left;
+            margin-left: 1.5em;
+        }
+        
+
+    }
+
+    &__layer{
+
+
+        .main .sectionDesc{
+            font-size: 1.3em;
+
+            @media all and (min-width: 768px){
+                    font-size: 1.2em;
+            }
+        }
+
+
+        .main .detailedDesc{
+                font-size: 1.2em;
+
+            @media all and (min-width: 768px){
+                    font-size: .95em;
+            }
+        }
+
+
+    
+        &--base{
+            margin-bottom: 7rem;        
+        }
+
+        #group1 &--fore{
+            margin-top: 5rem;
+        }
+
+        >.title{
+            max-width: 180px;
+            // height: auto;
+            margin-top: 2rem;
+            margin-bottom: -2rem;
+            position: relative;
+            padding: 1rem 1.5rem;
+            display: inline-block;
+            text-transform: uppercase;
+            text-align: center;
+            z-index: 2;
+            font-size: 2.3rem;
+            line-height: 1.5em;
+
+            @media all and (min-width: 768px){     
+                    max-width: 240px;
+            }
+
+            &:after{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding-bottom: 100%;
+                background: rgba(255,255,255,.2);
+                /*transform: skewX(15deg);*/
+                box-shadow: 0.3125rem 0.3125rem 1.25rem rgba(0,0,0,.4);
+                z-index: -1;
+                border:5.5px solid transparent;
+            }
+
+        }
+
+        
+        .background{
+            padding: 0;
+            z-index: 1;
+        }
+        .background__wrapper{
+            padding-bottom: 40%;
+        }
+
+        .main{
+            // position: absolute;
+            top: 0;
+            margin-top: 8rem;
+            font-size: 1em;
+            padding: 1rem 1.5rem;
+            z-index: 11;
+            /*top: 20%;*/
+
+            @media all and (min-width: 768px){
+                    font-size: 1em;
+                    padding: 1rem 2.5rem;
+                    /*top: 20%;*/
+            }
+
+            .parallax__group.skills &{
+                position: relative;
+            }
+        }
+
+
+        .background__wrapper{
+            position: relative;
+            
+        }
+
+        
+        .main:after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            
+            // border-radius: 28px;
+            box-shadow: 5px 5px 80px rgba(0,0,0,.4);
+            z-index: -10;
+            padding-bottom: 40%;
+        }
+
+        .main:after{
+            // border-radius: 4px;
+            bottom: 0;
+            background: white;
+            border:5.5px solid transparent;
+        }
+
+        
+        .background .pattern{
+            position: relative;
+
+            &:after{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+
+                padding-bottom: 40%;
+                /*background: red;*/
+                opacity: 1;
+                border-radius: 4px;
+                overflow: hidden;
+                box-shadow: 5px 5px 80px rgba(0,0,0,.4);
+
+            }
+
+            /* =introduction pattern */
+            .parallax__group.introduction &:after{
+                background-color: transparent;
+                background-size: 100px 15px;
+                background-position: 0px 16px;
+
+                background-image: 
+                  linear-gradient(180deg, transparent  5px, hsl(34,87%,81%) 5px, 
+                                  hsl(34,87%,81%) 8px, transparent 8px);
+
+                /* background-position: 0px 2px, 4px 35px, 29px 31px, 33px 6px,
+                0px 36px, 4px 2px, 29px 6px, 33px 30px; */      
+            } 
+
+            /* =experience pattern */
+            .parallax__group.experience &:after{   
+              /*background:rgba(255,255,255,.5);*/
+              background: linear-gradient(
+                            30deg,
+                            rgba(255,255,255,0) 6px,
+                            hsl(33,35%,64%) 7px,
+                            hsl(33,35%,64%) 8.5px,
+                            rgba(255,255,255,0) 8.5px
+                          ) repeat,
+                            
+                            linear-gradient(
+                            -30deg,
+                            rgba(255,255,255,0) 6px,
+                            hsl(33,35%,64%) 6px,
+                            hsl(33,35%,64%) 7.5px,
+                            rgba(255,255,255,0) 8.5px
+                          ) repeat ;
+
+              // background-color: white;
+              background-size: 28px 20px;
+            }
+
+            /* =currentState pattern */
+            .parallax__group.currentState &:after{   
+                
+                background: linear-gradient(135deg, transparent 22px,
+                             hsl(34,87%,81%) 22px,
+                             hsl(34,87%,81%) 24px,
+                             transparent 24px,
+                             transparent 67px,
+                              hsl(34,87%,81%) 67px,
+                              hsl(34,87%,81%) 69px,
+                              transparent 69px
+                            ),
+
+                           linear-gradient(225deg, transparent 22px,
+                             hsl(34,87%,81%) 22px,
+                             hsl(34,87%,81%) 24px,
+                             transparent 24px,
+                             transparent 67px,
+                              hsl(34,87%,81%) 67px,
+                              hsl(34,87%,81%) 69px,
+                              transparent 69px
+                            ) 0px 64px;
+
+                            // background-color:rgba(255,255,255,0);
+                            background-size: 64px 128px;
+            }
+
+            .parallax__group.skills &:after{
+                  background:transparent;
+                  background: linear-gradient(
+                    45deg,
+                    transparent 70.5px,
+                    hsl(33,35%,64%) 70.5px,
+                    hsl(33,35%,64%) 72px,
+                    transparent 72px
+                  ) repeat,
+                    
+                    linear-gradient(
+                    -45deg,
+                    transparent 70.5px,
+                    hsl(33,35%,64%) 70.5px,
+                    hsl(33,35%,64%) 72px,
+                    transparent 72px
+                     ) repeat
+                    
+                    ;
+                  background-color: white;
+                  background-size: 100px 100px;
+            }
+
+
+        }
+
+    }
+
+
+}
+
+
+/* =technology list inside skills-parallax__group */
+.technologies{
+
+    .list__container{
+        height: 150px;
+        overflow: hidden;
+        transition: all .5s;
+        position: relative;
+        box-shadow: inset 0 4px 10px -2px rgba(0,0,0,.3);
+        padding: 1rem;
+
+        >.icon__container{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: hsl(37,82%,93%) ;
+            border: 2px solid hsl(33,35%,78%);
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 28px;
+            box-shadow: 5px 5px 10px 2px rgba(0,0,0,.2);
+            transition: all .4s;
+            cursor: pointer;
+            z-index: 10;
+
+            &:hover{
+                box-shadow: 0px 3px 10px 0px rgba(0,0,0,.2);
+            }
+
+            .icon{
+                font-size: 1rem;
+                /*padding-left: .1em;*/
+                text-shadow: 3px 4px 2px rgba(0,0,0,.2);
+            }
+
+        }
+
+        .list__order__desc{
+            display: inline-block;
+            overflow: hidden;
+            padding: 1em 2em 0;
+            font-size: .95rem;
+            color: hsl(33,35%,60%);
+        }
+
+    }
+
+    ul{
+        position: relative;
+
+        .arrow{
+            position: absolute;
+            display: block;
+            height: calc(100% - 1rem);
+            width: 3px;
+            background: hsl(37,82%,79%);
+            right: calc(100% - 5px);
+            box-shadow: 6px 5px 5px rgba(0,0,0,.15);
+
+            span{
+                display: inline-block;
+            }
+
+        }
+
+    }
+
+    .wrapper--arrow{
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .icon{
+            position: absolute;
+            height: 10px;
+            bottom: 0;
+            /*width: 10px;*/
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: hsl(37,82%,79%);
+            font-size: 1.5rem;
+            text-shadow: 6px 5px 5px rgba(0,0,0,.15);
+        }
+    }
+
+    .technologyList{
+        position: relative;
+        margin-top: 1em;
+        padding-left: 2.5rem;
+
+        li{
+            display: block;
+            border: 1px solid rgba(179,179,179,1);
+            box-shadow: 0 4px 10px rgba(0,0,0,.05);
+            border-top: none;
+            /*border-bottom: none;*/
+            margin: 3px 5px 10px 0;
+            padding: 1rem;
+        }
+
+    }
+
+    .listHeading{
+        font-size: 1.35rem;
+        text-transform: uppercase;
+        overflow: visible;
+
+        .text{
+            display: inline-block;
+            position: relative;
+            padding-bottom: 4px;
+        }
+    }
+
+    >section{
+        margin-bottom: 2.5rem;
+    }
+
+}
+
+
+/* =services / =group5 */
+
+.services{
+
+    .heading--section{
+        font-size: 1em;
+    }
+
+    .content--section{
+        // font-size: .9em;
+    }
+
+    .list--job__titles{
+        list-style: none;
+        padding:0;
+        margin: 0;
+        margin-bottom: 1.3rem;
+
+        .listHeading{
+            margin: 0;
+            font-size: 1em;
+            margin-top: 1em;
+            margin-bottom: .5em;
+        }
+
+        li{
+            /*padding-left: 10%;*/
+            margin-left: 10%;
+            margin-bottom: .3em;
+            position: relative;
+
+            &:before{
+                content: "\f487";
+                left: -35px;
+                font-family: "Ionicons";
+                position: absolute;
+            }
+        
+        }
+    
+    }
+
+}
+
+
+/* =contact / =group6 */
+
+.contact{
+
+    .main .sectionDesc{
+        font-size: 1.2em;
+    }
+
+    .formContainer{
+        text-transform: capitalize;
+       /*background: red;*/
+       /*border: 4px solid silver;*/
+
+    }
+
+    .formFieldWrapper{
+        /*width: 100%;*/
+        position: relative;
+        margin: 0.3125rem 0 2.5rem;
+        padding: 0.25rem 0.125rem;
+
+        >label{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /*background: red;*/
+            cursor: pointer;
+            text-align: center;
+            line-height: 3.125rem;
+            z-index: 4;
+            transition: all .3s;
+            font-size: 1.1rem;
+            line-height: 3.125rem;
+            transform: translateY(0);
+            /*z-index: -1;*/
+            z-index: -1;
+        }
+
+        >.element{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            text-align: center;
+            line-height: 3.125rem;
+            z-index: -1;
+        }
+        >.element--1{
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right,
+               rgb(117,117,117) 10%,
+               transparent 10%,
+               transparent 90%,
+               rgb(117,117,117) 90%
+            ) 1 stretch;
+            transform: scaleX(1);
+            transition: all .3s;
+        }
+        >.element--2{
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right,
+               transparent 10%,
+               rgb(117,117,117) 10%,
+               rgb(117,117,117) 90%,
+               transparent 90%
+            ) 1 stretch;
+            transition: all .3s;
+        }
+
+    }
+
+    input,
+    textarea,
+    select{
+        width: 100%;
+        display: block;
+        border: none;
+        padding: 0 2em;
+        height: 3.125rem;
+        color: rgb(0,0,0);
+        font-size: 1.2rem;
+        font-family: 'Poiret One', sans-serif;
+        font-weight: 900;
+        text-transform: capitalize;
+        letter-spacing: .08em;
+        line-height: 3.5rem;
+        text-align: center;
+        background: transparent;
+
+        transition: background .15s;
+
+    }
+
+    textarea{
+        padding: .5em;
+        line-height: 1.6em;
+        resize: none;
+        height: 200px;
+    }
+
+    input[type="email"]{
+        text-transform: lowercase;
+    }
+    input[type="email"]:first-letter{
+        text-transform: uppercase;
+    }
+    select{
+        cursor: pointer;
+    }
+    option{
+        font-size: 1.5rem;
+        font-weight: 100;
+        font-family: 'Josefin Sans', sans-serif;
+        text-transform: capitalize;
+        background: hsla(37,82%,95%,1);
+    }
+
+    input:focus, input.focused,
+    textarea:focus, textarea.focused,
+    select:focus, select.focused{
+        background: hsla(37,82%,95%,.6);
+        outline: 2px solid hsla(37,82%,90%,1);
+        transition: background .3s .15s;
+    }
+    input:focus,
+    textarea:focus,
+    select:focus{
+        box-shadow: 0 5px 10px 0px hsla(37,82%,80%,.7);
+        transition: box-shadow .3s ;
+    }
+    input:focus ~ label, input.focused ~ label,
+    textarea:focus ~ label, textarea.focused ~ label,
+    select:focus ~ label, select.focused ~ label{
+        transform: translateY(-2.5rem);
+    }
+
+    input:focus ~ .element--1, input.focused ~ .element--1,
+    textarea:focus ~ .element--1, textarea.focused ~ .element--1,
+    select:focus ~ .element--1, select.focused ~ .element--1{
+        transform: scaleX(1.04);
+    }
+
+    input:focus ~ .element--2, input.focused ~ .element--2,
+    textarea:focus ~ .element--2, textarea.focused ~ .element--2,
+    select:focus ~ .element--2, select.focused ~ .element--2{
+        opacity: 0;
+    }
+    
+    .submit--cf{
+        background: none;
+        padding: .4em 1.5em;
+        border:none;
+        background: hsla(37,82%,95%,.6);
+        background: hsla(37,82%,99%,1);
+        color: rgb(0,0,55);
+        text-shadow: .5px .5px 0 rgba(0,0,0,.3),
+                    2px 2px 1px rgba(0,0,0,.4),
+                    3px 3px 1px rgba(0,0,0,.2),
+                    4px 4px 1px rgba(0,0,0,.1)
+        ;
+
+        font-weight: 900;
+        font-size: 1.2rem;
+        margin: 1em 0 2em;
+        cursor: pointer;
+        transition: all .3s;
+        box-shadow: 5px 5px 10px 0px rgba(0,0,0,.3);
+    }
+    .submit--cf:hover,
+    .submit--cf:focus{
+        background: hsla(37,82%,99%,1);
+        background: hsla(37,82%,95%,.6);
+        box-shadow: -5px -5px 10px 0px rgba(0,0,0,.3);
+        outline: none;
+    }
+}
+
+
+/* =work / =group7 */
+.work{
+
+    .parallax__layer{
+
+        >.title{
+            &:after{
+                padding-bottom: 0;
+            }
+        }
+
+        &--base{
+            margin-top: 0px;
+        }
+
+    }
+
+    .main{
+        margin-right: 0;
+        right: -17%;
+    }
+
+    &__tiles{
+        margin-bottom: 20px;
+
+        .view >.holder{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+
+            >*,
+            iframe{
+                height: 100% !important;
+            }
+
+        }
+
+        .wrapper--more__buttons{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);  
+            padding: 0 15px; 
+        }
+
+        .wrapper--more__buttons .button__container{
+           padding: 0 5px;
+        }
+
+        .more{
+            height: 3.75rem;
+            background: rgb(249,249,249);
+            border: 1px solid rgb(237,237,237);
+            border-top: none;
+            border-radius: 0 0 3px 3px;
+
+            .button{
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                /*vertical-align: bottom;*/
+                height: 2.5rem !important;
+                background: white;
+                border: 1px solid rgb(249,214,166) ;
+                border-radius: 4px;
+                line-height: 1em;
+                cursor: pointer;
+                padding: 0;
+                font-size: .8rem;
+                overflow: hidden;
+
+
+                &:after{
+                    content: "\f39c";
+                    line-height: 2.5rem;
+                    font-size: 1rem;
+                    color: rgb(81,81,81);
+                    text-align: center;
+                    font-family: "Ionicons";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    background: red;
+                    background: linear-gradient(
+                          45deg, 
+                          rgba(255,255,255,.8),
+                          rgba(253, 245, 232,.8)
+                        );
+                    opacity: 0;
+                    transition: all 0.3s; 
+                }
+
+                &__work--case__study:after{
+                    content: "\f133";
+
+                }
+                &__work--case__study.locked:after{
+                    content: "\f306";
+                }
+
+                &.locked:after{
+                    content: "\f457";
+                }
+
+                &:hover:after{
+                    opacity: 1;
+                }
+
+                .icon{
+                    font-size: 1em;
+                }
+
+
+            }
+
+        }
+    
+    }
+
+    /* =type-specific work__tiles stylings */
+    &__tiles--my__projects .view{
+        position: relative;
+        height: 0;
+        padding-top: 56.25%;
+    }
+    &__tiles--my__work .view{
+        position: relative;
+        height: 0;
+        padding-top: 100%;
+    }
+
+}
+
+
+

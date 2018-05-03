@@ -1,0 +1,76 @@
+
+/*****
+**           =html 
+** optimal minimum width
+****/
+
+html{
+    min-width: 240px;
+    min-width: 15rem;
+
+    font-size: 16px;
+    font-size: .8rem;
+    /*font-size: 2vw; */
+}
+
+@media all and (min-width: 768px){
+    html{
+        font-size: 16px;
+        font-size: 1em;
+    }
+}
+
+        /* =body */
+body{
+    font-size: 1rem;
+    position: relative;
+    line-height: 1.618em;
+    font-family: "Alegreya Sans","Lucida Sans","Times New Roman",sans-serif;
+    font-weight: 400;
+    color: #000;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;   
+    /*overflow-y: scroll;*/
+    transition: all 0.25s; 
+    width: 100%;        
+}
+
+
+/***************
+*******    =wrap
+***************/
+body> #wrap{
+    width: 100%;
+    padding: 0 ;
+    backface-visibility: hidden;
+    position: relative;
+    background: rgba(255,255,255,.3);
+}
+
+#wrap:after{
+    display: block;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background: url("../img/background/1077-compressed.svg");
+    background-size:250% 100%;
+    background-position: 50% 0%;
+    opacity: .08;
+    z-index: -1;
+}
+@media all and (min-width: 768px){
+    #wrap:after{
+        background-size: 65%;
+        background-position: 50% 0%;
+        opacity: .08;
+        z-index: -1;
+    }
+}
+
+
+/* basic code shell css ends*/
+

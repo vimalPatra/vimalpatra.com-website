@@ -1,0 +1,21 @@
+// This is the single file output by sass. It is intended to ONLY @import other files.
+
+body{
+    background: black;
+}
+
+
+// BASE
+
+@import 'modules/vars';
+@import 'modules/base';
+@import 'modules/helper';
+
+
+// MODULES
+@import 'modules/utils'; // stores utility styles ( also base styles for text and links)
+@import 'modules/body'; // base body styles
+@import 'modules/header'; // header styles
+@import 'modules/footer'; //  styles
+@import 'modules/parallax-groups'; // all parallax groups' (sections) styles  
+@import 'modules/borders'; // border utilities

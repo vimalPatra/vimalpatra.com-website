@@ -1,0 +1,55 @@
+"content": {
+	"sections":{
+		"about": {
+			"sectionDescription": "",
+			"detailedDescription": ""
+		},
+		"experience": {
+			"sectionDescription": "",
+			"detailedDescription": ""
+		},
+		"services": {
+			"sectionDescription": "",
+			"jobTitles": []
+		},
+		"contact": {
+			"sectionDescription": "",
+			"otherContent": []
+		}
+	},
+	"skills": {
+		"using": [],
+		"workingUpon": [],
+		"future": []
+	},
+	"contact":{
+		"email": "connect@vimalpatra.com",
+		"linkedin": "facebook.com",
+		"codepen": "codepen.com",
+		"github": "github.com"
+	},
+	"showcase":{
+		"projects":{
+			"projectName":{
+				"link": null,
+				"pen": null
+			}
+		},
+		"myWork":{
+			"workName": {
+				"link": null,
+				"pen": null
+			}
+		}
+	},
+	"caseStudies":{
+		"caseName":{
+			"url": null,
+			"content": null,
+			"images": []
+
+		}
+	}
+
+},
+"html": {}

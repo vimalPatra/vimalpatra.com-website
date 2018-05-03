@@ -1,0 +1,1022 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script>
+            var dateNow = Date.now();
+
+            window.mobileAndTabletCheck = function() {
+            var check = false;
+            (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+
+                return check;
+            };
+
+            if (!mobileAndTabletCheck()) {
+                window.isMobileTablet = false;
+                window.htmlTag = document.getElementsByTagName("html")[0];
+                htmlTag.className += "  notMobile";
+            }else{
+                window.isMobileTablet = true;
+            }
+        </script>
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        
+        <!-- <link href="https://fonts.googleapis.com/css?family=Abel|Amaranth:400,400i,700,700i|Arvo:400,400i,700,700i|Cabin:400,400i,500,500i,600,600i,700,700i|Fjalla+One|Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i|Josefin+Slab:100,100i,300,300i,400,400i,600,600i,700,700i|Karla:400,400i,700,700i|Kreon:300,400,700|Nixie+One|Poiret+One|Questrial|Reem+Kufi|Spinnaker|Syncopate:400,700|Voltaire|Zilla+Slab+Highlight:400,700|Zilla+Slab:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i|Poiret+One|Voltaire" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600,700|Kumar+One+Outline" rel="stylesheet">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        
+        <link rel="stylesheet" href="css/vendor.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <script id="helpboxTemplate" type="text/template">
+            <div id="helpbox" class="popups border1 border--5px col-xs-10 col-sm-8 col-md-6 " >
+                <div class="wrapper wrapper--helpbox">
+                    <div class="close">
+                        <div class="icon ion-ios-close-outline"></div>
+                    </div>
+                    <h4 class="popup__heading subject font--heading  center__children">
+                        <span class="helpFor">HELP FOR: </span><span class="heading--underlined text">%subject%</span>
+                    </h4>
+                    <div class="data font--primaryText">
+                        <p class="text">%text%</p>
+                        <div class="other">%other%</div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script id="modalTemplate" type="text/template">
+            <div id="modal" class="popups border2 border--5px col-xs-10 col-sm-8 col-md-6 ">
+                <div class="face top border2 border--5px"></div>
+                <div class="face bottom border2 border--5px"></div>
+                <div class="face left border2--alt border--5px"></div>
+                <div class="face right border2--alt border--5px"></div>
+                <div class="wrapper wrapper--modal">
+                    <div class="close">
+                        <div class="icon ion-ios-close-outline"></div>
+                    </div>
+                    <h4 class="popup__heading title font--heading  center__children">
+                        <span class="text">%title%</span>
+                    </h4>
+                    <div class="data font--primaryText">
+                        %data%
+                    </div>
+                    
+                </div>
+            </div>
+        </script>
+        
+        <script id="getAQuoteTemplate" type="text/template">
+            <div id="get_a_quote" class="form__container">
+                <form action="">
+                    <div class="form__field__block">
+                        <label for="qName">name</label>
+                        <input required id="qName" type="text">
+                    </div>
+                    <div class="form__field__block">
+                        <label for="qMail">e-mail address</label>
+                        <input required id="qMail" type="email">
+                    </div>
+                    <div class="form__field__block show__if__india">
+                        <label for="qPhone">phone number (without country code +91)</label>
+                        <input id="qPhone" type="text">
+                    </div>
+                    <div class="form__field__block">
+                        <label for="qWorkType">what kind of work</label>
+                        <input required id="qWorkType" type="text">
+                    </div>
+                    <div class="form__field__block">
+                        <label for="qWorkDesc">give a brief</label>
+                        <textarea id="qWorkDesc"></textarea>
+                    </div>
+                    <div class="form__field__block--big--container changeable">
+                        <div class="form__field__block">
+                            <div class="text text--toggle" data-toggle="0">
+                                my project is a fixed price project
+                            </div>
+                            <div class="text text--toggle" data-toggle="1">
+                                my project is an hourly based project
+                            </div>
+                            <button class="toggle toggle--form__field__block toggle--project__type">
+                                <span class="hole"></span>
+                                <span class="mover"></span>
+                            </button>
+                        </div>
+                        
+                        <div data-toggle="0" class="form__field__block--big form__field__block--toggle">
+                            <div class="form__field__block">
+                                <label for="qBudget">Budget (approx.)</label>
+                                <input required id="cBudget" type="number">
+                            </div>
+                            <div class="form__field__block">
+                                <label for="qDuration">
+                                    Duration for the project completion (approx.)
+                                </label>
+                                <input required id="cDuration" type="text">
+                            </div>
+                        </div>
+                        <div data-toggle="1" class="form__field__block--big form__field__block--toggle">
+                            <div class="form__field__block">
+                                <label for="qHourlyBudget">Budget (approx.)</label>
+                                <input required id="qHourlyBudget" type="number">
+                            </div>
+                            <div class="form__field__block">
+                                <label for="qHoursPerDay">you want me working for </label>
+                                <input required id="qHoursPerDay" type="text">
+                            </div>
+                            <div class="form__field__block">
+                                <label for="qTotalApproxTime">total number of hours you assume your work might need (leave blank if you aren't sure)</label>
+                                <input id="qTotalApproxTime" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </script>
+        
+        <!-- Add your site or application content here -->
+        <div id="wrap">
+
+            <header id="header">
+                <div class="branding logoContainer">
+                    <a href="index.html" class="logo link anchor ">
+                        <span class="firstName">Vimal </span>
+                        <br> 
+                        <span class="lastName">Patra</span>
+                    </a>
+                </div>
+                <div class="clear" style="clear:both;" ></div>
+                
+                <nav class="nav--main font--primaryText ">
+                    <div class="wrapper wrapper--nav__main">
+                        <div data-toggle="nav--main" class="icon icon--toggle icon--pull ion-navicon border--3px border1--alt">
+                        </div>
+                        <div data-toggle="nav--main" class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
+                        </div>
+                        <div class="list__container list__container--main__nav">
+                            <ul class="list--main__nav clearfix border1 border--3px">
+                                <li>
+                                    <a data-hash_scroll_to="#about" href="#about" class="navActiveEffect navHoverEffect link link--scroll">about</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#experience" href="#experience" class="navHoverEffect link link--scroll">experience</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#services" href="#services" class="navHoverEffect link link--scroll">services</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#contact" href="#contact" class="navHoverEffect link link--scroll">contact</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#showcase" href="#showcase" class="navHoverEffect link link--scroll">work</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="getAQuote" class="navHoverEffect link link--open__modal">get a quote</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- <nav class="mob__nav--main font--primaryText ">
+                    <div class="wrapper wrapper--nav__main">
+                        <div data-toggle="mob__nav--main" class="icon icon--toggle icon--pull ion-navicon border--3px border1--alt">
+                        </div>
+                        <div data-toggle="mob__nav--main" class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
+                        </div>
+                        <div class="list__container list__container--mob__nav">
+                            <ul class="list--main__nav clearfix border1 border--3px">
+                                <li>
+                                    <a data-hash_scroll_to="#about" href="#about" class="navActiveEffect navHoverEffect link link--scroll">about</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#experience" href="#experience" class="navHoverEffect link link--scroll">experience</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#services" href="#services" class="navHoverEffect link link--scroll">services</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#contact" href="#contact" class="navHoverEffect link link--scroll">contact</a>
+                                </li>
+                                <li>
+                                    <a data-hash_scroll_to="#showcase" href="#showcase" class="navHoverEffect link link--scroll">work</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="getAQuote" class="navHoverEffect link link--open__modal">get a quote</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                 -->
+            </header>
+        
+            
+
+            <div id="parallax" class="parallax">
+
+                <div id="group1" class="parallax__group introduction">
+                    <!-- <div class="parallax__layer parallax__layer--deep-back clearfix">
+                        
+                    </div> -->
+                    <div class="parallax__layer parallax__layer--fore clearfix">
+                        <h1 class="title border1 font--heading col-xs-offset-1 col-xs-10 col-md-offset-3 col-sm-3 col-md-2">
+                        <!-- Hi, <br> --> my<br>name is<br>Vimal Patra
+                        </h1> 
+                    </div>
+                    <div id="introduction" class="parallax__layer parallax__layer--base clearfix">
+                        
+                        <div class="background col-md-offset-4 col-md-8">
+                            <div class="background__wrapper wrapper">
+                                
+                                <div class="pattern col-md-12"></div>
+                                <div class="shine col-md-12"></div>
+
+                                <section class="main border1--alt col-md-9">
+                                    <div class="wrapper">
+                                        <h2 class="sectionDesc font--primaryText">
+                                            I have expertise in <strong>Front-End Web Development</strong> with my primary focus on building unique, creative and intuitive <strong>UI/UX</strong> that makes your content / application more appealing and engaging.
+                                        </h2>
+                                        <h2 class="detailedDesc font--secondaryText hidden-xs">
+                                            With a Bachelors Degree in CS. I am indulged in frontend of the web although i am also looking forward to opportunities to work in backend & mobile development in the future with an intriguing eye and interest for the technologies Node JS & React Native for the respective areas. With a further look into the future, thinking of what more can i get myself into, comes to my mind; Game Development and maybe even AI
+                                        </h2>
+                                    </div>
+                                </section>        
+                                
+                            </div>
+                        </div>
+                    </div>
+                      
+                </div>
+
+                <div id="group2" class="parallax__group experience">
+
+                    <div class="parallax__layer parallax__layer--fore clearfix">
+                        <h2 class="title border2 font--heading col-md-offset-7 col-sm-3 col-md-2">
+                            my work<br>experie<br>nce
+                        </h2>
+                    <!-- <div class="title">Background Layer 2</div> -->
+                    </div>
+                    <div id="experience" class="parallax__layer parallax__layer--base clearfix">
+                        <div class="background col-md-8 ">
+                            <div class="wrapper background__wrapper">
+                                
+                                <div class="pattern col-md-12"></div>
+                                <div class="shine col-md-12"></div>
+
+                                <section class="main border2--alt col-md-9">
+                                    <div class="wrapper">
+                                        <h2 class="sectionDesc font--primaryText">
+                                           I have been coding with the basic frontend web stack ( HTML, CSS, JS ) for about <strong>1.5 years</strong> but It's been two year since i coded my first HTML page and really glad that i did :)
+                                        </h2>
+                                        <h3 class="detailedDesc font--secondaryText hidden-xs">
+                                           I have been planning, coding and laying out <strong>responsive and bombproof web designs</strong> with the best of my thoughts and creativity. 
+                                           <br>creating interactions, AJAX solutions for small web apps, animating on web ( so yes, maybe I am also an web animator :> ).
+                                        </h3>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="group3 " class="parallax__group currentState">
+                      
+                    <div class="parallax__layer parallax__layer--fore clearfix">
+                        <h2 class="title border3 font--heading col-md-offset-3 col-sm-3 col-md-2">
+                            my<br>current<br>state of<br>affairs
+                        </h2>
+                    </div>
+
+                    <div class="parallax__layer parallax__layer--base clearfix">
+                        <div class="background col-md-offset-4 col-md-8">
+                            <div class="wrapper background__wrapper">
+                                
+                                <div class="pattern col-md-12"></div>
+                                <div class="shine col-md-12"></div>
+                                <section class="main  border3--alt col-md-9">
+                                    <div class="wrapper">
+                                        <h2 class="sectionDesc font--primaryText">
+                                           As of now, I am working and committed to a self owned startup, <strong>Webkrushers</strong> with a few people.
+                                           and I have certain future plans for various projects. 
+                                        </h2>
+                                        <h3 class="detailedDesc font--secondaryText hidden-xs">
+                                            Web/App based projects For e.g.; a portal or platform like Facebook, Medium ?  A framework like jQuery, Bootstrap ? ( Hmm... Saying it like so may feel a lil exaggerating.. Or Not? :> ). If you would like to talk more about of these things, then head over to the contact section.
+                                            But Right now I am just spending contributing to my startup because it is the gateway and a balancing stick between my passion and maintaining finances for all the aspiring things that I want to do. If you are curious, and have come so far reading it, Or If you're not, consider this an adjuration and visit my startup website <a  href="webkrushers.com/about">webkrushers.com about page</a> to know what its all about.
+                                        </h3>
+                                    </div>
+                                </section>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="group4" class="parallax__group skills">
+                     
+                     <div class="parallax__layer parallax__layer--fore">
+                            <h2 class="title border1--alt font--heading col-md-offset-8 col-sm-3 col-md-2">
+                                Skills<br>Or<br>Techno<br>logies I Use 
+                            </h2>
+                      </div>
+
+                      <div id="skills" class="parallax__layer parallax__layer--base clearfix">
+                            <div class="background col-md-9">
+                                <div class="wrapper background__wrapper">
+
+                                    <div class="pattern col-md-12"></div>
+                                    <div class="shine col-md-12"></div>
+                                    <section class="main border1 col-md-9">
+                                        <div class="technologies ">
+                                            <section>
+                                                <h2 class="listHeading font--heading">
+                                                    <span class="text heading--underlined">technologies i use right now...</span>
+                                                </h2>
+                                                
+                                                <div id="proficientSkills" class="list__container">
+                                                    <div class="icon__container expand">
+                                                        <span class="icon ion-arrow-down-b"></span>
+                                                    </div>
+
+                                                    <ul class="technologyList iUse font--primaryText">
+
+                                                        <li>HTML 5</li>
+                                                        <li>CSS 3</li>
+                                                        <li>CSS Preprocessor ( SASS, SCSS )</li>
+                                                        <li>Bootstrap 3, Bootstrap 4 ( CSS Frameworks )</li>
+                                                        <li>CSS Flexbox, CSS Grids ( CSS Layout Model )</li>
+                                                        <li>Material Design Lite, Materialize CSS ( Material Design Framework )</li>
+                                                        <li>JavaScript & jQuery ( with AJAX / JSON / REGEX )</li>
+                                                        <li>jQuery UI</li>
+                                                        <li>jQuery Mobile</li>
+                                                        <li>Angular JS</li>
+                                                        <li>GSAP ( Web Animation Framework )</li>
+                                                        <li>Scrollr JS, ScrollMagic ( Scroll Animation Framework )</li>
+                                                        <li>Grunt, Gulp and NPM ( Frontend Build Tools )</li>
+                                                        <li>Wordpress</li>
+                                                        <li>Wordpress Theme Development</li>
+                                                        <li>SEO, SEM ( Digital Marketing Skill ) <div class="help">why this?</div></li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <h2 class="listHeading font--heading">
+                                                    <span class="helpbox__subject text heading--underlined">Ones i am still improving upon</span> 
+                                                    <div data-bind="skillsImprovingUpon" class="open__helpbox">what does it mean ?</div>
+                                                </h2>
+                                                <div id="goodSkills" class="list__container">
+                                                    <span class="list__order__desc font--secondaryText">In Increasing order of "How long before it makes it to the skills list above" from top to bottom.</span>
+
+                                                    <div class="icon__container expand">
+                                                        <span class="icon ion-arrow-down-b"></span>
+                                                    </div> 
+                                                    <ul class="technologyList polishing font--primaryText">  
+                                                                 
+                                                        <li>
+                                                            <h4 class="subListHeading font--heading">
+                                                                from the skills list above:
+                                                            </h4>
+                                                            <ul>
+                                                                <span class="icon__container arrow">
+                                                                    <span class="wrapper wrapper--arrow">
+                                                                        <span class="icon ion-arrow-down-b"></span>
+                                                                    </span>
+                                                                </span> 
+                                                                <li>
+                                                                    GSAP
+                                                                </li>
+                                                                <li>
+                                                                    Bootstrap 4 ( newest version )
+                                                                </li>
+                                                                <li>
+                                                                    Wordpress Theme Development
+                                                                </li>
+                                                                <li>
+                                                                    Angular
+                                                                </li>
+                                                                <li>
+                                                                    ScrollMagic
+                                                                </li>
+                                                                <li>
+                                                                    jQuery Mobile   
+                                                                </li>
+                                                                <li>
+                                                                    Material Design Frameworks
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    
+                                                        <li>
+                                                            <h4 class="subListHeading font--heading">
+                                                                in addition to the skills list:
+                                                            </h4>
+                                                            <ul>
+                                                                <span class="icon__container arrow">
+                                                                    <span class="wrapper wrapper--arrow">
+                                                                        <span class="icon ion-arrow-down-b"></span>
+                                                                    </span>
+                                                                </span> 
+                                                                <li>
+                                                                    SMO, SMM, Email Marketing( Digital Marketing )
+                                                                </li>
+                                                                <li>
+                                                                    PHP & mySQL ( Backend Languages )
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                    
+                                                </div>
+                                            </section>
+                                            <section class="hidden-xs">
+                                                <h2 class="listHeading font--heading">
+                                                    <span class="helpbox__subject text heading--underlined">what's next on my list ?</span> 
+                                                    <div data-bind="futureSkills" class="open__helpbox">what does it mean ?</div>
+                                                </h2>
+                                                
+                                                    
+                                                <div id="futureSkills" class="list__container">
+                                                    <span class="list__order__desc font--secondaryText">In Increasing order of "How long before I pick up one of these to work upon" from top to bottom.</span>
+
+                                                    <div class="icon__container expand">
+                                                        <span class="icon ion-arrow-down-b"></span>
+                                                    </div> 
+                                                    <ul class="technologyList futureSkills font--primaryText">
+                                                        <span class="icon__container arrow">
+                                                            <span class="wrapper wrapper--arrow">
+                                                                <span class="icon ion-arrow-down-b"></span>
+                                                            </span>
+                                                        </span> 
+                                                        
+                                                        <li>
+                                                            Canvas Animations
+                                                        </li>
+                                                        <li>
+                                                            Pixi JS
+                                                        </li>
+                                                        <li>
+                                                            Three JS
+                                                        </li>
+                                                        <li>
+                                                            CoffeeScript
+                                                        </li>
+                                                        <li>
+                                                            Babel
+                                                        </li>
+                                                        <li>
+                                                            Stylus
+                                                        </li>
+                                                        <li>
+                                                            HAML
+                                                        </li>
+                                                        <li>
+                                                            PUG
+                                                        </li>
+                                                        <li>
+                                                            React JS
+                                                        </li>
+                                                        <li>
+                                                            Node JS
+                                                        </li>
+                                                        <li>
+                                                            Mongo DB
+                                                        </li>
+                                                        <li>
+                                                            React Native  
+                                                        </li>
+                                                        <li>
+                                                            Meteor JS
+                                                        </li>
+                                                        <li>
+                                                            Create JS   
+                                                        </li>
+                                                        <li>
+                                                            Snap SVG
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </section>
+                                    
+                                </div>
+                            </div>
+                      </div>
+                      <div class="parallax__layer parallax__layer--back">
+                        <!-- <div class="title"></div> -->
+                      </div>       
+                </div>
+
+                <div id="group5 " class="parallax__group services">
+                      
+                      <div class="parallax__layer parallax__layer--fore">
+                            <h2 class="title border2--alt font--heading col-md-offset-2 col-sm-3 col-md-2">
+                                Services<br>I<br>Provide
+                            </h2>
+                      </div>
+
+                      <div id="services" class="parallax__layer parallax__layer--base clearfix">
+                        
+                            <div class="background col-md-offset-3 col-md-9">
+                                <div class="wrapper background__wrapper">
+                                    
+                                    <div class="pattern col-md-12"></div>
+                                    <div class="shine col-md-12"></div>
+                                    
+                                    <section class="main border2  col-md-9">
+                                        <div class="text">
+                                            <h2 class="sectionDesc font--primaryText">
+                                               <section>
+                                                   <h6 class="heading--section font--heading font--secondaryText">
+                                                       <div class="text heading--underlined">Personally I alone</div>
+                                                   </h6>
+                                                   <span class="content--section personal">
+                                                        can design and develop the frontend of a whole site and do a lil bit of backend too (like processing a form or two, for now). 
+                                                       <br>
+                                                       <ul class="list--job__titles">
+                                                           <h4 class="listHeading">Or if i were to say in titles, I can be the following in your projects</h4>
+                                                           <li><strong>Web Designer or Design Director</strong></li>
+                                                           <li><strong>Web UI/UX & Interactions Developer</strong></li>
+                                                           <li><strong>Javascript Developer</strong></li>
+                                                           <li><strong>or even a SEO Specialist</strong></li>
+                                                       </ul>
+                                                        And I can also Create Complex Dynamic sites (E-commerce or Social) with WordPress CMS with Custom Developed Frontend Themes or I can maintain an existing site.
+                                                   </span>
+                                               </section>
+                                               <br>
+                                               <section>
+                                                   <h6 class="heading--section font--heading font--secondaryText">
+                                                       <div class="text heading--underlined">With My Team</div>
+                                                   </h6>
+                                                   <span class="content--section team">
+                                                       I can do almost anything on WEB, give full solutions related to GRAPHICS, and DIGITAL MARKETING. If you are interested in this part, then visit <a  href="webkrushers.com"><strong>Webkrsuhers.com</strong></a>.
+                                                   </span>
+                                               </section>
+                                            </h2>
+                                        </div>
+                                        
+                                    </section>
+
+                                </div>
+                               
+                            </div>
+                      </div>
+
+                </div>
+
+                <div id="group6" class="parallax__group contact">
+                      <div class="parallax__layer parallax__layer--fore">
+                            <h2 class="title border2--alt font--heading col-md-offset-9 col-sm-3 col-md-2">
+                                Get<br>in<br>touch
+                            </h2>
+                      </div>
+
+                      <div id="contact" class="parallax__layer parallax__layer--base clearfix">
+                        
+                            <div class="background col-md-10">
+                                <div class="wrapper background__wrapper">
+                                    
+                                    <div class="pattern col-md-12"></div>
+                                    <div class="shine col-md-12"></div>
+                                    <section class="main border2 col-md-9">
+                                        <div class="text">
+                                            <h2 class="sectionDesc font--primaryText">
+                                               If you want to hire me / need full web solutions (or any other digital solutions like design, mobile development, digital marketing ) / or just give a shoutout to me, you can head over to 
+                                               <strong>webkrushers.com</strong> and start a project there or fill in the form below. I will get back to you as soon as i can. Alternatively you can also contact me via the social media links below. 
+                                            </h2>
+                                        </div>
+                                        <div class="formContainer font--secondaryText text-shadow-1">
+                                            <h3 class="heading--form font--heading__alt">
+                                                <span class="heading--underlined">
+                                                    contact form
+                                                </span>
+                                            </h3>
+                                            <form id="contactForm" action="" class="row ">
+                                                <div class="col-xs-12">
+                                                    <div class="formFieldWrapper">
+                                                        <input id="nameC" class="text-shadow-2" data-placeholder="what's your full name" type="text">
+                                                        <div class="element element--1"></div>
+                                                        <div class="element element--2"></div>
+                                                        <label for="nameC">name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    
+                                                    <div class="formFieldWrapper">
+                                                        <input id="mailC" class="text-shadow-2" type="email" data-placeholder="type down your official/go-to e-mail address">
+                                                        <div class="element element--1"></div>
+                                                        <div class="element element--2"></div>
+                                                        <label for="mailC">e-mail address</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="formFieldWrapper">
+                                                        
+                                                        <select class="text-shadow-2" name="" id="sourceC">
+                                                            <option class="default" value="" data-default-text="Don't wanna answer">
+                                                                
+                                                            </option>
+                                                            <option value="search_engine">
+                                                                Google or other Search Engine (MSN, Bing)
+                                                            </option>
+                                                            <option value="freelance_website">
+                                                                A Freelance site (Freelancer, Upwork, etc.)
+                                                            </option>
+                                                            <option value="social_media">
+                                                                A social media link (Facebook, twitter, codepen, etc.)
+                                                            </option>
+                                                            <option value="url">
+                                                                A friend referred me
+                                                            </option>
+                                                            <option value="bookmarked">
+                                                                I bookmarked it (I am visiting the second time)
+                                                            </option>
+                                                            <option value="advertisement">
+                                                                I clicked on an Ad
+                                                            </option>
+                                                            <option value="dunno">
+                                                                I don't know how i ended up here
+                                                            </option>
+                                                        </select>
+                                                        <label for="sourceC">how did you came here ?</label>
+                                                        <div class="element element--1"></div>
+                                                        <div class="element element--2"></div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="formFieldWrapper">
+                                                        
+                                                        <select class="text-shadow-2" name="" id="purposeC">
+                                                            <option class="default" value=""></option>
+                                                            <option value="hello">I just wanted to say hello</option>
+                                                            <option value="hire">I want to hire you</option>
+                                                            <option value="query">I have a query</option>
+                                                            <option value="report">I want to report some problem with your site</option>
+                                                            <option value="cheer">I couldn't stop myself after seeing your amazing site</option>
+                                                            <option value="random">I don't have anything better to do</option>
+                                                        </select>
+                                                        <label for="purposeC">Purpose of contact</label>
+                                                        <div class="element element--1"></div>
+                                                        <div class="element element--2"></div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div class="col-xs-12">
+                                                    <div class="formFieldWrapper">
+                                                        <textarea class="text-shadow-2" name="" id="elaborate" data-placeholder="give full details elaborating your purpose" ></textarea>
+                                                        <label for="elaborate">
+                                                            Please <span class="change">describe your project <span class="small">(and mention your budget if possible)</span></span>
+                                                        </label>
+                                                        <div class="element element--1"></div>
+                                                        <div class="element element--2"></div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                <div class="col-xs-12">
+                                                    <button id="cfSubmit" class="submit submit--cf border--3px border1--alt font--heading" type="submit">
+                                                        <span class="change">Get A Quote!</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </section>
+
+                                </div>
+
+                            </div>
+                      </div>
+                </div>
+
+                <div id="group7" class="parallax__group work">
+                      <div class="parallax__layer parallax__layer--fore">
+                            <h2 class="title border2--alt font--heading col-md-offset-3 col-md-6">
+                                <strong>Work</strong><br>Show<br>case
+                            </h2>
+                      </div>
+
+                      <div id="showcase" class="parallax__layer parallax__layer--base">
+                        
+                            <div class="background col-md-10">
+                                <div class="wrapper background__wrapper">
+                                    
+                                    <div class="pattern col-md-12"></div>
+                                    <div class="shine col-md-12"></div>
+                                   
+                                    <section class="main border2 col-md-12">
+                                        <section class="section--work__tiles section--my__projects">
+
+                                            <h4 class="my__projects font--heading heading--underlined">my projects</h4>
+                                            <div class="wrapper wrapper--my__project__tiles row">
+                                                
+                                                <article class="col-lg-3 col-md-4 col-sm-6 col-xs-12 work__tiles work__tiles--my__projects">
+                                                    <div class="view view--my__project">
+                                                        
+                                                    </div>
+                                                    <div class="more">
+                                                        <div class="wrapper wrapper--more__buttons row">
+                                                            <div class="button__container col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6">
+                                                                <button class="button button__work--open font--primaryText">
+                                                                    <i class="icon ion-android-globe"></i>
+                                                                    <span class="text visible-sm-inline visible-md-inline visible-lg-inline">Open Project</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="button__container col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6">
+                                                                <button data-bind="viewCaseStudy" data-case-study="" class="link link--open__modal button button__work--case__study font--primaryText">
+                                                                    <i class="icon ion-ios-search-strong"></i>
+                                                                    <span class="text visible-sm-inline visible-md-inline visible-lg-inline">Case Study</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+
+                                            </div>
+
+                                        </section>
+                                        <section class="section--work__tiles section--my__work">
+
+                                            <h4 class="my__work font--heading heading--underlined">my work</h4>
+                                            <div class="wrapper wrapper--my__work__tiles row">
+                                                
+                                                <article class="col-lg-3 col-md-4 col-sm-6 col-xs-12 work__tiles work__tiles--my__work">
+                                                    <div class="view view--codepen__project">
+                                                        <div class="holder">
+                                                            <p data-height="309" data-theme-id="31003" data-slug-hash="dVQQjj" data-default-tab="result" data-user="lisilinhart" data-embed-version="2" data-pen-title="Manatee Friend" class="codepen">See the Pen <a href="https://codepen.io/lisilinhart/pen/dVQQjj/">Manatee Friend</a> by Lisi (<a href="https://codepen.io/lisilinhart">@lisilinhart</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                                                            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="more">
+                                                        <div class="wrapper wrapper--more__buttons row">
+                                                            <div class="button__container col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6">
+                                                                <button class="button button__work--open font--primaryText">
+                                                                    <i class="icon ion-android-globe"></i>
+                                                                    <span class="text visible-sm-inline visible-md-inline visible-lg-inline">Open Project</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="button__container col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6">
+                                                                <button data-bind="viewCaseStudy" data-case-study="" class="link link--open__modal button button__work--case__study font--primaryText">
+                                                                    <i class="icon ion-ios-search-strong"></i>
+                                                                    <span class="text visible-sm-inline visible-md-inline visible-lg-inline">Case Study</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+
+                                            </div>
+
+                                        </section>
+                                        
+                                    </section>
+
+                                </div>
+                                
+                            </div>
+                      </div>
+                </div>
+            </div>
+            
+            <footer class="font--primaryText border2">
+                <div class="wrapper row">
+                    <section class="section section--nav__footer col-xs-12 col-sm-4">
+
+                        <nav class="nav--secondary hidden-xs">
+                                <div class="wrapper wrapper--nav-secondary">
+                                    <div data-toggle="nav--secondary" class="icon icon--toggle icon--pull ion-ios-arrow-up border--3px border1">
+           
+                                    </div>
+                                    <div data-toggle="nav--secondary"
+                                     class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
+                                        
+                                    </div>
+                                    <ul class="list--sec__nav border--3px border1">
+                                        <li>
+                                            <a data-bind="getAQuote" href="#" class="navHoverEffect link link--open__modal">
+                                                get a quote
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="navHoverEffect link anchor">
+                                                blog
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="navHoverEffect link anchor">
+                                                webkrushers
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="icon">
+                                    
+                                </div> -->
+                                <!-- <span class="info">
+                                    Design - Creation - Development
+                                    <span class="author">
+                                        Vimal Patra
+                                    </span> 
+                                </span> -->
+                        </nav>
+
+                        <!-- <nav class="mob__nav--secondary ">
+                                <div class="wrapper wrapper--nav-secondary">
+                                    <div data-toggle="nav--secondary" class="icon icon--toggle icon--pull ion-ios-arrow-up border--3px border1">
+                                   
+                                    </div>
+                                    <div data-toggle="nav--secondary"
+                                     class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
+                                        
+                                    </div>
+                                    <ul class="list--sec__nav border--3px border1">
+                                        <li>
+                                            <a data-bind="getAQuote" href="#" class="navHoverEffect link link--open__modal">
+                                                get a quote
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="navHoverEffect link anchor">
+                                                blog
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="navHoverEffect link anchor">
+                                                webkrushers
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="icon">
+                                    
+                                </div>
+                                <span class="info">
+                                    Design - Creation - Development
+                                    <span class="author">
+                                        Vimal Patra
+                                    </span> 
+                                </span>
+                        </nav> -->
+                    </section>
+
+                    <section class="section section--nav__social col-xs-12 col-sm-4 center__children">
+                        <nav class="nav--social clicked hidden-xs">
+                                <div class="wrapper wrapper--nav--social">
+                                    <div data-toggle="nav--social"
+                                     class="icon icon--toggle icon--pull ion-android-wifi border--3px border1--alt">
+                                        
+                                    </div>
+                                    <div data-toggle="nav--social"
+                                     class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1--alt">
+                                        
+                                    </div>
+                                    <ul class="list--socialLinks border--3px border1--alt">
+                                        <li>
+                                            <a href="" class="link anchor linkedIn">
+                                                <span class="icon ion-social-linkedin">
+                                                    
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="link anchor codepen ">
+                                                <span class="icon ion-social-codepen">
+                                                    
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="link anchor github ">
+                                                <span class="icon ion-social-github">
+                                                    
+                                                </span>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                
+                        </nav>
+                        <!-- <nav class="mob__nav--social clicked">
+                                <div class="wrapper wrapper--nav--social">
+                                    <div data-toggle="nav--social"
+                                     class="icon icon--toggle icon--pull ion-android-wifi border--3px border1--alt">
+                                        
+                                    </div>
+                                    <div data-toggle="nav--social"
+                                     class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1--alt">
+                                        
+                                    </div>
+                                    <ul class="list--socialLinks border--3px border1--alt">
+                                        <li>
+                                            <a href="" class="link anchor linkedIn">
+                                                <span class="icon ion-social-linkedin">
+                                                    
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="link anchor codepen ">
+                                                <span class="icon ion-social-codepen">
+                                                    
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="link anchor github ">
+                                                <span class="icon ion-social-github">
+                                                    
+                                                </span>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                
+                        </nav> -->
+                    </section>
+
+                    <section class="goToTop col-xs-12 col-sm-4">
+                        <div data-hash_scroll_to="0" class="link link--scroll link--go__to__top border--3px border2">
+                            <a href="#" class="go">
+                                
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </footer>
+
+        </div>
+        
+
+
+
+        <script>
+        var debugInput = document.querySelector("input");
+        function updateDebugState() {
+            document.body.classList.toggle('debug-on', debugInput.checked);
+        }
+        debugInput.addEventListener("click", updateDebugState);
+        updateDebugState();
+        </script>
+
+
+        <!-- jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- gsap  -->
+
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/CSSPlugin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/easing/EasePack.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenLite.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/ScrollToPlugin.min.js"></script>
+
+        <!-- my scripts  -->
+        
+        <script src="js/main.js"></script>
+
+
+
+       <!--  <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+       
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+       
+       <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script> -->
+
+        
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <!-- <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
+
+    </body>
+</html>

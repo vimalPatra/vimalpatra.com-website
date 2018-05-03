@@ -1,0 +1,56 @@
+{
+  "name": "vimal",
+  "version": "1.0.0",
+  "description": "Vimal Patra - The developer-marketer-entrepreneur freelancer",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.8.2",
+    "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
+    "eslint": "^4.13.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "postcss-cssnext": "^3.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vimalPatra/vimal.git"
+  },
+  "keywords": [
+    "vimal",
+    "frontend-developer",
+    "ui-developer",
+    "ux-developer",
+    "digital-marketer",
+    "entrepreneur",
+    "web-developer",
+    "freelancer",
+    "indian",
+    "digital services",
+    "DIGITAL",
+    "BUSINESS",
+    "DIGITIZINGU",
+    "DIGITIZINGYOU",
+    "DIGITAL WORLD"
+  ],
+  "author": "Vimal Patra",
+  "license": "SEE LICENSE IN License.txt",
+  "bugs": {
+    "url": "https://github.com/"
+  },
+  "homepage": "https://github.com/"
+}

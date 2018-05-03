@@ -1,0 +1,102 @@
+
+/* =secondary-style-utilities  that needs to be added after applying some styles*/
+
+
+.border--1px{
+    border:1px solid transparent !important;
+}
+.border--2px{
+    border:2px solid transparent !important;
+}
+.border--3px{
+    border:3px solid transparent !important;
+}
+.border--4px{
+    border:4px solid transparent !important;
+}
+.border--5px{
+    border:5px solid transparent !important;
+}
+.border--5_5px{
+    border:5.5px solid transparent !important;
+}
+.border--6px{
+    border:6px solid transparent !important;
+}
+.border--6_5px{
+    border: 6.5px solid transparent !important;
+}
+.border--7px{
+    border:7px solid transparent !important;
+}
+.border1,
+[class*="border--"].border1,
+.title.border1:after,
+.main.border1:after{
+    border-image: linear-gradient(to right, hsl(33,35%,64%),
+     hsl(37,82%,95%) ) 1 stretch !important;
+}
+
+.border2,
+[class*='border--'].border2,
+.title.border2:after,
+.main.border2:after{
+    /* shiny gold to rusty gold    */
+    border-image: linear-gradient(to right,hsl(34,87%,81%),
+       hsl(33,35%,64%) ) 1 stretch !important;
+}
+
+.border3,
+[class*='border--'].border3,
+.title.border3:after,
+.main.border3:after{
+    /* shiny gold to lightest gold    */
+    border-image: linear-gradient(to right,hsl(34,87%,81%),
+       hsl(37,82%,95%) ) 1 stretch !important;
+}
+
+.border1--alt,
+[class*='border--'].border1--alt,
+.title.border1--alt:after,
+.main.border1--alt:after{
+    /* lightest gold to rusty gold */
+    border-image: linear-gradient(to right, hsl(37,82%,95%),
+        hsl(33,35%,64%) ) 1 stretch !important;
+}
+
+.border2--alt,
+[class*='border--'].border2--alt,
+.title.border2--alt:after,
+.main.border2--alt:after{
+    /* rusty gold to shiny gold   */
+    border-image: linear-gradient(to right,hsl(33,35%,64%),
+       hsl(34,87%,81%) ) 1 stretch !important;
+}
+
+.border3--alt,
+[class*='border--'].border3--alt,
+.title.border3--alt:after,
+.main.border3--alt:after{
+    /* lightest gold to shiny gold */
+    border-image: linear-gradient(to right,hsl(37,82%,95%),
+       hsl(34,87%,81%) ) 1 stretch !important;
+}
+
+.border4,
+[class*='border--'].border4,
+.title.border4:after,
+.main.border4:after{
+    /* lightest gold to white */
+    border-image: linear-gradient(to right,hsl(37,82%,95%),
+       hsl(34,87%,100%) ) 10 stretch !important;
+}
+
+.border5,
+[class*='border--'].border5,
+.title.border5:after,
+.main.border5:after{
+    /* shiny gold to white   */
+    border-image: linear-gradient(to right,hsl(34,87%,81%),
+       hsl(37,82%,100%) ) 10 stretch !important;
+
+}
