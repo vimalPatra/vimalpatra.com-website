@@ -8,37 +8,49 @@
 	});
 	
 		// decaring variables
-	var icons,
+	 var skillsListToggleStatus, 
+	 windowHeight, windowWidth,
+	 icons,
 	 header, headerNavMain, headerMobNavMain, headerNavToggleIcons, headerMobNavToggleIcons,
 	 headerPullIcons, headerPushIcons, headerMobPullIcons, headerMobPushIcons,
 	 footerPullIcons,footerPushIcons, footerToggleIcons,
 	 links, redirLinks,
-	 modalLinks, disabledLinks, headerScrollLinks, scrollingLinks, scrollingLinks, scrollToTop,
+	 modalLinks, disabledLinks, headerScrollLinks, scrollingLinks, scrollToTop,
 	 scrollingContainer, scrollPos,
 	 html, wrap, header, parallaxGroup, mainSection,
+
 	 		/*parallaxLayers,*/ 
 	 skillsLayer, technologies, listContainer, expandListContainer, technologyList, 
+
 	 contactLayer, contactForm, 
 	 cfInput, cfTextarea, cfSelectBoxes, cfAllFields,
 	 cfHelpText, dataDefaultText, contactFormDefaultText,
-	 windowHeight, windowWidth,
-	 htmlFontSize, htmlFontSizeRem,  parallaxGroupExtraHeight, parallaxGroupMarginBottom,
+	 
 	 listContainerDefaultHeight,
+
 	 scrollPositionOfHashLinks = [],
+
 	 helpboxBtn,
+
 	 helpboxTemplate, modalTemplate;
 
 
+	skillsListToggleStatus = {};
 
 	 	// scroller
-	scrollingContainer = $("#parallax");
+	scrollingContainer = $(window);
 	scrollPos = 0;
+
+		// get dimensions of the window in js
+	windowWidth = $(window).width();
+	windowHeight = $(window).height();
+
 
 		// elements
 	html = $("html");
 	wrap = $("#wrap");
 	header = $("#header");
-	parallaxGroup = scrollingContainer.find(".parallax__group");
+	parallaxGroup = wrap.find(".parallax__group");
 	mainSection = parallaxGroup.find(".main");
 
 	skillsLayer = $("#skills");
@@ -94,102 +106,101 @@
 	modalTemplate = $("script#modalTemplate");
 	
 		// font sizes and all  other rigid values that we need to get or set
-	htmlFontSize = parseInt(html.css("font-size"));
-	htmlFontSizeRem = htmlFontSize / 16;
-	parallaxGroupExtraHeight = 100 * htmlFontSizeRem;
-	parallaxGroupMarginBottom = 150 * htmlFontSizeRem;
 	listContainerDefaultHeight = 150;
 	dataDefaultText = "not selected";
 	contactFormDefaultText = "";
 	cfHelpText = " ( ↑ or ↓ to navigate / ↵ to toggle dropdown)";
 
 
-	// event handlers
+
+				/***********************
+
+					=event handlers
+				
+				***********************/
 
 
 		// major handlers
 
+		// run these when dom ready (and elements cached)
+	doSessionWorkOnLoad();
+	checkBreakpoints();
+
 			// unload hander
 	$(window).on("unload",function(){
-		// window.sessionStorage.setItem("lastScrollPos",scrollingContainer.scrollTop());
+		window.sessionStorage.setItem("lastScrollPos",scrollingContainer.scrollTop());
 	});
 
 
 			// load handler
 	$(window).on("load",function(){
 		// getDimensions();
-		// checkBreakpoints();
-		// setHeights();
-		// doSessionWorkOnLoad();
+		
 		
 	});
 
 			// resize handler
 
 	$(window).on("resize",debounce(function(){handleResize();},1000));
+
 	function handleResize(){
-		// getDimensions();
-		// checkBreakpoints();
-		// setHeights();
+		checkBreakpoints();
 	}
 
 			// scroll handler
 	$(scrollingContainer).on("scroll",function(){
-		// scrollPos = $(scrollingContainer).scrollTop();
-		// requestAnimationFrame(onScroll);
+		scrollPos = $(scrollingContainer).scrollTop();
+		requestAnimationFrame(onScroll);
 	});
 
 	
 
 
-	// Event Handling functions
+			/**************************************
+
+				Event Handling =callback functions
+			
+			**************************************/
 
 
-		// functions waiting to be invoked
-
-				// get dimensions for all repsonsive elements in js
-
-	function getDimensions(){
-		windowWidth = $(window).width();
-		windowHeight = $(window).height();
-	}
-
-
-				// setHeights function to set a parallax__group's height according to its content
-	function setHeights(){
-		mainSection.each(function(index,elem){
-			var main = $(elem),
-				parentGroup = main.closest(".parallax__group"),
-				height = main.height(),
-				top = parseInt(main.closest(".background").css("top"));	
-
-			parentGroup.css({
-				"height": height + parallaxGroupExtraHeight + top,
-				"margin-bottom": parallaxGroupMarginBottom
-			});
-
-		});
-	}
-
-				// onScroll function to be invoked when scroll container is scrolled
+			// onScroll function to be invoked when scroll container is scrolled
 	function onScroll(){
 		var sp = scrollPos;
 		var scArr = scrollPositionOfHashLinks;
 		var hScrlinks = headerScrollLinks;
 
-		$.each(scArr,function(i,el){
+		$.each(scArr,function(i,hashLinkPos){
 
-			if ( (sp >= el && sp < scArr[i+1]) ||  ( sp >= scArr[scArr.length - 1] )) {
+			if ( (sp >= hashLinkPos && sp < scArr[i+1]) ||  ( sp >= scArr[scArr.length - 1] )) {
 				hScrlinks.removeClass("navActiveEffect");
 				$(hScrlinks[i]).addClass("navActiveEffect");
 			}
-
 		});
+
 	}
 
 			// responsive handlers
+	function smBreakpoint(){	
+		toggleMainNav();
+	}
 
-	function smBreakpoint(){
+	function mdBreakpoint(){
+		
+	}
+
+	function lgBreakpoint(){
+		
+	}
+
+
+
+			/****************************
+
+				=self attaching (invoking themselves and the functions) handlers
+			
+			****************************/
+
+	function toggleMainNav(){
 		// toggle header menus : main--nav
 		toggle({
 			toggling: "main-nav",
@@ -228,297 +239,186 @@
 			openButton: headerPullIcons,
 			closeButton: headerPushIcons
 		});
-
-		// change extra parallax height
-
-		parallaxGroupExtraHeight = 200 * htmlFontSizeRem;
-		parallaxGroupMarginBottom = 10 * htmlFontSizeRem;
 	}
+	
 
-	function mdBreakpoint(){
-		
-	}
+	function toggleFooterMenus(){
+		// toggle footer menus : secondary nav and social nav
+		toggle({
+			toggling: "footer",
+			events:'click',
+			effects: {
+				open: function(elements){
 
-	function lgBreakpoint(){
-		
-	}
+					TweenLite.to(elements.nav,.7,{
+						yPercent: "-105",
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleIcon.add(elements.list),.3,{
+						autoAlpha: 1
+					});
+					
+				},
+				close: function(elements){
 
-
-
-
-
-			// self invoking handlers
-
-
-	console.log(headerMobPullIcons);
-	console.log(headerMobPushIcons);
-
-
-	// toggle header menus : mob__main--nav
-	toggle({
-		toggling: "mobile main--nav",
-		events:'click',
-		effects: {
-			/*open: function(elements){
-
-				TweenLite.to(elements.nav,.7,{
-					yPercent: "-105",
-					ease: Power4.easeOut
-				});
-				TweenLite.to(elements.$this,.3,{
-					autoAlpha: 0
-				});
-				TweenLite.to(elements.visibleIcon.add(elements.list),.3,{
-					autoAlpha: 1
-				});
-				
+					TweenLite.to(elements.nav,.7,{
+						yPercent:"0",
+						ease: Bounce.easeOut
+					});
+					TweenLite.to(elements.$this.add(elements.list),.3,{
+						autoAlpha:0
+					});
+					TweenLite.to(elements.visibleIcon,.3,{
+						autoAlpha: 1
+					});
+					
+				}
 			},
-			close: function(elements){
+			openButton: footerPullIcons,
+			closeButton: footerPushIcons
+		});
+	}
 
-				TweenLite.to(elements.nav,.7,{
-					yPercent:"0",
-					ease: Bounce.easeOut
-				});
-				TweenLite.to(elements.$this.add(elements.list),.3,{
-					autoAlpha:0
-				});
-				TweenLite.to(elements.visibleIcon,.3,{
-					autoAlpha: 1
-				});
-				
-			}*/
-		},
-		openButton: headerMobPullIcons,
-		closeButton: headerMobPushIcons
-	});
+	toggleFooterMenus();
 
 
-	// toggle footer menus : secondary nav and social nav
-	toggle({
-		toggling: "footer",
-		events:'click',
-		effects: {
-			open: function(elements){
+			// technologyList toggle handler (inside the skills section) */
+	function technologyListToggleHandler(){
+		var setTimeoutDelayForSettingHeights = 600;
 
-				TweenLite.to(elements.nav,.7,{
-					yPercent: "-105",
-					ease: Power4.easeOut
-				});
-				TweenLite.to(elements.$this,.3,{
-					autoAlpha: 0
-				});
-				TweenLite.to(elements.visibleIcon.add(elements.list),.3,{
-					autoAlpha: 1
-				});
-				
-			},
-			close: function(elements){
+		listContainer.each(function(i,elem){
+			var $elem = $(elem); // listcontainer
+			var technologyList = $elem.find(".technologyList");
+			var listOrderDesc = $elem.find(".list__order__desc");
+			var initialHeightOfListOrderDesc = listOrderDesc.outerHeight();
+			var arrow = $elem.find(".arrow");
+			var listHeight = technologyList.height();
+			var expand = $elem.find(".expand");
 
-				TweenLite.to(elements.nav,.7,{
-					yPercent:"0",
-					ease: Bounce.easeOut
-				});
-				TweenLite.to(elements.$this.add(elements.list),.3,{
-					autoAlpha:0
-				});
-				TweenLite.to(elements.visibleIcon,.3,{
-					autoAlpha: 1
-				});
-				
+			// alert(technologyList.height());
+			if (!initialHeightOfListOrderDesc) {
+				initialHeightOfListOrderDesc = 0;
 			}
-		},
-		openButton: footerPullIcons,
-		closeButton: footerPushIcons
-	});
 
-		
+			var objForExpand = {
+				listContainer: $elem,
+				listHeight: (listHeight + initialHeightOfListOrderDesc),
+				listOrderDesc: listOrderDesc,
+				arrow: arrow,
+				initialHeightOfListOrderDesc: initialHeightOfListOrderDesc
+			};
 
-	/* toggle technology list in the skills section */
-	// SIAF
-	function toggleTechnologyList(){
-			var setTimeoutDelayForSettingHeights = 600;
-
-			listContainer.each(function(i,elem){
-				var $elem = $(elem); // listcontainer
-				var technologyList = $elem.find(".technologyList");
-				var listOrderDesc = $elem.find(".list__order__desc");
-				var initialHeightOfListOrderDesc = listOrderDesc.height();
-				var arrow = $elem.find(".arrow");
-				var listHeight = technologyList.height();
-				var expand = $elem.find(".expand");
-
-				// alert(technologyList.height());
-				if (!initialHeightOfListOrderDesc) {
-					initialHeightOfListOrderDesc = 0;
-				}
-
-				var main = $elem.closest(".main"),
-					parentGroup = main.closest(".parallax__group");
-
-				
-
-				TweenLite.set(listOrderDesc,{
-					autoAlpha: 0,
-					height: 0,
-					transformOrigin: "50% 0"
-				});
-				TweenLite.set(arrow,{
-					autoAlpha:0,
-					scaleY: 0,
-					transformOrigin: "0 0"
-				}); 
+			var objForCollapse = {
+				listContainer: $elem,
+				listHeight: listContainerDefaultHeight,
+				listOrderDesc: listOrderDesc,
+				arrow: arrow
+			};
 
 
-				function saveToSession(id){
-					var skillsListToggleStatus = {};
-
-					if (skillsListToggleStatus[id]) {
-						skillsListToggleStatus[id] = undefined;
-					}else{
-						skillsListToggleStatus[id] = true;
-					}
-
-					window.sessionStorage.setItem("skillsListToggleStatus",JSON.stringify(skillsListToggleStatus));
-				}	
-
-				function callExpandList(){
-					var $this = $(this); // button that is clicked
-					$this.off("click");
-					
-					// console.log($this[0]);
-					saveToSession($elem[0].id);
-					expandListFunc.call(expand,$elem,(listHeight + initialHeightOfListOrderDesc),main,parentGroup);
-
-					var tl = new TimelineLite();
-					tl.to(listOrderDesc,.6,{
-						autoAlpha: 1,
-						height: initialHeightOfListOrderDesc
-					}).fromTo(arrow,.9,{
-						autoAlpha:.5,
-						scaleY: 0
-					},{
-						autoAlpha:1,
-						scaleY: 1
-					},"-=.3"); 
-					
-					$this.on("click",callCollapseList);
-				}
-
-				function callCollapseList(){
-					var $this = $(this);
-					$this.off("click");
-
-					saveToSession($elem[0].id);
-					collapseListFunc.call(expand,$elem,listContainerDefaultHeight,main,parentGroup);
-
-					var tl = new TimelineLite();
-					tl.to(listOrderDesc,.2,{
-						autoAlpha: 0,
-						height: 0
-					}).to(arrow,.4,{
-						autoAlpha:0,
-						scaleY: 0
-					},"-=.2"); 
-
-					$this.on("click",callExpandList);
-				}
-
-				expand.on("click",callExpandList);
-
+			TweenLite.set(listOrderDesc,{
+				autoAlpha: 0,
+				height: 0,
+				transformOrigin: "50% 0"
 			});
 
-			function expandListFunc(listContainer,listHeight,main,parentGroup){
-				var $this = $(this);
+			TweenLite.set(arrow,{
+				autoAlpha:0,
+				scaleY: 0,
+				transformOrigin: "0 0"
+			}); 
+
+
+			function saveToSession(obj){
+				var id = obj.id, setTo = obj.setTo;
 				
-
-				// console.log(listContainer);
-				// console.log(listHeight);
-				console.log("before expand: " + main.height());
+				skillsListToggleStatus[id] = setTo;
 				
-				var tm = new TimelineMax({
-					onComplete: setHeightsForGroups.bind($this,main,parentGroup)
+				window.sessionStorage.setItem(
+					"skillsListToggleStatus",
+					JSON.stringify(skillsListToggleStatus)
+				);
+
+			}	
+
+
+			function callExpandList(obj){
+				var $this = $(this); // button that is clicked
+
+				$this.off("click");	
+				$this.on("click",callCollapseList.bind(expand,objForCollapse));
+
+				saveToSession({
+					id: $elem[0].id,
+					setTo: true
+				});
+				
+				TweenLite.set($elem,{
+					'will-change': 'height'
 				});
 
-				tm.to(listContainer,.3,{
-					height: (listHeight + 100) + "px",
-					ease: Power2.easeOut
-				},"listExpanded").to($this,.3,{
-					rotation:180
-				});
-
-			}			
-			function collapseListFunc(listContainer,listHeight,main,parentGroup){
-				var $this = $(this);
-				// console.log(listContainer);
-				// console.log(listHeight);
-				console.log("before collapse: "+ main.height());
-
-				var tm = new TimelineMax({
-					onComplete: setHeightsForGroups.bind($this,main,parentGroup)
-				});
-
-				tm.to(listContainer,.2,{
-					height: listHeight + "px",
-					ease: Power2.easeOut
-				},"listCollapsed").to($this,.2,{
-					rotation:0
-				});
+				expandListFunc.call($this,obj);
 
 			}
-			function setHeightsForGroups(main,parentGroup){
-				/*
-				console.log("callback: "+ main.height());
-				setTimeout(function(){
-					console.log("callback 0ms: "+ main.height());
-				},0);
-				setTimeout(function(){
-					console.log("callback 5ms: "+ main.height());
-				},5);
-				setTimeout(function(){
-					console.log("callback 10ms: "+ main.height());
-				},10);
-				setTimeout(function(){
-					console.log("callback 2: "+ main.height());
-				},50);
-				setTimeout(function(){
-					console.log("callback 3: "+ main.height());
-				},100);*/
-				var extra = parallaxGroupExtraHeight;
-				var newTl = new TimelineLite();
-				setTimeout(function(){
-					var	mainHeight = main.height() + extra;
 
-					console.log("callback: "+ main.height());
-					console.log("callback: "+ mainHeight);
+			function callCollapseList(obj){
+				var $this = $(this);
 
-					newTl.to(parentGroup,.3,{
-						height: mainHeight
-					});
+				$this.off("click");
+				$this.on("click",callExpandList.bind(expand,objForExpand));
 
-				},setTimeoutDelayForSettingHeights);
+				saveToSession({
+					id: $elem[0].id,
+					setTo: undefined
+				});
+
+				TweenLite.set($elem,{
+					'will-change': 'height'
+				});
+
+				collapseListFunc.call($this,obj);
+
 			}
 
+			if (!$elem.hasClass('expanded')) {
+
+				(function(expand,objForExpand){
+					expand.on("click",callExpandList.bind(expand,objForExpand));
+				})(expand,objForExpand);
+
+			}else{	
+
+				(function(expand,objForCollapse){
+					expand.on("click",callCollapseList.bind(expand,objForCollapse));
+				})(expand,objForCollapse);
+					
+			}
+			
+		}); /* listContainer.each ENDS*/
 	}
 
+	technologyListToggleHandler();
 
 
-				// hash scrolling handlers
-	// SIAF
-	function hashScroll(){
+			// hash scrolling handlers
+	(function hashScroll(){
 		scrollingLinks.on("click",function(){
 			var $this = $(this),
 			scrollToPoint = $this.data("hash_scroll_to");
 			// var toPoint = type of ($this.data("hashScrollTo")) ? 
 			TweenLite.to(scrollingContainer, 1, {scrollTo:scrollToPoint,ease:Power2.easeOut});
-			// alert(scrollToPoint);
+			console.log("$(window).scrollTop()");
+			console.log($(window).scrollTop());
 			if (scrollToPoint == undefined) { console.log("data-hash_scroll_to is not defined")}
 		});
-	} /*hashScroll function*/
+	}()); /*hashScroll function*/
 
 
 			// helpbox handler
-	// SIAF
-	function helpboxHandler(){
+	(function helpboxHandler(){
 		var model = {
 			skillsImprovingUpon: "These are the skills which i would say that i am still grasping on while working with them on real projects to be if not perfect, atleast be very comfortable with them "
 		,	futureSkills: "These are the technologies which i have an eye on and as soon as my scheduled allows me for it i'll be picking up from one of these to learn & work on. "
@@ -655,19 +555,16 @@
 		}
 
 		helpboxBtn.on("click",helpAdder.init);
-	}
-
-	var model_objects_proto = function(obj){
-		var type = obj.type;
-		this.type = type;
-
-	};
-
+	}());
 
 
 			// modal handler
-	// SIAF
-	function modalHandler(){
+	var model_objects_proto = function(obj){
+		var type = obj.type;
+		this.type = type;
+	};
+
+	(function modalHandler(){
 		var model = {};
 
 		model.getAQuote = new model_objects_proto({
@@ -683,6 +580,7 @@
 		var lightboxForModal;
 		var template;
 		var templateCounter = 0;
+
 		var modalAdder = {
 			init:function(){
 				var self = modalAdder;
@@ -828,29 +726,16 @@
 		}
 
 		modalLinks.on("click",modalAdder.init);
-	}
+	}());
 
+				
+				/****************************
 
+						=integral functions (for essential functionalities and UX)
+				
+				****************************/
 
-
-	// utility functions
-	// SIAF
-	function getTopOffsetsForHeaderScrollLinks(){
-		headerScrollLinks.each(function(i,elem){
-			var $this = $(elem),
-			scrollsToElementId = $this.data("hash_scroll_to");
-
-			var elementItself = scrollingContainer.find(scrollsToElementId);
-			var offsetTopForElement= elementItself.offset().top;
-			scrollPositionOfHashLinks.push(offsetTopForElement);
-			
-		});
-		console.log(scrollPositionOfHashLinks);
-	}
-
-	
-
-			// scrollBackToLastPosition function to scroll back to the last cached function
+		// scrollBackToLastPosition function to scroll back to the last cached function
 	function scrollBackToLastPosition(){
 		var scrollToDefault = sessionStorage.getItem("lastScrollPos");
 		if (scrollToDefault) {
@@ -858,59 +743,119 @@
 		}
 	}
 
-			// checkBreakpoints function to run on resize and load
+		// checkBreakpoints function to run on resize and load
 	var smBreakpointInitiated = false,	mdBreakpointInitiated = false,	lgBreakpointInitiated = false;
 	function checkBreakpoints(){
-		if (windowWidth >= 768) {
-			if (!smBreakpointInitiated) {
 
-				smBreakpointInitiated = true;
+		if (windowWidth >= 768 && !smBreakpointInitiated) {
+			smBreakpointInitiated = true;
+			smBreakpoint();
 
-				/*code for sm breakpoint STARTS here*/
-					smBreakpoint();
-				/*code for sm breakpoint ENDS here*/
+			if (windowWidth >= 992 && !mdBreakpointInitiated) {
+				mdBreakpointInitiated = true;
+				mdBreakpoint();
 
-				if (windowWidth >= 992) {
+				if (windowWidth >= 1200 && !lgBreakpointInitiated) {
+					lgBreakpointInitiated = true;
+					lgBreakpoint();	
 
-					if (!mdBreakpointInitiated) {
+				}/* check if window is larger than 1200 and if lg breakpoint has ran earlier*/
 
-						mdBreakpointInitiated = true;
+			}/* check if window is larger than 992 and if md breakpoint has ran earlier*/
 
-						/*code for md breakpoint STARTS here*/
-							mdBreakpoint();
-						/*code for md breakpoint ENDS here*/
+		}/* check if window is larger than 768 and if sm breakpoint has ran earlier*/
 
-						if (windowWidth >= 1200) {
-
-							if (lgBreakpointInitiated) {
-
-								lgBreakpointInitiated = true;
-
-								/*code for lg breakpoint STARTS here*/
-									lgBreakpoint();
-								/*code for lg breakpoint ENDS here*/
+	}	/* checkBreakpoints function */
 
 
-							}/* check if lg breakpoint has ran earlier*/
+		// reopenSkillsLists function to open the last opened skills lists 
+	function reopenSkillsLists(){
 
-						}/* check if window is larger than 1200*/
+		if (!sessionStorage.getItem("skillsListToggleStatus")) { return; }
 
-					}/* check if md breakpoint has ran earlier*/
+		skillsListToggleStatus = JSON.parse(sessionStorage.getItem("skillsListToggleStatus"));
+		// var OpenSkillsListFor = [];
 
-				}/* check if window is larger than 992*/
+		Object.keys(skillsListToggleStatus).forEach(function(id){
 
-			}/* check if sm breakpoint has ran earlier*/
+			if (!skillsListToggleStatus[id]) {
 
-		}/* check if window is larger than 768*/
-	}/* checkBreakpoints function */
+			}else{
 
-			// toggle function to toggle menus in header and footer
+			}
+			console.log('skillsListToggleStatus[id]');
+			console.log(skillsListToggleStatus[id]);
+			var element = $("#"+id),
+				expand = element.find(".expand"),
+				arrow = element.find(".arrow"),
+				listOrderDesc = element.find(".list__order__desc"),
+				initialHeightOfListOrderDesc = listOrderDesc.outerHeight(),
+				technologyList = element.find(".technologyList"),
+				listHeight = technologyList.height();
+
+		
+			// alert(technologyList.height());
+			if (!initialHeightOfListOrderDesc) {
+				initialHeightOfListOrderDesc = 0;
+			}
+
+			expandListFunc.call(expand,{
+				listContainer: element,
+				listHeight: (listHeight + initialHeightOfListOrderDesc),
+				listOrderDesc: listOrderDesc,
+				arrow: arrow,
+				initialHeightOfListOrderDesc: initialHeightOfListOrderDesc
+			});
+
+		});
+
+	}
+		// doSessionWorkOnLoad function to do some stuff based on what's stored in the session storage
+	function doSessionWorkOnLoad(){
+		reopenSkillsLists();
+		scrollBackToLastPosition();
+	}
+
+
+				/****************************
+
+						=utility functions (which we use time-n-time to repeat some functionality for one or many features)
+				
+				****************************/
+
+	function getTopOffsetsForHeaderScrollLinks(){
+		scrollPositionOfHashLinks = [];
+		window.anything = '[ ';
+		headerScrollLinks.each(function(i,elem){
+			var $this = $(elem),
+			scrollsToElementId = $this.data("hash_scroll_to");
+		
+			var elementItself = $(scrollsToElementId);
+
+			var offsetTopForElement= Number((elementItself.offset().top - 1).toFixed(2)); // -1 for fixing the precision error
+			scrollPositionOfHashLinks.push(offsetTopForElement);
+
+			window.anything += scrollsToElementId + ': '+ offsetTopForElement + ', '
+			// console.log(elementItself);
+	
+		});
+		window.anything += ']';
+		// console.log(scrollPositionOfHashLinks);
+		// console.log(window.anything);
+	}
+	getTopOffsetsForHeaderScrollLinks();
+
+
+		// toggle function to toggle menus in header and footer
 	function toggle(options){
 		var pullIcons, pushIcons;
+		console.log(options);
+		console.log(arguments);
 
 		if (!options.openButton && !options.closeButton) {
 			return console.log('no toggle buttons provided');
 		}
+
 		options.effects.defaults = {};
 		pullIcons = options.openButton;
 		pushIcons = options.closeButton;	
@@ -1016,36 +961,135 @@
 		});
 	};
 
+		// function to expand skills list
+	function expandListFunc(args){
+		var $this = $(this);
+		
+		var listOrderDesc = args.listOrderDesc,
+			listContainer = args.listContainer,
+			listHeight = args.listHeight,
+			arrow = args.arrow,
+			initialHeightOfListOrderDesc = args.initialHeightOfListOrderDesc;
 
 
-	/* INCOMPLETE */
-			// reopenSkillsLists function to open the last opened skills lists 
-	function reopenSkillsLists(){
-		var skillsListToggleStatus = JSON.parse(sessionStorage.getItem("skillsListToggleStatus"));
-		// var OpenSkillsListFor = [];
-
-		console.log(skillsListToggleStatus);
-
-
-		Object.keys(skillsListToggleStatus).forEach(function(id){
-			var element = $("#"+id);
-			var expand = $elem.find(".expand");
-			var main = $elem.closest(".main"),
-			parentGroup = main.closest(".parallax__group");
-			var technologyList = $elem.find(".technologyList");
-			var listHeight = technologyList.height();
-
-			expandListFunc.call(expand,$elem,listHeight,main,parentGroup);
+		TweenLite.to(listContainer,1,{
+			height: (listHeight + 100) + "px",
+			onComplete: completed
+			
 		});
 
+		function completed(){
+			TweenLite.set(listContainer,{
+				'will-change': 'auto'
+			});
+
+			setTimeout(function(){
+				getTopOffsetsForHeaderScrollLinks();
+			},500);
+		}
+
+		/*TweenLite.to(listContainer,0,{
+			height: (listHeight + 100) + "px",
+			ease: Power2.easeOut,
+			onComplete: getTopOffsetsForHeaderScrollLinks
+			
+		},"listExpanded");*/
+
+		/* ---------------------- */
+
+		// var tl = new TimelineLite();
+		if (listOrderDesc.length) {
+			TweenLite.set(listOrderDesc,{
+				autoAlpha: 1,
+				height: initialHeightOfListOrderDesc
+			});
+		}
+
+		TweenLite.set(listContainer,{
+			className: '+=expanded'
+		});
+		/*TweenLite.fromTo(arrow,.9,{
+			autoAlpha:.5,
+			scaleY: 0
+		},{
+			autoAlpha:1,
+			scaleY: 1
+		}); */
+
+		if (arrow.length) {
+			TweenLite.fromTo(arrow,.9,{
+				autoAlpha:.5,
+				scaleY: 0
+			},{
+				autoAlpha:1,
+				scaleY: 1
+			}); 
+		}
+
+		TweenLite.to($this,.3,{
+			rotation: 180
+		});
+	
+	}	
+		// function to collapse skills list
+	function collapseListFunc(args){
+		var $this = $(this);
+
+		var listOrderDesc = args.listOrderDesc,
+			listContainer = args.listContainer,
+			listHeight = args.listHeight,
+			arrow = args.arrow;
+
+
+		TweenLite.to(listContainer,.3,{
+			height: listHeight + "px",
+			ease: Power2.easeOut,
+			onComplete: completed
+		});
+
+		function completed(){
+			TweenLite.set(listContainer,{
+				'will-change': 'auto'
+			});
+
+			setTimeout(function(){
+				getTopOffsetsForHeaderScrollLinks();
+			},500);
+		}			
+
+		/* -------------------- */
+		if (listOrderDesc.length) {
+			TweenLite.set(listOrderDesc,{
+				autoAlpha: 0,
+				height: 0
+			});
+		}
+
+		TweenLite.set(listContainer,{
+			className: '-=expanded'
+		});
+
+		/*var tl = new TimelineLite();
+		tl.to(listOrderDesc,.2,{
+			autoAlpha: 0,
+			height: 0
+		}).to(arrow,.4,{
+			autoAlpha:0,
+			scaleY: 0
+		},"-=.2"); */
+		if (arrow.length) {
+			TweenLite.to(arrow,.4,{
+				autoAlpha:0,
+				scaleY: 0
+			}); 
+		}
+
+		TweenLite.to($this,.2,{
+			rotation:0
+		})
+	
 	}
-
-
-	function doSessionWorkOnLoad(){
-		// reopenSkillsLists();
-		scrollBackToLastPosition();
-	}
-
+	
 
 	// Returns a function, that, as long as it continues to be invoked, will not
 	// be triggered. The function will be called after it stops being called for
@@ -1069,8 +1113,7 @@
 
 
 	// other work
-
-
+	
 			// disabling default behaviours
 	links.on("click",function(e){
 		if (e.target.tagName=="A") { e.preventDefault(); } 
@@ -1084,8 +1127,6 @@
 		$this.attr("data-hover",dataHover);
 	});
 
-
-	
 
 			// contact form
 	cfAllFields.on("focus",function(e){
@@ -1120,6 +1161,8 @@
 		});
 		
 	});
+
+
 
 
 }());
