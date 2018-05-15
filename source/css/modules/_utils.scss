@@ -5,6 +5,71 @@
 *************
 ***********************/
 
+
+.not-loaded{
+    @include absolute;
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    z-index: 2;
+    background: $shiny ;
+    background: linear-gradient(
+                -45deg,
+                $accent,  
+                $lightest
+              );
+
+    &:before{
+        @include pseudo;
+        z-index: 1;
+        // bottom: auto;
+        // height: 10000000px;
+        animation: loading-shine 1s infinite ease both;
+        background: linear-gradient(
+                    90deg, 
+                    transparent 0%,
+                    rgba(255,255,255,.8) 40%,
+                    rgba(255,255,255,.8) 60%,
+                    transparent  
+                   );
+        // background-size: 100px 100px ;
+    
+    }
+
+    &--wip{
+        z-index: 10;
+
+        &-container{
+            .not-loaded{
+                display: none;
+            }
+            >.not-loaded{
+                display: block;
+            }
+        }
+        &:after{
+            @include pseudo;
+            @extend .font--primaryText;
+            z-index: 2;
+            font-size: 3rem;
+            content: 'Under Development';
+            text-align: center;
+            padding-top: 40px;
+
+
+        }
+    }
+}
+
+@keyframes loading-shine{
+    0%{
+        transform: translateX(-100%) ;
+    }
+    100%{
+        transform: translateX(100%) ;
+    }
+}
+
 .lightbox{
     position: fixed;
     background: rgba(255,255,255,.7);
@@ -51,21 +116,32 @@
 
 
 /* =fonts */
-
 .font--heading{
-    font-family: 'Poiret One', cursive;
+    font-family: $fontHeading;
     font-weight: 800;
     letter-spacing: .2em;
     text-transform: capitalize;
 }
 .font--heading__alt{
     color: rgb(125,125,125);
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: $fontHeadingAlt;
     font-weight: 700;
     letter-spacing: .05em;  
     word-spacing: .1em;
     font-style: italic;
 }
+.font--primaryText{
+    color: #404040;
+    line-height: 1.5em;
+    font-family: $fontPrimary;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+    text-shadow: 5px 5px 3px rgba(0,0,0,.15);
+}
+
+
+
 .text-shadow-1{
     text-shadow: 0.3125em 0.3125em 0.1875em rgba(0,0,0,.15);
 }
@@ -74,15 +150,6 @@
 }
 .text-shadow-3{
     text-shadow: -0.1875rem  0.1875rem  0.1875rem rgba(0,0,0,.15);
-}
-.font--primaryText{
-    color: #404040;
-    line-height: 1.5em;
-    font-family: 'Poiret One', sans-serif;
-    font-weight: 800;
-    letter-spacing: .1em;
-    text-transform: capitalize;
-    text-shadow: 5px 5px 3px rgba(0,0,0,.15);
 }
 
 .popups{

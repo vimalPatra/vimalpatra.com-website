@@ -91,7 +91,8 @@ function swallowError (error) {
 
 	// tasks for concatenating external downloaded resources if we do so 
 	gulp.task('vendorJS',['minVendorJS'], function() {
-		var sourceFile = gulp.src(['./source/js/vendor/**/*.min.js']);
+		var sourceFile = gulp.src(['./source/js/vendor/**/jquery.min.js',
+									'./source/js/vendor/**/*.min.js']);
 
 	    return sourceFile
 	    	.pipe(plumber({
@@ -138,18 +139,18 @@ function swallowError (error) {
 
 	// task for concatenating and linting the primary js file, On file modification (it doesn't run any dependent tasks first)
 	gulp.task('js:watch',function(){ 
-		        return gulp.src(['./source/js/plugins.js',
-		        				'./source/js/*.js'])
-		        .pipe(plumber({
-					errorHandler: onError
-				}))
-				.pipe(sourcemaps.init())
-		        .pipe(concat('main.js'))
-		        .pipe(sourcemaps.write())
-		        // .pipe(eslint())
-		        // .pipe(eslint.formatEach())
-		        .pipe(gulp.dest('./dist/js/'))
-		        .pipe( browserSync.reload({stream:true}) );
+	        return gulp.src(['./source/js/plugins.js',
+	        				'./source/js/*.js'])
+	        .pipe(plumber({
+				errorHandler: onError
+			}))
+			.pipe(sourcemaps.init())
+	        .pipe(concat('main.js'))
+	        .pipe(sourcemaps.write())
+	        // .pipe(eslint())
+	        // .pipe(eslint.formatEach())
+	        .pipe(gulp.dest('./dist/js/'))
+	        .pipe( browserSync.reload({stream:true}) );
 	});
 	
 
@@ -165,17 +166,19 @@ function swallowError (error) {
 
 	
 	// task for bundling JS files and write to single js file for distribution build  
+
 	gulp.task('js:dist',['vendorJS'], function(){ 
-		        return gulp.src(['./source/js/plugins.js',
-		        				'./source/js/*.js'])
-		        .pipe(plumber({
-					errorHandler: onError
-				}))
-		        .pipe(concat('main.js'))
-		        .pipe(uglify())
-		        .pipe(gulp.dest('./dist/js/'));
-	
-		});
+        
+        return gulp.src(['./source/js/plugins.js',
+        				'./source/js/*.js'])
+        .pipe(plumber({
+			errorHandler: onError
+		}))
+        .pipe(concat('main.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/js/'));
+
+	});
 
 
 

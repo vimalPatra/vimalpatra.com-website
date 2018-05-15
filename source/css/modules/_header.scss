@@ -31,6 +31,7 @@ footer{
 #header .branding{
     z-index: 1;
     float: left;
+
 }
 
 @media all and (min-width: 768px){
@@ -46,27 +47,29 @@ footer{
 
 
 #header .logo{
+    z-index: 2;
     display: block;
     background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,1),
-        rgba(255,255,255,.9)
-        );
+                30deg, 
+                $lightest,
+                lighten($bg1,25%)
+               );
+    padding: .5rem 1rem;
+
+    font-family: $logoFont;
+    color: rgb(0,0,0);
+    
+    font-size: 1.3rem;
+    line-height: 1.5em;
+    word-spacing: .3rem;
+    box-shadow: 0 15px 45px 6px $rusty;
+    
     border: 2px solid hsla(34,87%,89%,.7);
     border-top: none;
-    z-index: 2;
-
-
-    font-family: "kumar one outline";
-    line-height: 1.5em;
-    z-index: 2;
-    font-size: 1.3rem;
-    word-spacing: .3rem;
-    padding: .5rem 1rem;
-    
 
     /*transform: translateY(-100%);*/
 }
+
 #header .logo br{
     display: none;
 }
@@ -74,6 +77,10 @@ footer{
 @media all and (min-width: 576px){
     #header .logo{
         font-size: 2rem;
+        
+    }
+    #header .logo br{
+        display: block;
     }
 }
 

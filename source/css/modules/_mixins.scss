@@ -1,0 +1,233 @@
+	
+	   //	mixins
+
+//// utility mixins
+
+
+@mixin pseudo{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom:0;
+}
+
+@mixin absolute{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@mixin fixed{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+@mixin transition__3{
+    transition: all .3s !important;
+}
+
+@mixin transition__2{
+    transition: all .2s !important;
+}
+
+
+
+
+
+// label mixins
+
+@mixin filterLabels{
+    @extend .text__center;
+    @extend .uppercase;
+
+    display: block !important;
+    top:auto !important;
+    left: 0 !important;
+    bottom: 100%;
+    width: 100%;
+    padding: .2em 0;
+    color: $listHeaderTextColor;
+    font-size: .9rem;
+    line-height: 1.1em;
+    font-weight: 400;
+    letter-spacing: .05em;
+    text-shadow: none;
+    transform:  none !important;
+}
+
+
+// shadows
+
+@mixin z-depth-1{
+   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 
+               0 1px 5px 0 rgba(0, 0, 0, .12), 
+               0 3px 1px -2px rgba(0, 0, 0, .2)
+                     !important;
+}
+@mixin z-depth-2{
+   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14),
+               0 1px 10px 0 rgba(0, 0, 0, .12),
+                0 2px 4px -1px rgba(0, 0, 0, .3) !important;
+}
+
+@mixin cardPopout1{
+    box-shadow: 0 4px 5px rgba(0,0,0,.2),
+                    0 4px 10px rgba(0,0,0,.1)
+                     !important;
+}
+
+
+@mixin blueShadows{
+    @include transition__3;
+    box-shadow: 0 0px 15px -1px rgba(59,197,220,1) !important;
+
+    &:hover{
+        box-shadow: 0 5px 15px 0px rgba(59,197,220,1) !important;
+    }
+
+}
+
+
+
+// calendar mixins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//// helper mixins
+@mixin capitalize{
+    text-transform: capitalize !important;
+}
+@mixin uppercase{
+    text-transform: uppercase !important;
+}
+@mixin lowercase{
+    text-transform: lowercase !important;
+}
+@mixin small__caps{
+    font-variant: small-caps !important;
+}
+
+@mixin text__light{
+    font-weight: 100 !important;
+}
+@mixin text__regular{
+    font-weight: 300 !important;
+}
+@mixin text__bold{
+    font-weight: 500 !important;
+}
+@mixin text__right{
+    text-align: right !important;
+}
+@mixin text__center{
+    text-align: center !important;
+}
+@mixin text__left{
+    text-align: left !important;
+}
+
+@mixin inline__block{
+    display: inline-block !important;
+}
+@mixin block{
+    display: block !important;
+}
+
+@mixin nonInteractivisible{
+    opacity: 0 !important;
+    pointer-events: none !important;
+    will-change:opacity;
+    transform: translateZ(0);
+    transition: opacity 0s;
+}
+@mixin noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+
+/////// Hide visually and from screen readers
+ 
+
+@mixin hidden {
+    display: none !important;
+}
+
+
+ /////////  Hide only visually, but have it available for screen readers:
+ /////////  https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ ///////// 
+ /////////  1. For long content, line feeds are not interpreted as spaces and small width
+ /////////     causes content to wrap 1 word per line:
+ /////////     https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ 
+
+@mixin visually__hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap; /* 1 */
+}
+
+    ////
+    //// Extends the .visuallyhidden class to allow the element
+    //// to be focusable when navigated to via the keyboard:
+    //// https://www.drupal.org/node/897638
+    ////
+
+@mixin visually__hidden__focusable{
+	
+    clip: auto;
+    -webkit-clip-path: none;
+    clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+    white-space: inherit;
+	
+}
+
+////////
+///// Hide visually and from screen readers, but maintain layout
+///////
+
+@mixin invisible{
+    opacity: 0 !important;
+	visibility:hidden;
+}
+
+
+// functions
+
+
+
+
+

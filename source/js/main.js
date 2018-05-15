@@ -200,6 +200,74 @@
 			
 			****************************/
 
+	function contactFormSubmission(){
+
+		var cf = contactForm;
+		console.log(cfInput.fitler(''));
+			// change validation messages and customize options
+
+		contactForm.parsley({
+			requiredMessage: 'This field is required'
+		});
+/*
+		emailField.parsley({
+			typeMessage: "Enter a valid e-mail address"
+		});*/
+
+		/*webServiceField.parsley({
+			requiredMessage: "Please select the digital service/s you want us to work on", // only works when using the first checkbox in the group
+			errorsContainer: function (Field) {
+			  
+			  return servicesCont;
+			},
+			classHandler: function (Field) {
+			  return servicesCont;
+			}
+		});*/
+
+
+		// act to validation errors and success 
+
+		contactForm.parsley().on('form:error',function(){
+
+		    alert('validation errors');  
+
+		}).on('form:submit',function(e){
+
+		    console.log('Contact Form Submitted');
+
+
+		    // write code below  to submit to DB for contact form
+		    // tip: contact popup is cached in variable 
+		    // above like this ` var contactPopup = $('#contact__popup'); ` 
+		    // so we can find the form fields like var formField = contactPopup.find('something');
+
+		    
+		    /*var subjectCF = $('#subjectCF').val();
+		    var nameCF = $('#nameCF').val();
+		    var emailCF = $('#emailCF').val();
+		    var detailsCF = $('#detailsCF').val();
+
+		     $.post("sp-submit.php",{subjectCF:subjectCF,nameCF:nameCF,emailCF:emailCF,detailsCF:detailsCF},function(data){
+		        if(data==1)
+		        {
+		          alert("Thank you !");
+		        }
+		        else{
+		          alert("Some error !");
+		        }
+		      });*/
+		               
+
+		    return false;  
+		    
+		});
+
+	}
+
+	contactFormSubmission();
+
+
 	function toggleMainNav(){
 		// toggle header menus : main--nav
 		toggle({
@@ -849,8 +917,6 @@
 		// toggle function to toggle menus in header and footer
 	function toggle(options){
 		var pullIcons, pushIcons;
-		console.log(options);
-		console.log(arguments);
 
 		if (!options.openButton && !options.closeButton) {
 			return console.log('no toggle buttons provided');
