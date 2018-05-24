@@ -15,8 +15,16 @@ body{
 
 // MODULES
 @import 'modules/utils'; // stores utility styles ( also base styles for text and links)
+
 @import 'modules/body'; // base body styles
+
 @import 'modules/header'; // header styles
 @import 'modules/footer'; //  styles
-@import 'modules/parallax-groups'; // all parallax groups' (sections) styles  
+
+@import 'modules/parallax-groups'; // all parallax groups' (sections) general styles  
+
+@import 'modules/skills'; // skills section styles  
+@import 'modules/contact'; // contact section styles  
+@import 'modules/work'; // work section styles  
+
 @import 'modules/borders'; // border utilities

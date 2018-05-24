@@ -1,23 +1,25 @@
 // colors
 
-// $lightest: hsl(37,82%,95%); // rgb(253, 245, 232)   // #fdf5e8
-
+	//BnW colors
 $white: rgb(255,255,255);
 
 $black: rgb(0,0,0);
 
+	// primary colors
 $shiny: hsl(34,87%,81%); // rgb(249, 212, 164) // #f9d4a4
 
 $rusty: hsl(33, 35%, 64%); // rgb(195, 166, 131)   // #c3a683
 
 $lightest: hsl(36, 84%, 90%); // rgb(251, 234, 208)   // #fbead0
 
+$lightestWhiten: hsl(36, 84%, 95%); // rgb(251, 234, 208)   // #fbead0
+
 $accent: hsl(36, 83%, 40%); // rgb(187, 119, 17);   // #bb7711
 
 
+	// colorful colors
 
-
-// yellowis
+// yellowish
 $bg1Darker: hsl(43, 100%, 65%); // rgb(255, 204, 77)  // #ffcc4d 
 $bg1: hsl(43, 100%, 70%); // rgb(255, 212, 102) // #ffd466
  // orangish
@@ -26,6 +28,28 @@ $bg2: hsl(24, 100%, 70%); // rgb(255, 163, 102) // #ffa366
 // reddish
 $bg3Darker: hsl(0, 100%, 65%); // rgb(255, 77, 77)  // #ff4d4d
 $bg3: hsl(0, 100%, 70%); // rgb(255, 102, 102)  // #ff6666
+
+$warning: darken($bg3,30%); // rgb(255, 77, 77)  // #ff4d4d
+// $success: hsl(0, 100%, 70%); // rgb(255, 102, 102)  // #ff6666
+
+	
+
+$navGradient: linear-gradient(to bottom,
+		       $lightestWhiten,
+		       $rusty
+		    );
+
+
+	// text colors
+
+$darkestText: lighten($black, 15%);
+$darkText: lighten($black, 25%); 
+$lightText: lighten($black, 35%); 
+$lighterText: lighten($black, 45%); 
+
+
+
+
 
 
 

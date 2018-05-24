@@ -1,0 +1,175 @@
+/* =work / =group7 */
+.work{
+
+    .parallax__layer{
+
+        >.title{
+            &:after{
+                padding-bottom: 0;
+            }
+        }
+
+        &--base{
+            margin-top: 0px;
+        }
+
+    }
+
+    .main{
+        margin-right: 0;
+        right: -17%;
+    }
+
+    &__tiles{
+        margin-bottom: 20px;
+
+        .view >.holder{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 5;
+
+
+            >*,
+            iframe{
+                height: 100% !important;
+            }
+            .image{
+                width:100%;
+                height: 100%;
+
+                img{
+                    object-fit:cover;
+                }
+
+
+            }
+
+            +.not-loaded{
+                display: none;
+            }
+
+        }
+
+        .wrapper--more__buttons{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);  
+            padding: 0 15px; 
+        }
+
+        .wrapper--more__buttons .button__container{
+           padding: 0 5px;
+        }
+
+        .more{
+            height: 3.75rem;
+            background: rgb(249,249,249);
+            border: 1px solid rgb(237,237,237);
+            border-top: none;
+            border-radius: 0 0 3px 3px;
+
+            .button{
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                /*vertical-align: bottom;*/
+                height: 2.5rem !important;
+                background: white;
+                border: 1px solid rgb(249,214,166) ;
+                border-radius: 4px;
+                line-height: 1em;
+                cursor: pointer;
+                padding: 0;
+                font-size: .8rem;
+                overflow: hidden;
+
+
+                &:after{
+                    content: "\f39c";
+                    line-height: 2.5rem;
+                    font-size: 1rem;
+                    color: rgb(81,81,81);
+                    text-align: center;
+                    font-family: "Ionicons";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    background: red;
+                    background: linear-gradient(
+                          45deg, 
+                          rgba(255,255,255,.8),
+                          rgba(253, 245, 232,.8)
+                        );
+                    opacity: 0;
+                    transition: all 0.3s; 
+                }
+
+                &__work--case__study:after{
+                    content: "\f133";
+
+                }
+                &__work--case__study.locked:after{
+                    content: "\f306";
+                }
+
+                &.locked:after{
+                    content: "\f457";
+                }
+
+                &:hover:after{
+                    opacity: 1;
+                }
+
+                .icon{
+                    font-size: 1em;
+                }
+
+
+            }
+
+        }
+    
+    }
+
+    /* =type-specific work__tiles stylings */
+    &__tiles--my__projects .view{
+        position: relative;
+        height: 0;
+        padding-top: 56.25%;
+
+
+
+        .not-loaded--work{
+        
+            background: rgb(220,220,220);
+            background: linear-gradient(
+                        45deg, 
+                        $rusty,
+                        $lightest
+                      );
+            
+        }
+    }
+
+    &__tiles--my__work .view{
+        position: relative;
+        height: 0;
+        padding-top: 100%;
+    }
+
+    .not-loaded--wip-container .section--my__work{
+        display: none;
+    }
+
+}
+
+@media all and (min-width: 768px){
+    .not-loaded--wip-container .section--my__work{
+        display: block;
+    }
+}

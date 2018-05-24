@@ -15,8 +15,8 @@
     background: $shiny ;
     background: linear-gradient(
                 -45deg,
-                $accent,  
-                $lightest
+                $bg1,  
+                $white
               );
 
     &:before{
@@ -51,11 +51,14 @@
             @include pseudo;
             @extend .font--primaryText;
             z-index: 2;
-            font-size: 3rem;
+            font-size: 2rem;
             content: 'Under Development';
             text-align: center;
             padding-top: 40px;
 
+            @media all and (min-width: 768px) {
+                font-size: 3rem;
+            }
 
         }
     }
@@ -122,6 +125,7 @@
     letter-spacing: .2em;
     text-transform: capitalize;
 }
+
 .font--heading__alt{
     color: rgb(125,125,125);
     font-family: $fontHeadingAlt;
@@ -130,6 +134,7 @@
     word-spacing: .1em;
     font-style: italic;
 }
+
 .font--primaryText{
     color: #404040;
     line-height: 1.5em;
@@ -140,14 +145,43 @@
     text-shadow: 5px 5px 3px rgba(0,0,0,.15);
 }
 
+.font--primaryText strong{
+    font-size: 1.1em;
+    text-shadow: 0px 5px 3px rgba(0,0,0,.3);
+    padding-bottom: 4px;
+    display: inline-block;
+    box-shadow: 0px 12px 10px -10px  rgba(0,0,0,.4);
+}
 
+.font--secondaryText{
+    color: $lightText;
+
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: .05em;  
+    word-spacing: .1em;
+    font-style: italic;
+    /* font-family: 'Poiret One', sans-serif;
+    font-weight: 800;
+    letter-spacing: .1em; */
+}
+
+.heading--underlined{
+    display: inline-block;
+    padding-bottom: 0.625rem;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(to right,hsl(34,87%,81%),
+        transparent 72%) 1 stretch;
+}
 
 .text-shadow-1{
     text-shadow: 0.3125em 0.3125em 0.1875em rgba(0,0,0,.15);
 }
+
 .text-shadow-2{
     text-shadow: 0  0.3125rem  0.1875rem rgba(0,0,0,.15);
 }
+
 .text-shadow-3{
     text-shadow: -0.1875rem  0.1875rem  0.1875rem rgba(0,0,0,.15);
 }
@@ -192,7 +226,9 @@
 }
 
 
-/* #helpbox{
+/* 
+
+#helpbox{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -202,9 +238,12 @@
     border-radius: 4px;
     box-shadow: 0px 5px 20px rgba(0,0,0,.3);
     padding: 1rem;
-} */
+} 
+
+*/
 
 /*
+
 #helpbox .close{
     position: absolute;
     right: 0;
@@ -220,12 +259,19 @@
     height: 100%;
     outline: 2px solid rgb(196,168,132);
     overflow: auto;
-} */
-/*#helpbox .subject{
+} 
+
+*/
+
+/*
+
+#helpbox .subject{
     font-size: 1.3rem;
     position: relative;
     margin: 2.5rem 0;
-}*/
+}
+
+*/
 
 
 #helpbox .subject .helpFor{
@@ -238,26 +284,35 @@
 }
 
 
-/*#helpbox .data{
+/*
+
+#helpbox .data{
     text-align: center;
     font-size: 1.4rem;
     line-height: 1.8em;
     padding: 0 2em 0 2em;
-}*/
+}
+
+*/
 
 
 
 #modal{ 
     transform-style: preserve-3d;
 }
-/* #modal .wrapper{
+
+/* 
+
+#modal .wrapper{
     position: relative;
     display: block;
     width: 100%;
     height: 100%;
     outline: 2px solid rgb(196,168,132);
     overflow: auto;
-} */
+}
+
+*/
 
 #modal .face{
     position: absolute;
@@ -357,74 +412,47 @@
     box-shadow: 0 10px 10px -4px rgba(0,0,0,.3);
 }
 
-.font--primaryText strong{
-    font-size: 1.1em;
-    text-shadow: 0px 5px 3px rgba(0,0,0,.3);
-    padding-bottom: 4px;
-    display: inline-block;
-    box-shadow: 0px 12px 10px -10px  rgba(0,0,0,.4);
-}
+        
 
-.font--secondaryText{
-    color: rgb(125,125,125);
+                        /* =anchor and links */
 
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    letter-spacing: .05em;  
-    word-spacing: .1em;
-    font-style: italic;
-    /* font-family: 'Poiret One', sans-serif;
-    font-weight: 800;
-    letter-spacing: .1em; */
-}
-
-
-.heading--underlined{
-    display: inline-block;
-    padding-bottom: 0.625rem;
-    border-bottom: 2px solid transparent;
-    border-image: linear-gradient(to right,hsl(34,87%,81%),
-        transparent 72%) 1 stretch;
-}
-
-
-.navHoverEffect{
+.navHoverEffect,
+.navActiveEffect{
     display: block;
     position: relative;
     z-index: 1;
 }
 
-.navHoverEffect:after{
-    content: "";
-    position: absolute;
-    background: red;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    height: 100%;
-    transform: translateY(-100%) translateZ(0) scale(.8);
-    width: 100%;
+.navHoverEffect:after,
+.navActiveEffect:after{
+    @include pseudo;
     z-index: -1;
-    background: linear-gradient(to top,
-           rgba(253, 245, 232,1),
-            rgba(196,168,132,1)
-        );
+    opacity: 0;
+    background: $navGradient;
+    transition: opacity .2s;
+    
+}
+.nav-main .navHoverEffect:after{
+    transform: translateY(-100%) translateZ(0) scale(.8);
     transition: opacity .2s, transform .5s;
 }
-.navHoverEffect:hover:after{
-    transform: translateY(0) translateZ(0) scale(1);
-    opacity: 1;
-    transition: opacity .2s .1s, transform .5s;
+@media all and (min-width:768px){
+    .nav-main .navHoverEffect:hover:after{
+        transform: translateY(0) translateZ(0) scale(1);
+        opacity: 1;
+        transition: opacity .2s .1s, transform .5s;
 
+    }
 }
-.navActiveEffect.navHoverEffect:after{
-    background: linear-gradient(to top,
-           rgba(253, 245, 232,1),
-            rgba(196,168,132,1)
-        );
+
+
+.navActiveEffect.navHoverEffect:after,
+.navActiveEffect:after{
+    background: $navGradient;
     transform: translateY(0) translateZ(0) scale(1);
     opacity: 1;
 }
+                    
 
 a:not(.link){
     line-height: 1em;
@@ -493,3 +521,19 @@ a:not(.link):hover:after{
     transition: background 0.4s 0.2s;
 }
 
+
+
+                        /* =width */
+
+
+
+.fullW{
+    width: 100%
+}
+.fullH{
+    height: 100%;
+}
+.fullWH{
+    @extend .fullW;
+    @extend .fullH;
+}

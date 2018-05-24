@@ -1,206 +1,137 @@
 
-footer{
-    bottom: 0;
-    border-bottom: 4px solid transparent;
-    padding: 0 10px 0 10px;
-}
 
-@media all and (min-width:768px){
-    footer{
-        border-bottom: 6px solid transparent;
-        padding: 0 30px;
-    }
-}
+
+
 
 footer .wrapper>.section{
     /*position: relative;*/
 }
 
-footer [class^="nav--"]{
-    position: absolute;
-    bottom: 3px;
-    left: 0;
-    transform: translateY(100%);
+#footer{ 
+    bottom: 0;
+    border-bottom: 4px solid transparent;
+    padding: 0 10px 0 10px;
+    padding: 0 30px;
+
+
+    nav{
+        position: absolute;
+        bottom: 4px;
+        
+
+        .icon{
+            font-size: 2rem;
+            line-height: .5em;
+        }
+
+        .icon--toggle{
+            position: absolute;
+            bottom: 100%;
+            background: rgba(255,255,255,.75);
+            padding: 0 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: .5em;
+            box-shadow: 2px 4px 10px rgba(0,0,0,.15);
+        }
+        
+        .list{
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            background: rgba(255,255,255,.75);
+            padding: 10px;
+
+            opacity: 0;
+            visibility: hidden;  
+        }
+    }
+
+
+    .nav-sec{
+        left: 0;
+        transform: translateY(100%);
+        .icon--pull,
+        .icon--push{
+            left: 0;
+            box-shadow: 2px -4px 10px rgba(0,0,0,.15);
+        }
+
+        .list{
+            padding: 0; 
+
+        }
+
+        a{
+            padding: 5px 7px;
+
+            &:after{
+                transform: translateZ(0) scale(0.8);
+            }
+
+            &:hover:after{
+                transform: translateZ(0) scale(1);
+            }
+
+        }
+
+    }
+
+    .nav-social{
+        left: 50% ;
+        transform: translateY(103%) translateX(-50%) ;
+        padding: 0;
+
+        .icon--pull,
+        .icon--push{
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0px -4px 10px rgba(0,0,0,.15);
+        }
+        li{
+            display: inline-block;
+            margin-left: 8px;
+        }
+        .icon{
+            font-size: 1.5rem !important;
+        }
+    }
+
 }
 
 
-footer .mob__nav--secondary,
-footer .mob__nav--social{
-    position: absolute;
-    bottom: 15vh;
-    
-}
-footer .mob__nav--secondary{
-    transform: translateX(-100%);
-    left: 10px;
-}
-footer .mob__nav--social{
-    transform: translateX(100%);
-    right: 10px;
-}
-
-footer .mob__nav--secondary .wrapper,
-footer .mob__nav--social .wrapper{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
 
-/* =icon for footer */
-footer  .icon{
-  font-size: 2rem;
-  line-height: .5em;
-}
-footer .nav--secondary .icon--toggle,
-footer .nav--social .icon--toggle{
-    position: absolute;
-    bottom: 100%;
-    background: rgba(255,255,255,.8);
-    padding: 0 5px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    line-height: .5em;
-    box-shadow: 2px 4px 10px rgba(0,0,0,.15);
-}
-
-
-/* icon styles for secondary nav */
-footer .nav--secondary .icon--pull,
-footer .nav--secondary .icon--push{
-    left: 0;
-    box-shadow: 2px -4px 10px rgba(0,0,0,.15);
-}
-footer .mob__nav--secondary .icon--toggle,
-footer .mob__nav--social .icon--toggle{
-    position: absolute;
-    top: 0%;
-    background: rgba(255,255,255,.8);
-    /*padding: 0 5px;*/
-    text-align: center;
-    cursor: pointer;
-    font-size: 1.5rem;
-    line-height: 1.3em;
-    line-height: 30px;
-    width: 30px;
-    height: 30px;
-    box-shadow: 2px 4px 10px rgba(0,0,0,.15);
-}
-footer .mob__nav--secondary .icon--pull,
-footer .mob__nav--secondary .icon--push{
-    left: 100%;
-    transform-origin: bottom left;
-    transform: rotate(90deg);
-    box-shadow: 2px -4px 10px rgba(0,0,0,.15);
-}
-
-footer .mob__nav--social .icon--pull,
-footer .mob__nav--social .icon--push{
-    right: 100%;
-    transform-origin: bottom right;
-    top: 50%;
-    transform: translateY(-50%) ;
-    box-shadow: 2px -4px 10px rgba(0,0,0,.15);
-}
-
+/* 
 footer [class^="nav--"] .icon--push{
     opacity: 0;
     visibility: hidden;
 }
-
-
-/* icon styles for social nav */
-
-footer .nav--social{
-    left: 50%;
-    transform: translateY(103%) translateX(-50%);
-    padding: 0;
-}
-
-footer .nav--social .icon--pull,
-footer .nav--social .icon--push{
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0px -4px 10px rgba(0,0,0,.15) !important;
-}
-
-footer .navigation--footer,
-footer .social,
-footer .link--go__to__top{
-}
+*/
 
 
 
-footer .navigation--footer{
-}
-
-footer .social{
-}
-
-footer .link--go__to__top{
-}
-
-
-footer [class^="list--"]{
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    background: rgba(255,255,255,.5);
-    padding: 10px;
-
-    /*visibility: hidden;*/
-    /*opacity: 0;*/
-}
-footer .nav--secondary .list--sec__nav{
-    padding: 0;
-}
-footer .nav--secondary .list--sec__nav a{
-    /*position: relative;*/
-    /*display: block;*/
-    padding: 5px 7px;
-}
-footer .nav--secondary .list--sec__nav a:after{
-    transform: translateZ(0) scale(0.8);
-}
-footer .nav--secondary .list--sec__nav a:hover:after{
-    transform: translateZ(0) scale(1);
-}
-
-footer [class^="list--"] li{
-}
-
-footer .list--socialLinks{
-}
-
-footer .list--socialLinks li{
-    display: inline-block;
-    margin-left: 8px;
-}
-footer .nav--social .icon--toggle{
-    /*font-size: 1.8rem ;*/
-}
-footer .list--socialLinks .icon{
-    font-size: 1.5rem !important;
-}
+// ------------------------------------------------
 
 
 
-footer .link--go__to__top{
+footer .link--go-to-top{
     position: absolute;
     /*background: red;*/
     width: 100px;
     height: 100px;
-    bottom: -3px;
-    right: 1rem;
+    bottom: -4px;
+    right: 0rem;
     transform: rotate(45deg);
-    transform-origin: -40% 50% ;
-}
-footer .link--go__to__top .go{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    /*background: red;*/
-}
+    transform-origin: -40% 50%;
+    background: $white;
 
+    background: repeating-linear-gradient(-90deg,
+                 lighten($lightestWhiten,5%) 7%,
+                 lighten($lightestWhiten,5%) 14%,
+                 darken($lightestWhiten,10%) 14%,
+                 darken($lightestWhiten,10%) 21%
+
+                );
+    
+}

@@ -261,6 +261,8 @@ function swallowError (error) {
 	gulp.task('folders',['root'],function(){
 		var sourceFile = 
 		['./source/**/*',
+		'!./source/*',
+		'!./source/img/#extras/**/*',
 		'!./source/js/**/*',
 		'!./source/css/**/*',
 		'!./source/sass/**/*',
@@ -275,6 +277,8 @@ function swallowError (error) {
 	gulp.task('folders:watch',function(){
 		var sourceFile = 
 		['./source/**/*',
+		'!./source/*',
+		'!./source/img/#extras/**/*',
 		'!./source/js/**/*',
 		'!./source/css/**/*',
 		'!./source/sass/**/*',
@@ -525,12 +529,16 @@ function swallowError (error) {
 		gulp.watch(['./source/css/*.css','./source/css/**/*.scss'],['css:watch']);
 		gulp.watch(['./source/controller/**/*.php','./source/Controller/**/*.php'],['php:watch']);
 
-		gulp.watch(['./source/**/*','!./source/js/**/*','!./source/css/**/*',
-					'!./source/controller/**/*'],['folders:watch']);
+		gulp.watch(['./source/**/*',
+					'!./source/*',
+					'!./source/img/#extras/**/*',
+					'!./source/js/**/*',
+					'!./source/css/**/*',
+					'!./source/sass/**/*',
+					'!./source/controller/**/*'], ['folders:watch']);
+
 		
 
-		// gulp.watch(['./app/**/*.js','./source/js/**/*.js'],['js:watch']);
-	    // gulp.watch("*.html").on('change', browserSync.reload);
 	});
 
 

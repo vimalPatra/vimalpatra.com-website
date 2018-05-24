@@ -166,31 +166,50 @@
                 </div>
                 <div class="clear" style="clear:both;" ></div>
                 
-                <nav class="nav--main font--primaryText ">
-                    <div class="wrapper wrapper--nav__main">
-                        <div data-toggle="nav--main" class="icon icon--toggle icon--pull ion-navicon border--3px border1--alt">
+                <nav class="nav-main font--primaryText ">
+                    <div class="wrapper nav-main__wrapper">
+                        <div data-toggle=".nav-main" data-function="open" class="icon icon--toggle icon--pull ion-navicon border--3px border1--alt">
                         </div>
-                        <div data-toggle="nav--main" class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
+
+                        <div data-toggle=".nav-main" data-function="close" class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
                         </div>
-                        <div class="list__container list__container--main__nav">
-                            <ul class="list--main__nav clearfix border1 border--3px">
+
+                        <div class="list-container">
+
+                            <ul class="list clearfix border1 border--3px">
                                 <li>
                                     <a data-hash_scroll_to="#introduction" href="#about" class="navActiveEffect navHoverEffect link link--scroll">about</a>
                                 </li>
+
                                 <li>
                                     <a data-hash_scroll_to="#experience" href="#experience" class="navHoverEffect link link--scroll">experience</a>
                                 </li>
+
+                                <li>
+                                    <a href="#skills" data-hash_scroll_to="#skills" class="navHoverEffect link link--scroll">skills</a>
+                                </li>
+
                                 <li>
                                     <a data-hash_scroll_to="#services" href="#services" class="navHoverEffect link link--scroll">services</a>
                                 </li>
+
                                 <li>
                                     <a data-hash_scroll_to="#contact" href="#contact" class="navHoverEffect link link--scroll">contact</a>
                                 </li>
+
                                 <li>
-                                    <a data-hash_scroll_to="#work" href="#showcase" class="navHoverEffect link link--scroll">work</a>
+                                    <a data-hash_scroll_to="#work" href="#work" class="navHoverEffect link link--scroll">work</a>
                                 </li>
+
                                 <li>
                                     <a href="#" data-bind="getAQuote" class="navHoverEffect link link--open__modal">get a quote</a>
+                                </li>
+
+                                <li>
+                                    <a href="#" data-bind="getAQuote" class=" special-link">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="getAQuote" class=" special-link">Digitizing U</a>
                                 </li>
                                 
                             </ul>
@@ -198,38 +217,50 @@
                     </div>
                 </nav>
 
-                <!-- <nav class="mob__nav--main font--primaryText ">
-                    <div class="wrapper wrapper--nav__main">
-                        <div data-toggle="mob__nav--main" class="icon icon--toggle icon--pull ion-navicon border--3px border1--alt">
+                <nav class="nav-main--mob font--primaryText">
+                    <div class="wrapper nav-main--mob__wrapper">
+
+                        <div data-toggle=".nav-main--mob .list-container" data-function="open" class="icon icon--toggle icon--pull ion-navicon border--3px border1--alt">
                         </div>
-                        <div data-toggle="mob__nav--main" class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
-                        </div>
-                        <div class="list__container list__container--mob__nav">
-                            <ul class="list--main__nav clearfix border1 border--3px">
+                        
+
+                        <div class="list-container">
+                            <div data-toggle=".nav-main--mob .list-container" data-function="close" class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1"></div>
+                            <ul class="list border1 border--3px">
                                 <li>
-                                    <a data-hash_scroll_to="#about" href="#about" class="navActiveEffect navHoverEffect link link--scroll">about</a>
+                                    <a data-hash_scroll_to="#introduction" href="#about" class="navActiveEffect link link--scroll">about</a>
                                 </li>
                                 <li>
-                                    <a data-hash_scroll_to="#experience" href="#experience" class="navHoverEffect link link--scroll">experience</a>
+                                    <a data-hash_scroll_to="#experience" href="#experience" class=" link link--scroll">experience</a>
                                 </li>
                                 <li>
-                                    <a data-hash_scroll_to="#services" href="#services" class="navHoverEffect link link--scroll">services</a>
+                                    <a href="#" data-hash_scroll_to="#skills" class=" link link--scroll">skills</a>
                                 </li>
                                 <li>
-                                    <a data-hash_scroll_to="#contact" href="#contact" class="navHoverEffect link link--scroll">contact</a>
+                                    <a data-hash_scroll_to="#services" href="#services" class=" link link--scroll">services</a>
                                 </li>
                                 <li>
-                                    <a data-hash_scroll_to="#showcase" href="#showcase" class="navHoverEffect link link--scroll">work</a>
+                                    <a data-hash_scroll_to="#contact" href="#contact" class=" link link--scroll">contact</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-bind="getAQuote" class="navHoverEffect link link--open__modal">get a quote</a>
+                                    <a data-hash_scroll_to="#work" href="#showcase" class=" link link--scroll">work</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="getAQuote" class=" link link--open__modal">get a quote</a>
+                                </li>
+                                <li>
+                                    <a href="#" class=" special-link">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="special-link">Digitizing U</a>
                                 </li>
                                 
                             </ul>
                         </div>
                     </div>
                 </nav>
-                 -->
+
+             
             </header>
         
             
@@ -245,9 +276,10 @@
                         <!-- Hi, <br> --> Hi<br>My Name<br>Is Vimal 
                         </h1> 
                     </div>
-                    <div  class="parallax__layer parallax__layer--base clearfix">
+
+                    <div class="parallax__layer parallax__layer--base clearfix">
                         
-                        <div class="background col-md-offset-4 col-md-8">
+                        <div class="background col-xs-offset-2 col-xs-10 col-md-offset-4 col-md-8">
                             <div class="background__wrapper wrapper">
                                 
                                 <div class="pattern col-md-12"></div>
@@ -279,7 +311,7 @@
                     <!-- <div class="title">Background Layer 2</div> -->
                     </div>
                     <div class="parallax__layer parallax__layer--base clearfix">
-                        <div class="background col-md-8 ">
+                        <div class="background col-md-8 col-xs-10">
                             <div class="wrapper background__wrapper">
                                 
                                 <div class="pattern col-md-12"></div>
@@ -312,12 +344,12 @@
                     </div>
 
                     <div class="parallax__layer parallax__layer--base clearfix">
-                        <div class="background col-md-offset-4 col-md-8">
+                        <div class="background col-md-offset-4 col-md-8 col-xs-offset-2 col-xs-10">
                             <div class="wrapper background__wrapper">
                                 
                                 <div class="pattern col-md-12"></div>
                                 <div class="shine col-md-12"></div>
-                                <section class="main  border3--alt col-md-9">
+                                <section class="main border3--alt col-md-9">
                                     <div class="wrapper">
                                         <h2 class="sectionDesc font--primaryText">
                                            As of now, I am working and committed to a self owned startup, <strong>Webkrushers</strong> with a few people.
@@ -344,13 +376,15 @@
                       </div>
 
                       <div class="parallax__layer parallax__layer--base clearfix">
-                            <div class="background col-md-9">
+                            <div class="background col-md-9 col-xs-10">
                                 <div class="wrapper background__wrapper">
 
                                     <div class="pattern col-md-12"></div>
                                     <div class="shine col-md-12"></div>
-                                    <section class="main border1 col-md-9">
+                                    <section class="main border1 col-xs-12 col-md-9">
+                                   
                                         <div class="technologies ">
+
                                             <section>
                                                 <h2 class="listHeading font--heading">
                                                     <span class="text heading--underlined">technologies i use right now...</span>
@@ -383,6 +417,7 @@
                                                     </ul>
                                                 </div>
                                             </section>
+
                                             <section>
                                                 <h2 class="listHeading font--heading">
                                                     <span class="helpbox__subject text heading--underlined">Ones i am still improving upon</span> 
@@ -453,6 +488,7 @@
                                                     
                                                 </div>
                                             </section>
+
                                             <section class="hidden-xs">
                                                 <h2 class="listHeading font--heading">
                                                     <span class="helpbox__subject text heading--underlined">what's next on my list ?</span> 
@@ -522,7 +558,7 @@
                                                 </div>
                                             </section>
                                         </div>
-                                    </section>
+                                    </section><!-- /main  -->
                                     
                                 </div>
                             </div>
@@ -542,13 +578,13 @@
 
                       <div class="parallax__layer parallax__layer--base clearfix">
                         
-                            <div class="background col-md-offset-3 col-md-9">
+                            <div class="background col-md-offset-3 col-md-9 col-xs-offset-2 col-xs-10">
                                 <div class="wrapper background__wrapper">
                                     
                                     <div class="pattern col-md-12"></div>
                                     <div class="shine col-md-12"></div>
                                     
-                                    <section class="main border2  col-md-9">
+                                    <section class="main border2 col-xs-12 col-md-9">
                                         <div class="text">
                                             <h2 class="sectionDesc font--primaryText">
                                                <section>
@@ -598,7 +634,7 @@
 
                       <div class="parallax__layer parallax__layer--base clearfix">
                         
-                            <div class="background col-md-10">
+                            <div class="background col-md-10  col-xs-11">
                                 <div class="wrapper background__wrapper">
                                     
                                     <div class="pattern col-md-12"></div>
@@ -606,8 +642,8 @@
                                     <section class="main border2 col-md-9">
                                         <div class="text">
                                             <h2 class="sectionDesc font--primaryText">
-                                               If you want to hire me / need full web solutions (or any other digital solutions like design, mobile development, digital marketing ) / or just give a shoutout to me, you can head over to 
-                                               <strong>webkrushers.com</strong> and start a project there or fill in the form below. I will get back to you as soon as i can. Alternatively you can also contact me via the social media links below. 
+                                               <!-- If you want to hire me / need full web solutions (or any other digital solutions like design, mobile development, digital marketing ) / or just give a shoutout to me, you can head over to 
+                                               <strong>webkrushers.com</strong> and start a project there or fill in the form below. I will get back to you as soon as i can. Alternatively you can also contact me via the social media links below.  -->
                                             </h2>
                                         </div>
                                         <div class="formContainer font--secondaryText text-shadow-1">
@@ -616,96 +652,96 @@
                                                     contact form
                                                 </span>
                                             </h3>
-                                            <form id="contactForm" action="" class="row ">
-                                                <div class="col-xs-12">
-                                                    <div class="formFieldWrapper">
-                                                        <input required id="nameC" class="text-shadow-2" data-placeholder="what's your full name" type="text">
-                                                        <div class="element element--1"></div>
-                                                        <div class="element element--2"></div>
-                                                        <label for="nameC">name</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    
-                                                    <div class="formFieldWrapper">
-                                                        <input required id="mailC" class="text-shadow-2" type="email" data-placeholder="type down your official/go-to e-mail address">
-                                                        <div class="element element--1"></div>
-                                                        <div class="element element--2"></div>
-                                                        <label for="mailC">e-mail address</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    <div class="formFieldWrapper">
-                                                        
-                                                        <select required class="text-shadow-2" name="" id="sourceC">
-                                                            <option class="default" value="" data-default-text="Don't wanna answer">
-                                                                
-                                                            </option>
-                                                            <option value="search_engine">
-                                                                Google or other Search Engine (MSN, Bing)
-                                                            </option>
-                                                            <option value="freelance_website">
-                                                                A Freelance site (Freelancer, Upwork, etc.)
-                                                            </option>
-                                                            <option value="social_media">
-                                                                A social media link (Facebook, twitter, codepen, etc.)
-                                                            </option>
-                                                            <option value="url">
-                                                                A friend referred me
-                                                            </option>
-                                                            <option value="bookmarked">
-                                                                I bookmarked it (I am visiting the second time)
-                                                            </option>
-                                                            <option value="advertisement">
-                                                                I clicked on an Ad
-                                                            </option>
-                                                            <option value="dunno">
-                                                                I don't know how i ended up here
-                                                            </option>
-                                                        </select>
-                                                        <label for="sourceC">how did you came here ?</label>
-                                                        <div class="element element--1"></div>
-                                                        <div class="element element--2"></div>
-                                                    </div>
+    <form id="contactForm" action="" class="row " data-parsley-trigger="focusout" data-parsley-trigger-after-failure="input" data-valid-email-text="I'll a valid e-mail address" data-required-text="Oops, You can't leave this field blank">
+        <div class="col-xs-12 field-block">
+            <div class="formFieldWrapper">
+                <input required id="nameC" class="text-shadow-2" data-placeholder="what's your full name" type="text">
+                <div class="element element--1"></div>
+                <div class="element element--2"></div>
+                <label for="nameC">name</label>
+            </div>
+        </div>
+        <div class="col-xs-12 field-block">
+            
+            <div class="formFieldWrapper">
+                <input required id="mailC" class="text-shadow-2" type="email" data-placeholder="type down your official/go-to e-mail address" data-parsley-trigger="focusout input"> 
+                <div class="element element--1"></div>
+                <div class="element element--2"></div>
+                <label for="mailC">e-mail address</label>
+            </div>
+        </div>
+        <div class="col-xs-12 field-block">
+            <div class="formFieldWrapper">
+                
+                <select class="text-shadow-2" name="" id="sourceC">
+                    <option class="default" value="" data-custom-text="Don't wanna answer">
+                        
+                    </option>
+                    <option value="search_engine">
+                        Google or other Search Engine (MSN, Bing)
+                    </option>
+                    <option value="freelance_website">
+                        A Freelance site (Freelancer, Upwork, etc.)
+                    </option>
+                    <option value="social_media">
+                        A social media link (Facebook, twitter, codepen, etc.)
+                    </option>
+                    <option value="url">
+                        A friend referred me
+                    </option>
+                    <option value="bookmarked">
+                        I bookmarked it (I am visiting the second time)
+                    </option>
+                    <option value="advertisement">
+                        I clicked on an Ad
+                    </option>
+                    <option value="dunno">
+                        I don't know how i ended up here
+                    </option>
+                </select>
+                <label for="sourceC">how did you came here ?</label>
+                <div class="element element--1"></div>
+                <div class="element element--2"></div>
+            </div>
 
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    <div class="formFieldWrapper">
-                                                        
-                                                        <select required class="text-shadow-2" name="" id="purposeC">
-                                                            <option class="default" value=""></option>
-                                                            <option value="hello">I just wanted to say hello</option>
-                                                            <option value="hire">I want to hire you</option>
-                                                            <option value="query">I have a query</option>
-                                                            <option value="report">I want to report some problem with your site</option>
-                                                            <option value="cheer">I couldn't stop myself after seeing your amazing site</option>
-                                                            <option value="random">I don't have anything better to do</option>
-                                                        </select>
-                                                        <label for="purposeC">Purpose of contact</label>
-                                                        <div class="element element--1"></div>
-                                                        <div class="element element--2"></div>
-                                                    </div>
-                                                    
-                                                </div>
+        </div>
+        <div class="col-xs-12 field-block">
+            <div class="formFieldWrapper">
+                
+                <select required class="text-shadow-2" name="" id="purposeC">
+                    <option class="default" value=""></option>
+                    <option value="hello">I just wanted to say hello</option>
+                    <option value="hire">I want to hire you</option>
+                    <option value="business">I have a business proposal</option>
+                    <option value="report">I want to report some problem with your site</option>
+                    <option value="cheer">I couldn't stop myself after seeing your amazing site</option>
+                    <option value="random">I don't have anything better to do</option>
+                </select>
+                <label for="purposeC">Purpose of contact</label>
+                <div class="element element--1"></div>
+                <div class="element element--2"></div>
+            </div>
+            
+        </div>
 
-                                                <div class="col-xs-12">
-                                                    <div required class="formFieldWrapper">
-                                                        <textarea class="text-shadow-2" name="" id="elaborate" data-placeholder="give full details elaborating your purpose" ></textarea>
-                                                        <label for="elaborate">
-                                                            Please <span class="change">describe your project <span class="small">(and mention your budget if possible)</span></span>
-                                                        </label>
-                                                        <div class="element element--1"></div>
-                                                        <div class="element element--2"></div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                
-                                                <div class="col-xs-12">
-                                                    <button id="cfSubmit" class="submit submit--cf border--3px border1--alt font--heading" type="submit">
-                                                        <span class="change">Get A Quote!</span>
-                                                    </button>
-                                                </div>
-                                            </form>
+        <div class="col-xs-12 field-block">
+            <div required class="formFieldWrapper">
+                <textarea class="text-shadow-2" name="" id="elaborate" data-placeholder="give full details elaborating your purpose" ></textarea>
+                <label for="elaborate">
+                    Please <span class="change">describe</span>
+                </label>
+                <div class="element element--1"></div>
+                <div class="element element--2"></div>
+            </div>
+            
+        </div>
+        
+        <div class="col-xs-12 field-block">
+            <button id="cfSubmit" class="submit submit--cf border--3px border1--alt font--heading" type="submit">
+                <span class="change">send</span>
+            </button>
+        </div>
+    </form>
                                         </div>
                                     </section>
 
@@ -724,13 +760,13 @@
 
                       <div class="parallax__layer parallax__layer--base clearfix">
                         
-                            <div class="background col-md-10">
+                            <div class="background col-md-10 col-xs-offset-1 col-xs-11">
                                 <div class="wrapper background__wrapper">
                                     
                                     <div class="pattern col-md-12"></div>
                                     <div class="shine col-md-12"></div>
                                    
-                                    <section  class="not-loaded--wip-container main border2 col-md-12">
+                                    <section class="main border2 col-xs-12 col-md-12 not-loaded--wip-container">
                                         <div class="not-loaded not-loaded--wip border--7px border2"></div>
 
                                         <section class="section--work__tiles section--my__projects">
@@ -816,20 +852,25 @@
                 </div>
             </div>
             
-            <footer class="font--primaryText border2">
+            <footer id="footer" class="font--primaryText border2">
                 <div class="wrapper row">
-                    <section class="section section--nav__footer col-xs-12 col-sm-4">
 
-                        <nav class="nav--secondary hidden-xs">
-                                <div class="wrapper wrapper--nav-secondary">
-                                    <div data-toggle="nav--secondary" class="icon icon--toggle icon--pull ion-ios-arrow-up border--3px border1">
+                    <section class="section section--nav-sec col-xs-12 col-sm-4">
+
+                        <nav class="nav-sec hidden-xs">
+
+                                <div class="wrapper nav-sec__wrapper">
+
+                                    <div data-function="open" data-toggle=".nav-sec" class="icon icon--toggle icon--pull ion-ios-arrow-up border--3px border1">
            
                                     </div>
-                                    <div data-toggle="nav--secondary"
+
+                                    <div data-function="close" data-toggle=".nav-sec"
                                      class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1">
                                         
                                     </div>
-                                    <ul class="list--sec__nav border--3px border1">
+
+                                    <ul class="list nav-sec--list border--3px border1">
                                         <li>
                                             <a data-bind="getAQuote" href="#" class="navHoverEffect link link--open__modal">
                                                 get a quote
@@ -842,10 +883,11 @@
                                         </li>
                                         <li>
                                             <a href="#" class="navHoverEffect link anchor">
-                                                webkrushers
+                                                Digitizing U
                                             </a>
                                         </li>
                                     </ul>
+
                                 </div>
                                 <!-- <div class="icon">
                                     
@@ -897,18 +939,20 @@
                         </nav> -->
                     </section>
 
-                    <section class="section section--nav__social col-xs-12 col-sm-4 center__children">
-                        <nav class="nav--social clicked hidden-xs">
-                                <div class="wrapper wrapper--nav--social">
-                                    <div data-toggle="nav--social"
+                    <section class="section section--nav-social col-xs-12 col-sm-4 center__children">
+
+                        <nav class="nav-social clicked hidden-xs">
+                                <div class="wrapper nav-social__wrapper ">
+                                    <div data-function="open" data-toggle=".nav-social "
                                      class="icon icon--toggle icon--pull ion-android-wifi border--3px border1--alt">
                                         
                                     </div>
-                                    <div data-toggle="nav--social"
+                                    <div data-function="close" data-toggle=".nav-social "
                                      class="icon icon--toggle icon--push ion-ios-close-empty border--3px border1--alt">
                                         
                                     </div>
-                                    <ul class="list--socialLinks border--3px border1--alt">
+
+                                    <ul class="list list--nav-social border--3px border1--alt">
                                         <li>
                                             <a href="" class="link anchor linkedIn">
                                                 <span class="icon ion-social-linkedin">
@@ -974,13 +1018,15 @@
                         </nav> -->
                     </section>
 
-                    <section class="goToTop col-xs-12 col-sm-4">
-                        <div data-hash_scroll_to="0" class="link link--scroll link--go__to__top border--3px border2">
-                            <a href="#" class="go">
+                    <section class="go-to-top col-xs-12 col-sm-4">
+
+                        <div class="wrapper wrapper--go-to-top" >
+                            <a href="#" data-hash_scroll_to="0"  class="link link--scroll link--go-to-top border--4px border2">
                                 
                             </a>
                         </div>
                     </section>
+
                 </div>
             </footer>
 

@@ -1,0 +1,197 @@
+
+/* =contact / =group6 */
+
+.contact{
+
+    .main .sectionDesc{
+        font-size: 1.2em;
+    }
+
+    .formContainer{
+        text-transform: capitalize;
+       /*background: red;*/
+       /*border: 4px solid silver;*/
+
+    }
+
+    .field-block{
+        margin: 0.3125rem 0 2.5rem;
+    }
+
+    .parsley-errors-list{
+        padding-left: 2rem;
+        list-style: none;
+        margin: .5rem 0 0;
+
+        li{ 
+            color: $darkestText;
+            padding: 0 .7rem 0 0;
+            border-bottom: 3px solid $warning;
+            display: inline-block;
+        }
+    }
+
+    .formFieldWrapper{
+        /*width: 100%;*/
+        position: relative;
+        
+        padding: 0.25rem 0.125rem;
+
+        >label{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /*background: red;*/
+            cursor: pointer;
+            text-align: center;
+            line-height: 3.125rem;
+            z-index: 4;
+            transition: all .3s;
+            font-size: 1.1rem;
+            line-height: 3.125rem;
+            transform: translateY(0);
+            /*z-index: -1;*/
+            z-index: -1;
+        }
+
+        >.element{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            text-align: center;
+            line-height: 3.125rem;
+            z-index: -1;
+        }
+        >.element--1{
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right,
+               rgb(117,117,117) 10%,
+               transparent 10%,
+               transparent 90%,
+               rgb(117,117,117) 90%
+            ) 1 stretch;
+            transform: scaleX(1);
+            transition: all .3s;
+        }
+        >.element--2{
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right,
+               transparent 10%,
+               rgb(117,117,117) 10%,
+               rgb(117,117,117) 90%,
+               transparent 90%
+            ) 1 stretch;
+            transition: all .3s;
+        }
+
+    }
+
+    input,
+    textarea,
+    select{
+        width: 100%;
+        display: block;
+        border: none;
+        padding: 0 2em;
+        height: 3.125rem;
+        color: $black;
+        font-size: 1.2rem;
+        font-family: 'Poiret One', sans-serif;
+        font-weight: 900;
+        text-transform: capitalize;
+        letter-spacing: .08em;
+        line-height: 3.5rem;
+        text-align: center;
+        background: transparent;
+
+        transition: background .15s;
+
+    }
+
+    textarea{
+        padding: .5em;
+        line-height: 1.6em;
+        resize: none;
+        height: 200px;
+    }
+
+    input[type="email"]{
+        text-transform: lowercase;
+    }
+    input[type="email"]:first-letter{
+        text-transform: uppercase;
+    }
+    select{
+        cursor: pointer;
+    }
+    option{
+        font-size: 1.5rem;
+        font-weight: 100;
+        font-family: 'Josefin Sans', sans-serif;
+        text-transform: capitalize;
+        background: hsla(37,82%,95%,1);
+    }
+
+    input:focus, input.focused,
+    textarea:focus, textarea.focused,
+    select:focus, select.focused{
+        background: hsla(37,82%,95%,.6);
+        outline: 2px solid hsla(37,82%,90%,1);
+        transition: background .3s .15s;
+    }
+    input:focus,
+    textarea:focus,
+    select:focus{
+        box-shadow: 0 5px 10px 0px hsla(37,82%,80%,.7);
+        transition: box-shadow .3s ;
+    }
+    input:focus ~ label, input.focused ~ label,
+    textarea:focus ~ label, textarea.focused ~ label,
+    select:focus ~ label, select.focused ~ label{
+        transform: translateY(-2.5rem);
+    }
+
+    input:focus ~ .element--1, input.focused ~ .element--1,
+    textarea:focus ~ .element--1, textarea.focused ~ .element--1,
+    select:focus ~ .element--1, select.focused ~ .element--1{
+        transform: scaleX(1.04);
+    }
+
+    input:focus ~ .element--2, input.focused ~ .element--2,
+    textarea:focus ~ .element--2, textarea.focused ~ .element--2,
+    select:focus ~ .element--2, select.focused ~ .element--2{
+        opacity: 0;
+    }
+    
+    .submit--cf{
+        background: none;
+        padding: .4em 1.5em;
+        border:none;
+        background: $lightestWhiten;
+        color: $black;
+        text-shadow: .5px .5px 0 rgba(0,0,0,.3),
+                    2px 2px 1px rgba(0,0,0,.4),
+                    3px 3px 1px rgba(0,0,0,.2),
+                    4px 4px 1px rgba(0,0,0,.1)
+        ;
+
+        font-weight: 900;
+        font-size: 1.2rem;
+        margin: 1em 0 2em;
+        cursor: pointer;
+        transition: all .3s;
+        box-shadow: 5px 5px 10px 0px rgba(0,0,0,.3);
+    }
+    .submit--cf:hover,
+    .submit--cf:focus{
+        background: lighten($lightestWhiten, 3%);
+        box-shadow: -5px -5px 10px 0px rgba(0,0,0,.3);
+        outline: none;
+    }
+}
+

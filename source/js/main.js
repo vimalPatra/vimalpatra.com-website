@@ -7,13 +7,18 @@
 		
 	});
 	
+
 		// decaring variables
 	 var skillsListToggleStatus, 
-	 windowHeight, windowWidth,
+	 documentHeight, windowHeight, windowWidth,
 	 icons,
 	 header, headerNavMain, headerMobNavMain, headerNavToggleIcons, headerMobNavToggleIcons,
 	 headerPullIcons, headerPushIcons, headerMobPullIcons, headerMobPushIcons,
-	 footerPullIcons,footerPushIcons, footerToggleIcons,
+	 
+	 footer, 
+	 secondaryNav, secondaryNavOpen, secondaryNavClose,
+	 socialNav, socialNavOpen,socialNavClose, 
+
 	 links, redirLinks,
 	 modalLinks, disabledLinks, headerScrollLinks, scrollingLinks, scrollToTop,
 	 scrollingContainer, scrollPos,
@@ -23,8 +28,10 @@
 	 skillsLayer, technologies, listContainer, expandListContainer, technologyList, 
 
 	 contactLayer, contactForm, 
-	 cfInput, cfTextarea, cfSelectBoxes, cfAllFields,
-	 cfHelpText, dataDefaultText, contactFormDefaultText,
+	 cfInput, cfTextarea, cfSelectBoxes, cfPurpose, cfAllFields, cfSubmit, 
+	 selectHelpText, cfReqText, cfMailText, 
+
+	 placeHolderDefault, selectDefaultText, selectNullText, purposeAlts, 
 	 
 	 listContainerDefaultHeight,
 
@@ -44,10 +51,14 @@
 		// get dimensions of the window in js
 	windowWidth = $(window).width();
 	windowHeight = $(window).height();
+	
 
 
 		// elements
+
 	html = $("html");
+	documentHeight = html.height();
+
 	wrap = $("#wrap");
 	header = $("#header");
 	parallaxGroup = wrap.find(".parallax__group");
@@ -67,34 +78,48 @@
 	cfInput = contactForm.find('input');
 	cfTextarea = contactForm.find('textarea');
 	cfSelectBoxes = contactForm.find("select");
+	cfPurpose = cfSelectBoxes.filter('#purposeC');
 	cfAllFields = cfInput.add(cfTextarea).add(cfSelectBoxes);
+	cfSubmit = contactForm.find('#cfSubmit');
 
+	// console.log('cfInput from top');
+	// console.log(cfInput);
+	// console.log(contactForm);
 		// icons
 	icons = $(".icon"),
 	header = $('#header');
-	headerNavMain = header.find('.nav--main'),
-	headerMobNavMain = header.find('.mob__nav--main'),
+	headerNavMain = header.find('.nav-main'),
+	headerMobNavMain = header.find('.nav-main--mob'),
 	headerNavToggleIcons = headerNavMain.find(".icon--toggle"),
 	headerMobNavToggleIcons = headerMobNavMain.find(".icon--toggle"),
 
-	footerToggleIcons = $("footer").find(".icon--toggle"),
-
 	headerPullIcons = headerNavToggleIcons.filter(".icon--pull"), // header's open toggle icons
 	headerPushIcons = headerNavToggleIcons.filter(".icon--push"), // header's hide toggle icons
-
 	headerMobPullIcons = headerMobNavToggleIcons.filter(".icon--pull"), // header's open toggle icons for mobiles
 	headerMobPushIcons = headerMobNavToggleIcons.filter(".icon--push"), // header's hide toggle icons for mobiles
 
-	footerPullIcons = footerToggleIcons.filter(".icon--pull"),	// footer's show toggle icons
-	footerPushIcons = footerToggleIcons.filter(".icon--push"), // footer's hide toggle icons
+	
+
+	footer = $("#footer"),
+	secondaryNav = footer.find(".nav-sec"),
+	secondaryNavOpen = secondaryNav.find(".icon--pull"),	// footer's show toggle icons
+	secondaryNavClose = secondaryNav.find(".icon--push"), // footer's hide toggle icons
+	
+	socialNav = footer.find(".nav-social"),
+	socialNavOpen = socialNav.find(".icon--pull"),	// footer's show toggle icons
+	socialNavClose = socialNav.find(".icon--push"), // footer's hide toggle icons
+
+
 
 		// links
 	redirLinks = $("a").not(".link"), //  anchor tags that redirect to other pages
 	links = $(".link"), // all anchors/links that leads to opening a modal or scrolling but not navigating to other page
 	modalLinks = links.filter(".link--open__modal");
-	headerScrollLinks = header.find(".link--scroll"),
+
+	headerScrollLinks = header.find(".link--scroll"), // a tags in header that scroll to a part of the page.. needed to highlight them properly on scrolling
+
 	scrollingLinks = links.filter(".link--scroll"),	// links that link to some scroll point in the document itself 
-	scrollToTop = scrollingLinks.filter(".link--go__to__top"); // scroll to top button
+	scrollToTop = scrollingLinks.filter(".link--go-to-top"); // scroll to top button
 
 		//buttons
 
@@ -107,9 +132,45 @@
 	
 		// font sizes and all  other rigid values that we need to get or set
 	listContainerDefaultHeight = 150;
-	dataDefaultText = "not selected";
-	contactFormDefaultText = "";
-	cfHelpText = " ( ↑ or ↓ to navigate / ↵ to toggle dropdown)";
+
+	placeHolderDefault = "";
+	selectDefaultText = "not selected";
+	selectNullText = "";
+	selectHelpText = " ( ↑ or ↓ to navigate / ↵ to toggle dropdown)";
+
+	purposeAlts = {
+		hello: {
+			submitBtnText: 'send message',
+			textareaPlaceholder: 'type down your message'
+		},
+		hire: {
+			submitBtnText: "let's talk work",
+			textareaPlaceholder: "describe your project including the specifics and the budget"
+		},
+		business: {
+			submitBtnText: "let's talk business",
+			textareaPlaceholder: "please describe your proposal"
+		},
+		report: {
+			submitBtnText: 'report problem',
+			textareaPlaceholder: "what problem did you find ?"
+		},
+		cheer: {
+			submitBtnText: 'praise me asap',
+			textareaPlaceholder: "please let me know.. what did you find great about the website ?"
+		},
+		default: {
+			submitBtnText: 'send',
+			textareaPlaceholder: cfTextarea.data('placeholder')
+		}
+	}
+
+	cfReqText = $.trim(contactForm.data("required-text")) || "This field must be filled";
+	
+	cfMailText = $.trim(contactForm.data("valid-email-text")) || "E-mail Address must be valid";
+
+
+
 
 
 
@@ -136,8 +197,9 @@
 	$(window).on("load",function(){
 		// getDimensions();
 		
-		
 	});
+
+
 
 			// resize handler
 
@@ -169,6 +231,7 @@
 		var scArr = scrollPositionOfHashLinks;
 		var hScrlinks = headerScrollLinks;
 
+		
 		$.each(scArr,function(i,hashLinkPos){
 
 			if ( (sp >= hashLinkPos && sp < scArr[i+1]) ||  ( sp >= scArr[scArr.length - 1] )) {
@@ -179,9 +242,12 @@
 
 	}
 
+	toggleMobMainNav();
+
 			// responsive handlers
 	function smBreakpoint(){	
 		toggleMainNav();
+		toggleFooterMenus();
 	}
 
 	function mdBreakpoint(){
@@ -199,79 +265,177 @@
 				=self attaching (invoking themselves and the functions) handlers
 			
 			****************************/
+			// contact form
 
-	function contactFormSubmission(){
+	function contact(){
+		var cf = contactForm, cfFields = cfAllFields;
+		/* FORM FOCUS EVENTS  */
 
-		var cf = contactForm;
-		console.log(cfInput.fitler(''));
-			// change validation messages and customize options
+		cfFields.on("focus",function(e){
+			var $this = $(this),
+			placeholderText = $this.attr("data-placeholder");
 
-		contactForm.parsley({
-			requiredMessage: 'This field is required'
-		});
-/*
-		emailField.parsley({
-			typeMessage: "Enter a valid e-mail address"
-		});*/
+			$this.addClass("focused");
+			
 
-		/*webServiceField.parsley({
-			requiredMessage: "Please select the digital service/s you want us to work on", // only works when using the first checkbox in the group
-			errorsContainer: function (Field) {
-			  
-			  return servicesCont;
-			},
-			classHandler: function (Field) {
-			  return servicesCont;
+			if (e.target.tagName=="SELECT") {
+				var itsSelect = true;
+				var option = $this.find('.default');
+				var customText = option.data("custom-text");
+				var selectText;
+
+				if (customText && customText != "") {
+					selectText = customText + selectHelpText;	
+				}else{
+					selectText = selectDefaultText + selectHelpText;	
+				}
+				option.html(selectText);
+
+			}else{
+				$this.attr('placeholder',placeholderText );
 			}
-		});*/
+			
+			// on focus out
 
+			$this.one('blur',function(e){
+				var value = $.trim($this.val());		
 
-		// act to validation errors and success 
+				if (value == "") {
+					$this.removeClass("focused");
+				}
 
-		contactForm.parsley().on('form:error',function(){
+				if (itsSelect) {
+					option.html(selectNullText);
+				}else{
+					$this.attr('placeholder',placeHolderDefault);
+				}
 
-		    alert('validation errors');  
+			});
 
-		}).on('form:submit',function(e){
-
-		    console.log('Contact Form Submitted');
-
-
-		    // write code below  to submit to DB for contact form
-		    // tip: contact popup is cached in variable 
-		    // above like this ` var contactPopup = $('#contact__popup'); ` 
-		    // so we can find the form fields like var formField = contactPopup.find('something');
-
-		    
-		    /*var subjectCF = $('#subjectCF').val();
-		    var nameCF = $('#nameCF').val();
-		    var emailCF = $('#emailCF').val();
-		    var detailsCF = $('#detailsCF').val();
-
-		     $.post("sp-submit.php",{subjectCF:subjectCF,nameCF:nameCF,emailCF:emailCF,detailsCF:detailsCF},function(data){
-		        if(data==1)
-		        {
-		          alert("Thank you !");
-		        }
-		        else{
-		          alert("Some error !");
-		        }
-		      });*/
-		               
-
-		    return false;  
-		    
 		});
 
-	}
 
-	contactFormSubmission();
+		// on change 
+		cfFields.on('change',function(e){
+			var $this = $(this);
+			var pick, pickFrom, pickDefault, textareaPlaceholder, submitBtnText,
+			selectedOption, itsSelect;
+
+			if (e.target.tagName=="SELECT") {
+				itsSelect = true;
+			}
+			
+			if (itsSelect && $this.attr('id') == 'purposeC') {
+				selectedOption = $.trim($this.val());
+				pick = selectedOption ? selectedOption : 'default'; // select default prop inside purposeAlts if nothing is selected
+				pickFrom = purposeAlts[pick] || purposeAlts['default']; // pick the prop (object) from purposeAlts
+				pickDefault = purposeAlts['default'];// pick the default prop from purposeAlts
+				
+				textareaPlaceholder = pickFrom['textareaPlaceholder'] || pickDefault['textareaPlaceholder']; // if textarea placeholder is not given in one of them use from the default prop
+				submitBtnText = pickFrom['submitBtnText']; // select the submit button text
+
+
+				// change textarea placeholder (data attribute which is used when it's focused)
+				cfTextarea.attr('data-placeholder',textareaPlaceholder);
+									
+				// change submit button text
+				cfSubmit.text(submitBtnText);
+				
+			} // if block ENDS -> if( itsSelect && $this.attr('id') == 'purposeC' )
+		});
+
+
+
+		/* FORM FOCUS EVENTS END */
+	
+		/* FORM SUBMISSION AND VALIDATION */
+
+		function contactFormSubmission(){
+
+			var cfEmail = cfInput.filter('[type="email"]');
+
+				
+				// change validation messages and other options 
+			
+			cf.parsley({
+				requiredMessage: cfReqText
+				
+			});
+
+			cfFields.each(function(){
+				var $this = $(this),
+				closestFieldBlock = $this.closest('.field-block');
+
+				$this.parsley({
+					errorsContainer: function () {
+						return closestFieldBlock; // change validation message container 
+					}
+				});
+			});
+
+						
+			cfEmail.parsley({
+				typeMessage: cfMailText
+	        	// noFocus: true
+			});
+
+
+			// act to validation errors and success on submission
+
+			cf.parsley().on('form:error',function(){
+
+			    console.log('validation errors');  
+
+			}).on('form:submit',function(e){
+
+			    console.log('Contact Form Submitted');
+
+
+			    // write code below  to submit to DB for contact form
+			    // tip: contact popup is cached in variable 
+			    // above like this ` var contactPopup = $('#contact__popup'); ` 
+			    // so we can find the form fields like var formField = contactPopup.find('something');
+
+			    
+			    /*
+				    var subjectCF = $('#subjectCF').val();
+				    var nameCF = $('#nameCF').val();
+				    var emailCF = $('#emailCF').val();
+				    var detailsCF = $('#detailsCF').val();
+
+				     $.post("sp-submit.php",{subjectCF:subjectCF,nameCF:nameCF,emailCF:emailCF,detailsCF:detailsCF},function(data){
+				        if(data==1)
+				        {
+				          alert("Thank you !");
+				        }
+				        else{
+				          alert("Some error !");
+				        }
+				      });
+
+			     */
+			               
+
+			    return false;  
+			    
+			});
+
+		}
+
+		contactFormSubmission();
+
+		/* FORM SUBMISSION AND VALIDATION ENDS*/
+	}
+	
+	contact();
 
 
 	function toggleMainNav(){
 		// toggle header menus : main--nav
 		toggle({
-			toggling: "main-nav",
+			nav: headerNavMain,
+			openButton: headerPullIcons,
+			closeButton: headerPushIcons,
 			events:'click',
 			inverseButtonAppearance: true,
 			effects: {
@@ -284,7 +448,7 @@
 					TweenLite.to(elements.$this,.3,{
 						autoAlpha: 0
 					});
-					TweenLite.to(elements.visibleIcon.add(elements.listContainer),.3,{
+					TweenLite.to(elements.visibleBtn.add(elements.listContainer),.3,{
 						autoAlpha: 1
 					});
 					
@@ -295,29 +459,80 @@
 						yPercent:"-105",
 						ease: Bounce.easeOut
 					});
+
 					TweenLite.to(elements.$this.add(elements.listContainer),.3,{
 						autoAlpha:0
 					});
-					TweenLite.to(elements.visibleIcon,.3,{
+
+					TweenLite.to(elements.visibleBtn,.3,{
 						autoAlpha: 1
 					});
 					
 				}
-			},
-			openButton: headerPullIcons,
-			closeButton: headerPushIcons
+			}
+		});
+	}
+
+	function toggleMobMainNav(){
+		// toggle header menus : main-nav--mob
+		toggle({
+			nav: headerMobNavMain,
+			openButton: headerMobPullIcons,
+			closeButton: headerMobPushIcons,
+			events:'click',
+			inverseButtonAppearance: false,
+			closeOnLinkClick: true,
+			effects: {
+				open: function(elements){
+					console.log(elements);
+					TweenLite.to(elements.el,.7,{
+						autoAlpha: 1,
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+					
+				},
+				close: function(elements){
+					console.log(elements);
+					TweenLite.to(elements.el,.7,{
+						autoAlpha: 0,
+						ease: Power4.easeOut
+					});
+
+					if(!elements.anchorPressed){
+						TweenLite.to(elements.$this,.3,{
+							autoAlpha:0
+						});
+					}
+
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+					
+				}
+			}
 		});
 	}
 	
 
 	function toggleFooterMenus(){
-		// toggle footer menus : secondary nav and social nav
+		// toggle footer menu - secondary nav
+		
+
 		toggle({
-			toggling: "footer",
+			nav: secondaryNav,
+			openButton: secondaryNavOpen,
+			closeButton: secondaryNavClose,
 			events:'click',
+
 			effects: {
 				open: function(elements){
-
+					console.log(elements);
 					TweenLite.to(elements.nav,.7,{
 						yPercent: "-105",
 						ease: Power4.easeOut
@@ -325,7 +540,7 @@
 					TweenLite.to(elements.$this,.3,{
 						autoAlpha: 0
 					});
-					TweenLite.to(elements.visibleIcon.add(elements.list),.3,{
+					TweenLite.to(elements.visibleBtn.add(elements.list),.3,{
 						autoAlpha: 1
 					});
 					
@@ -339,18 +554,67 @@
 					TweenLite.to(elements.$this.add(elements.list),.3,{
 						autoAlpha:0
 					});
-					TweenLite.to(elements.visibleIcon,.3,{
+
+					
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+
+					
+					
+				}
+			}
+
+		});
+
+		// toggle footer menus - social nav
+
+		toggle({
+
+			nav: socialNav,
+			openButton: socialNavOpen,
+			closeButton: socialNavClose,
+			events:'click',
+			effects: {
+				open: function(elements){
+					console.log('elements');
+					console.log(elements);
+					TweenLite.to(elements.nav,.7,{
+						yPercent: "-105",
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleBtn.add(elements.list),.3,{
 						autoAlpha: 1
 					});
 					
+				},
+				close: function(elements){
+
+					TweenLite.to(elements.nav,.7,{
+						yPercent:"0",
+						ease: Bounce.easeOut
+					});
+					TweenLite.to(elements.$this.add(elements.list),.3,{
+						autoAlpha:0
+					});
+
+					
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+
+					
+					
 				}
-			},
-			openButton: footerPullIcons,
-			closeButton: footerPushIcons
+			}
 		});
+
 	}
 
-	toggleFooterMenus();
+	
 
 
 			// technologyList toggle handler (inside the skills section) */
@@ -475,11 +739,22 @@
 	(function hashScroll(){
 		scrollingLinks.on("click",function(){
 			var $this = $(this),
+			duration = 1,
+			easing = 'Power2.easeOut', 
 			scrollToPoint = $this.data("hash_scroll_to");
+
+			if ($this.hasClass("link--go__to__top")) {
+				var maxScrollTop = documentHeight - windowHeight,
+				scrollFactor = (maxScrollTop / scrollPos).toFixed(2);
+
+				duration *= 5 / scrollFactor;
+				easing = "Linear.easeNone";
+
+			}
+			console.log(scrollToPoint);
 			// var toPoint = type of ($this.data("hashScrollTo")) ? 
-			TweenLite.to(scrollingContainer, 1, {scrollTo:scrollToPoint,ease:Power2.easeOut});
-			console.log("$(window).scrollTop()");
-			console.log($(window).scrollTop());
+			TweenLite.to(scrollingContainer, duration, {scrollTo:scrollToPoint,ease:'Power2.easeOut'});
+			
 			if (scrollToPoint == undefined) { console.log("data-hash_scroll_to is not defined")}
 		});
 	}()); /*hashScroll function*/
@@ -764,6 +1039,7 @@
                 }
 
 				self.removeBox.call(self);
+			
 			},
 			removeBox: function(){
 				var self = this;
@@ -916,36 +1192,52 @@
 
 		// toggle function to toggle menus in header and footer
 	function toggle(options){
-		var pullIcons, pushIcons;
+		var openBtn, closeBtn;
 
 		if (!options.openButton && !options.closeButton) {
 			return console.log('no toggle buttons provided');
 		}
 
 		options.effects.defaults = {};
-		pullIcons = options.openButton;
-		pushIcons = options.closeButton;	
+		openBtn = options.openButton;
+		closeBtn = options.closeButton;	
+
+		
 
 		if (options.inverseButtonAppearance) {
-			TweenLite.set(pullIcons,{autoAlpha:0});
+			TweenLite.set(openBtn,{autoAlpha:0});
+
 		}else{
-			TweenLite.set(pushIcons,{autoAlpha:0});
+			TweenLite.set(closeBtn,{autoAlpha:0});
+
 		}
 
 
 		if (!options.events) {
-			options.events = 'click'
+			options.events = 'click';
 		}
 
-		pullIcons.on(options.events,function(){
-			var $this = $(this);
-			var visibleIcon = $this.siblings(".icon--toggle");
-			var dataToggle = $this.data("toggle");
-			var listContainer = $this.siblings('.list__container');
-			var nav = $this.closest("."+ $.trim(dataToggle));
-			var list = $this.siblings("[class^='list--']");
+		var dataToggle = openBtn.data("toggle") ||  closeBtn.data("toggle");
+		var el = wrap.find(dataToggle);
+		var nav = options.nav; 
+		var listContainer = nav.find('.list-container');
+		var list = nav.find('.list');
+		var anchors = options.closeOnLinkClick ? options.nav.find('a') : undefined;
 
-			console.log(listContainer);
+		
+
+		openBtn.on(options.events,function(){
+			var $this = $(this);
+			var visibleBtn = $this.attr("data-function") != 'close' ? closeBtn : openBtn;		
+			console.log('obbject');
+			console.log({
+				dataToggle: dataToggle,
+				el: el,
+				nav: nav,
+				listContainer: listContainer,
+				list: list,
+				anchors: anchors
+			});
 
 			options.effects.defaults.open = function(){
 				var tl = new TimelineLite();
@@ -956,16 +1248,18 @@
 					autoAlpha: 0
 				});
 
-				TweenLite.to(visibleIcon.add(listContainer),.3,{
+				TweenLite.to(visibleBtn.add(listContainer),.3,{
 					autoAlpha: 1
 				});
 			}
+
 			if (options.effects) {
 				if (options.effects.open && typeof options.effects.open == 'function') {
 					options.effects.open({
 						nav: nav,
+						el: el,
 						list: list,
-						visibleIcon: visibleIcon,
+						visibleBtn: visibleBtn,
 						$this: $this,
 						listContainer: listContainer
 					});
@@ -974,23 +1268,30 @@
 					console.log("No function passed for effects.open, running the defaults");
 					options.effects.defaults.open();
 				}
+			
 			}else{
 				console.log("No object passed for effects");
 				options.effects.defaults.open();
+			
 			}
-
 
 		});
 
-		pushIcons.on(options.events,function(){
-			var $this = $(this);
-			var dataToggle = $this.data("toggle");
-			var visibleIcon = $this.siblings(".icon--toggle");
-			var listContainer = $this.siblings(".list__container");
-			var nav = $this.closest("."+ $.trim(dataToggle));
-			var list = $this.siblings("[class^='list--']");
 
-			console.log(listContainer);
+		closeBtn.on(options.events,function(){
+			var $this = $(this);
+			var visibleBtn = $this.attr("data-function") != 'open' ? openBtn : closeBtn;
+
+			console.log('obbject');
+			console.log({
+				dataToggle: dataToggle,
+				el: el,
+				nav: nav,
+				listContainer: listContainer,
+				list: list,
+				anchors: anchors
+			});
+
 
 			options.effects.defaults.close = function(){
 				var tl = new TimelineLite();
@@ -1000,7 +1301,7 @@
 					"display":"none"
 				});
 
-				TweenLite.to(visibleIcon,.3,{
+				TweenLite.to(visibleBtn,.3,{
 					autoAlpha: 1
 				});
 			}
@@ -1009,8 +1310,9 @@
 				if (options.effects.close && typeof options.effects.close == 'function') {
 					options.effects.close({
 						nav: nav,
+						el:el,
 						list: list,
-						visibleIcon: visibleIcon,
+						visibleBtn: visibleBtn,
 						$this: $this,
 						listContainer: listContainer
 					});
@@ -1022,9 +1324,44 @@
 				console.log("No object passed for effects");	
 				options.effects.defaults.close();
 			}
-
-			
+	
 		});
+
+
+		if (options.closeOnLinkClick) {
+
+			anchors.on(options.events,closeWithLink);
+			
+			function closeWithLink(){
+				var $this = $(this);
+				var visibleBtn = $this.attr("data-function") != 'open' ? openBtn : closeBtn;
+
+				
+				if (options.effects) {
+					if (options.effects.close && typeof options.effects.close == 'function') {
+						options.effects.close({
+							nav: nav,
+							el:el,
+							list: list,
+							anchorPressed: true,
+							visibleBtn: visibleBtn,
+							listContainer: listContainer
+						});
+
+					}else{
+						console.log("No function passed for effects.close, running the defaults");			
+						// options.effects.defaults.close();
+					}
+				}else{
+					console.log("No object passed for effects");	
+					// options.effects.defaults.close();
+				}
+			}
+
+		}
+
+		
+
 	};
 
 		// function to expand skills list
@@ -1194,39 +1531,7 @@
 	});
 
 
-			// contact form
-	cfAllFields.on("focus",function(e){
-		var $this = $(this);
-
-		$this.addClass("focused");
-
-		if (e.target.tagName=="SELECT") {
-			var itsSelect = true;
-			var option = $this.find('.default');
-			var customText = option.data("default-text");
-			var contactFormDefaultHelpText;
-
-			if (customText && customText != "") {
-				contactFormDefaultHelpText = customText + cfHelpText;	
-			}else{
-				contactFormDefaultHelpText = dataDefaultText + cfHelpText;	
-			}
-			option.html(contactFormDefaultHelpText);
-
-		}
 	
-		$this.on('blur',function(e){
-			var value = $.trim($this.val());
-			
-			if (value == "") {
-				$this.removeClass("focused");
-			}
-			if (itsSelect) {
-				option.html(contactFormDefaultText);
-			}
-		});
-		
-	});
 
 
 
