@@ -1,7 +1,7 @@
-	
-	   //	mixins
+                    
+                    //	mixins
 
-//// utility mixins
+        //// utility mixins
 
 
 @mixin pseudo{
@@ -30,31 +30,6 @@
 
 @mixin transition__2{
     transition: all .2s !important;
-}
-
-
-
-
-
-// label mixins
-
-@mixin filterLabels{
-    @extend .text__center;
-    @extend .uppercase;
-
-    display: block !important;
-    top:auto !important;
-    left: 0 !important;
-    bottom: 100%;
-    width: 100%;
-    padding: .2em 0;
-    color: $listHeaderTextColor;
-    font-size: .9rem;
-    line-height: 1.1em;
-    font-weight: 400;
-    letter-spacing: .05em;
-    text-shadow: none;
-    transform:  none !important;
 }
 
 

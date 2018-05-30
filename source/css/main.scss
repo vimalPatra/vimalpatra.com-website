@@ -14,7 +14,9 @@ body{
 
 
 // MODULES
-@import 'modules/utils'; // stores utility styles ( also base styles for text and links)
+@import 'modules/utils'; // stores utility classes 
+
+@import 'modules/general-elements'; // stores styles for specific elements and types
 
 @import 'modules/body'; // base body styles
 

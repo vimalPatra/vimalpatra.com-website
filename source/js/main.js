@@ -230,14 +230,16 @@
 		var sp = scrollPos;
 		var scArr = scrollPositionOfHashLinks;
 		var hScrlinks = headerScrollLinks;
-
 		
+		hScrlinks.removeClass("navActiveEffect");
+
 		$.each(scArr,function(i,hashLinkPos){
 
-			if ( (sp >= hashLinkPos && sp < scArr[i+1]) ||  ( sp >= scArr[scArr.length - 1] )) {
-				hScrlinks.removeClass("navActiveEffect");
+			if ( (sp >= hashLinkPos && sp < scArr[i+1]) ||  (sp >= hashLinkPos && scArr[scArr.length - 1] == hashLinkPos )) {
+				
 				$(hScrlinks[i]).addClass("navActiveEffect");
 			}
+
 		});
 
 	}
@@ -1157,7 +1159,10 @@
 		// doSessionWorkOnLoad function to do some stuff based on what's stored in the session storage
 	function doSessionWorkOnLoad(){
 		reopenSkillsLists();
-		scrollBackToLastPosition();
+		if(!location.hash.length){
+			scrollBackToLastPosition();
+		}
+
 	}
 
 
@@ -1170,13 +1175,15 @@
 	function getTopOffsetsForHeaderScrollLinks(){
 		scrollPositionOfHashLinks = [];
 		window.anything = '[ ';
+		var headerScrollLinks = $(headerNavMain[0]).find('.link--scroll');
+
 		headerScrollLinks.each(function(i,elem){
 			var $this = $(elem),
 			scrollsToElementId = $this.data("hash_scroll_to");
 		
 			var elementItself = $(scrollsToElementId);
 
-			var offsetTopForElement= Number((elementItself.offset().top - 1).toFixed(2)); // -1 for fixing the precision error
+			var offsetTopForElement= Number((elementItself.offset().top - 30).toFixed(2)); // -1 for fixing the precision error
 			scrollPositionOfHashLinks.push(offsetTopForElement);
 
 			window.anything += scrollsToElementId + ': '+ offsetTopForElement + ', '

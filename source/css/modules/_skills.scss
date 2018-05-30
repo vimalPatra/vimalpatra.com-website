@@ -49,20 +49,19 @@
 
     ul{
         position: relative;
+    }
 
-        .arrow{
-            position: absolute;
-            display: block;
-            height: calc(100% - 1rem);
-            width: 3px;
-            background: hsl(37,82%,79%);
-            right: calc(100% - 5px);
-            box-shadow: 6px 5px 5px rgba(0,0,0,.15);
+    .arrow{
+        position: absolute;
+        display: block;
+        height: calc(100% - 1rem);
+        width: 3px;
+        background: hsl(37,82%,79%);
+        right: calc(100% - 5px);
+        box-shadow: 6px 5px 5px rgba(0,0,0,.15);
 
-            span{
-                display: inline-block;
-            }
-
+        span{
+            display: inline-block;
         }
 
     }
@@ -89,18 +88,20 @@
     .technologyList{
         position: relative;
         margin-top: 1em;
-        padding-left: 2.5rem;
+        padding-left: 1rem;
 
         li{
-            display: block;
-            border: 1px solid rgba(179,179,179,1);
-            box-shadow: 0 4px 10px rgba(0,0,0,.05);
-            border-top: none;
-            /*border-bottom: none;*/
-            margin: 3px 5px 10px 0;
-            padding: 1rem;
+            list-style: none;
         }
-
+    }
+    .design li{
+        display: block;
+        border: 1px solid rgba(179,179,179,1);
+        box-shadow: 0 4px 10px rgba(0,0,0,.05);
+        border-top: none;
+        /*border-bottom: none;*/
+        margin: 3px 5px 10px 0;
+        padding: 1rem;
     }
 
     .listHeading{
@@ -119,4 +120,17 @@
         margin-bottom: 2.5rem;
     }
 
+}
+
+
+@media all and (min-width: 768px){
+
+    .technologies{
+        .technologyList{
+            padding-left: 2rem;
+
+        }
+
+
+    }
 }

@@ -48,13 +48,15 @@ footer{
 
 
 #header .logo{
-    z-index: 2;
     display: block;
-    background: linear-gradient(
+    position: relative;
+    /* background: linear-gradient(
                 30deg, 
                 $lightest,
                 lighten($bg1,25%)
-               );
+               ); */
+    background: rgba(255,255,255,.8);
+
     padding: .5rem 1rem;
 
     font-family: $logoFont;
@@ -63,12 +65,24 @@ footer{
     font-size: 2rem;
     line-height: 1.5em;
     word-spacing: .3rem;
-    box-shadow: 0 15px 45px 6px $rusty;
+    box-shadow: 5px 15px 45px 6px $rusty;
     
-    border: 2px solid hsla(34,87%,89%,.7);
+    border: 2px solid hsla(34,87%,89%,.8);
     border-top: none;
 
+
     /*transform: translateY(-100%);*/
+    &:after{
+        // @include pseudo;
+        left: 30%;
+        top: 20%;
+        background: linear-gradient(
+                30deg, 
+                $lightest,
+                lighten($bg1,25%)
+               );
+        z-index: -2;
+    }
 }
 
 #header .logo br{
@@ -117,6 +131,17 @@ footer{
     a{
         text-align: center;
         display: block;
+
+        &:not(.link){
+            border: none;
+            
+            &:after,
+            &:before{
+                border: none;
+                height: 100%;
+                text-shadow: none;
+            }
+        }
     }
 
 
@@ -134,7 +159,10 @@ footer{
         font-size: 1rem;
         padding: .5em 1em;
         letter-spacing: .04em;
+        line-height: 1.5em;
         word-spacing: -.1em;
+        margin: 0;
+
     }
     
 
@@ -178,6 +206,11 @@ footer{
             letter-spacing: .04em;
             word-spacing: -.1em;
             border: 1px solid lighten($rusty,30%);
+
+            &:not(.link):before,
+            &:not(.link):after{
+                border: 1px solid lighten($rusty,30%);
+            }
         }
 
         .list-container{

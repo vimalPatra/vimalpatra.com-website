@@ -35,8 +35,8 @@ $warning: darken($bg3,30%); // rgb(255, 77, 77)  // #ff4d4d
 	
 
 $navGradient: linear-gradient(to bottom,
-		       $lightestWhiten,
-		       $rusty
+		       lighten($lightestWhiten,5%),
+		       lighten($rusty,5%)
 		    );
 
 
@@ -55,7 +55,14 @@ $lighterText: lighten($black, 45%);
 
 // fonts
 $logoFont: "kumar one outline";
-$fontHeading: 'Poiret One', cursive;
+
 $fontHeadingAlt: 'Josefin Sans', sans-serif;
+$fontHeading: 'Poiret One', cursive;
+
+$fontSecondary: 'Josefin Sans', sans-serif;
 $fontPrimary: 'Poiret One', sans-serif;
 
+
+
+
+$listPaddingLeft: 2.2rem ;

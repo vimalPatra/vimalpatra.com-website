@@ -59,20 +59,28 @@ body> #wrap{
     right: 0;
     bottom: 0;
     position: absolute;
-    background: url("../img/background/1077-compressed.svg") repeat;
-    background-size: 200%;
-    background-position: 50% 0%;
-    opacity: .25;
+    opacity: .3;
     z-index: -1;
+    background: url("../img/background/1077-cropped-sm.jpg") repeat;
+    background-size: 40%;
+    // background-position: 50% 0%;
 }
 
+@media all and (min-width: 576px){
+    #wrap:after{
+        background: url("../img/background/1077-cropped-md.jpg") repeat;
+        background-size: 30%;
+        // background-position: 50% 0%;
+
+    }
+}
 
 @media all and (min-width: 768px){
     #wrap:after{
-        background-size: 65%;
-        background-position: 50% 0%;
+        background: url("../img/background/1077-cropped-lg.jpg") repeat;
+        background-size: auto;
+        // background-position: 50% 0%;
 
-        z-index: -1;
     }
 }
 

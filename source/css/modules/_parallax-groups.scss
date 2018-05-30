@@ -7,6 +7,9 @@
 /* Parallax base styles  =parallax
 --------------------------------------------- */
 
+
+
+
 .parallax {
     position: relative;
     width: 100%;
@@ -14,21 +17,34 @@
 
     
     &__layer{
+
         .main .sectionDesc{
             font-size: 1.3em;
 
-            @media all and (min-width: 768px){
-                    font-size: 1.2em;
+            ul{
+                list-style: circle;
             }
+
+            ol,
+            ul{
+                padding-left: 1.3rem;
+            }
+
+            li{
+                margin-bottom: 0rem;
+            }
+
+            .listHeading{
+                margin-left: -($listPaddingLeft * .5);
+            }
+
+            
         }
 
 
         .main .detailedDesc{
                 font-size: 1.2em;
 
-            @media all and (min-width: 768px){
-                    font-size: .95em;
-            }
         }
 
         &--base{
@@ -113,10 +129,10 @@
             // border-radius: 28px;
             box-shadow: 5px 5px 80px rgba(0,0,0,.4);
             z-index: -10;
-            padding-bottom: 100%;
             bottom: 0;
             background: white;
             border:5.5px solid transparent;
+            padding-bottom: 100%;
         }
 
         
@@ -262,12 +278,13 @@
                   background-size: 100px 100px;
                   background-attachment: fixed; */
 
-                  background-color: #bb7711;
-                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 60'%3E%3Cg fill-opacity='0.73'%3E%3Crect fill='%23bb7711' width='11' height='11'/%3E%3Crect fill='%23bc7916' x='10' width='11' height='11'/%3E%3Crect fill='%23bd7b1a' y='10' width='11' height='11'/%3E%3Crect fill='%23bf7d1e' x='20' width='11' height='11'/%3E%3Crect fill='%23c07f22' x='10' y='10' width='11' height='11'/%3E%3Crect fill='%23c18126' y='20' width='11' height='11'/%3E%3Crect fill='%23c28329' x='30' width='11' height='11'/%3E%3Crect fill='%23c3852d' x='20' y='10' width='11' height='11'/%3E%3Crect fill='%23c48730' x='10' y='20' width='11' height='11'/%3E%3Crect fill='%23c68933' y='30' width='11' height='11'/%3E%3Crect fill='%23c78b37' x='40' width='11' height='11'/%3E%3Crect fill='%23c88c3a' x='30' y='10' width='11' height='11'/%3E%3Crect fill='%23c98e3d' x='20' y='20' width='11' height='11'/%3E%3Crect fill='%23ca9040' x='10' y='30' width='11' height='11'/%3E%3Crect fill='%23cb9243' y='40' width='11' height='11'/%3E%3Crect fill='%23cc9446' x='50' width='11' height='11'/%3E%3Crect fill='%23cd9649' x='40' y='10' width='11' height='11'/%3E%3Crect fill='%23cf984c' x='30' y='20' width='11' height='11'/%3E%3Crect fill='%23d09a4f' x='20' y='30' width='11' height='11'/%3E%3Crect fill='%23d19c52' x='10' y='40' width='11' height='11'/%3E%3Crect fill='%23d29e55' y='50' width='11' height='11'/%3E%3Crect fill='%23d3a058' x='60' width='11' height='11'/%3E%3Crect fill='%23d4a25c' x='50' y='10' width='11' height='11'/%3E%3Crect fill='%23d5a45f' x='40' y='20' width='11' height='11'/%3E%3Crect fill='%23d6a662' x='30' y='30' width='11' height='11'/%3E%3Crect fill='%23d7a865' x='20' y='40' width='11' height='11'/%3E%3Crect fill='%23d9aa68' x='10' y='50' width='11' height='11'/%3E%3Crect fill='%23daac6b' x='70' width='11' height='11'/%3E%3Crect fill='%23dbae6e' x='60' y='10' width='11' height='11'/%3E%3Crect fill='%23dcaf71' x='50' y='20' width='11' height='11'/%3E%3Crect fill='%23ddb174' x='40' y='30' width='11' height='11'/%3E%3Crect fill='%23deb377' x='30' y='40' width='11' height='11'/%3E%3Crect fill='%23dfb57a' x='20' y='50' width='11' height='11'/%3E%3Crect fill='%23e0b77d' x='80' width='11' height='11'/%3E%3Crect fill='%23e1b980' x='70' y='10' width='11' height='11'/%3E%3Crect fill='%23e2bb83' x='60' y='20' width='11' height='11'/%3E%3Crect fill='%23e3bd86' x='50' y='30' width='11' height='11'/%3E%3Crect fill='%23e4bf8a' x='40' y='40' width='11' height='11'/%3E%3Crect fill='%23e5c18d' x='30' y='50' width='11' height='11'/%3E%3Crect fill='%23e6c390' x='90' width='11' height='11'/%3E%3Crect fill='%23e7c593' x='80' y='10' width='11' height='11'/%3E%3Crect fill='%23e9c796' x='70' y='20' width='11' height='11'/%3E%3Crect fill='%23eac999' x='60' y='30' width='11' height='11'/%3E%3Crect fill='%23ebcb9c' x='50' y='40' width='11' height='11'/%3E%3Crect fill='%23eccda0' x='40' y='50' width='11' height='11'/%3E%3Crect fill='%23edcfa3' x='90' y='10' width='11' height='11'/%3E%3Crect fill='%23eed1a6' x='80' y='20' width='11' height='11'/%3E%3Crect fill='%23efd3a9' x='70' y='30' width='11' height='11'/%3E%3Crect fill='%23f0d5ac' x='60' y='40' width='11' height='11'/%3E%3Crect fill='%23f1d6af' x='50' y='50' width='11' height='11'/%3E%3Crect fill='%23f2d8b3' x='90' y='20' width='11' height='11'/%3E%3Crect fill='%23f3dab6' x='80' y='30' width='11' height='11'/%3E%3Crect fill='%23f4dcb9' x='70' y='40' width='11' height='11'/%3E%3Crect fill='%23f5debc' x='60' y='50' width='11' height='11'/%3E%3Crect fill='%23f6e0c0' x='90' y='30' width='11' height='11'/%3E%3Crect fill='%23f7e2c3' x='80' y='40' width='11' height='11'/%3E%3Crect fill='%23f8e4c6' x='70' y='50' width='11' height='11'/%3E%3Crect fill='%23f9e6c9' x='90' y='40' width='11' height='11'/%3E%3Crect fill='%23fae8cd' x='80' y='50' width='11' height='11'/%3E%3Crect fill='%23fbead0' x='90' y='50' width='11' height='11'/%3E%3C/g%3E%3C/svg%3E");
-                    background-attachment: fixed;
-                    background-size: cover;
-                    background-position: center;
-                    background-attachment: fixed;
+                 
+
+                background-color: #f9d4a4;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23f7c788' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23f4bb6d' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23f2ae52' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23efa237' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23ec971c' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23d78813' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23bb7711' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: 100% 50%;
             }
 
             /* =services pattern */
@@ -303,13 +320,16 @@
 
 
 
-
-
         }
 
     }
 
+
+
+
+
     &__group{
+        padding: 1px;
 
         &:nth-child(odd) .parallax__layer .main{
             float: right;
@@ -331,6 +351,11 @@
         &#work .parallax__layer .main{
             margin-right: 0;
             left: -1em;
+            padding-bottom: 10%;
+
+            &:after{
+                padding: 0;
+            }
         }
         
 
@@ -341,38 +366,57 @@
 
 @media all and (min-width: 768px){
     .parallax {
-        
-        &:nth-child(odd) .parallax__layer .main{
-            float: right;
-            margin-right: 1.5em;
-            left: 0;
-        }
-        
-        &:nth-child(even) .parallax__layer .main{
-            float: left;
-            margin-left: 1.5em;
-            right: 0;
-        }
 
-        .background__wrapper{
-            padding-bottom: 40%;     
-        }
-        
-        .main:after{
-            
-            padding-bottom: 40%;
-            
-        }
+        &__layer{
 
-        .background .pattern{
-            &:after{
-                padding-bottom: 40%;
+            .main .sectionDesc{
+                font-size: 1.3em;
+
+                ul,
+                ol{
+                    padding-left: $listPaddingLeft;
+                }
             }
+
+            .main .detailedDesc{
+                font-size: 1.1em;
+            }
+
         }
 
+        &__group{
 
+            
+            &:nth-child(odd) .parallax__layer .main{
+                margin-right: 1.5em;
+                left: 0;
+            }
+            
+            &:nth-child(even) .parallax__layer .main{
+                margin-left: 1.5em;
+                right: 0;
+            }
+
+            .background__wrapper{
+                padding-bottom: 40%;     
+            }
+            
+            .main:after{
+                
+                padding-bottom: 40%;
+                
+            }
+
+            .background .pattern{
+                &:after{
+                    padding-bottom: 40%;
+                }
+            }
+
+        }
 
     }
+
 
 }
 
