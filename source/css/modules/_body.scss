@@ -8,15 +8,19 @@ html{
     min-width: 240px;
     min-width: 15rem;
 
-    font-size: 16px;
-    font-size: .8rem;
+    font-size: .8em;
     /*font-size: 2vw; */
 }
 
 @media all and (min-width: 768px){
     html{
-        font-size: 16px;
         font-size: 1em;
+    }
+}
+
+@media all and (max-width: 400px){
+    html{
+        font-size: .7em;
     }
 }
 

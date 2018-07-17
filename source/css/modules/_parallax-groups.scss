@@ -58,7 +58,7 @@
         >.title{
             max-width: 180px;
             // height: auto;
-            margin-top: 2rem;
+            
             margin-bottom: -2rem;
             position: relative;
             padding: 1rem 1.5rem;
@@ -330,6 +330,7 @@
 
     &__group{
         padding: 1px;
+        margin-bottom: 5rem;
 
         &:nth-child(odd) .parallax__layer .main{
             float: right;
@@ -415,6 +416,18 @@
 
         }
 
+    }
+
+
+}
+
+
+@media all and (min-width: 1200px){
+    .parallax {
+
+        &__group{    
+            margin-bottom: 2rem;
+        }
     }
 
 

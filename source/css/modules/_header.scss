@@ -10,13 +10,7 @@ footer{
     padding: 0 .5rem;
 }
 
-@media all and (min-width: 768px){
-    #header,
-    footer{
-        padding: 0 2.5rem 0 2rem;
-    }
 
-}
 
 
 
@@ -33,17 +27,6 @@ footer{
     z-index: 1;
     float: left;
 
-}
-
-@media all and (min-width: 768px){
-    #header .branding{
-        float: left;
-        z-index: 1;
-        position: relative;
-    }
-    #header .clear{
-        display: none;
-    }
 }
 
 
@@ -164,6 +147,9 @@ footer{
         margin: 0;
 
     }
+    li.special-link-holder{
+        display: none;
+    }
     
 
     .icon--toggle{
@@ -198,7 +184,7 @@ footer{
     &--mob{
         display: block;
         font-size: 1.1em;
-        z-index: 10;
+        
 
         a{
             font-size: 1.5rem;
@@ -214,12 +200,13 @@ footer{
         }
 
         .list-container{
+            @include absolute;
             visibility: hidden;
             opacity: 0;
-            @include absolute;
             bottom: 0;
             right: 0;
             position:fixed;
+            z-index: 10;
         }
 
         .list {
@@ -270,22 +257,53 @@ footer{
 
 
 
+
+
 @media all and (min-width: 576px){
     #header .logo{
         font-size: 2rem;
         
     }
-    #header .logo br{
-        display: block;
-    }
+    
 }
 
 
 
+@media all and (min-width: 768px){
+    /* #header .branding{
+        float: left;
+        z-index: 1;
+        position: relative;
+    }
+    #header .clear{
+        display: none;
+    } */
+}
+
 
 @media all and (min-width: 768px){
+    #header,
+    footer{
+        padding: 0 1rem;
+    }
+
     #header .logo .lastName{
         padding-left: 2.5em;
+    }
+
+    #header .logo br{
+        display: block;
+    }
+
+
+}
+
+
+@media all and (min-width: 1000px){
+ 
+    #header,
+    footer{
+        padding: 0 1.5rem 0 1.5rem;
     }
 
     .nav-main{
@@ -299,5 +317,13 @@ footer{
    
 }
 
+@media all and (min-width: 1200px){
+    .nav-main{
+        
+        li.special-link-holder{
+            display: block;
+        }
 
+    }
+}
 

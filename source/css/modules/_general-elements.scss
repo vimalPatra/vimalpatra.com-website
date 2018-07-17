@@ -19,8 +19,26 @@
 
 
 
+.notification-container{
+    @include absolute;
+    position: fixed;
+    top: auto;
+    bottom: 10%;
+    left: 3%;
+    right: 3%;
 
-.popups{
+    z-index: 105;
+}
+
+.notification{
+    width: 250px;
+    padding: 10px;
+    background: black;
+    color: white;
+}
+
+
+.popup{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,35 +48,50 @@
     box-shadow: 0px 5px 20px rgba(0,0,0,.3);
     padding: 1rem;
     transform:translate3d(-50%,-50%,0);
-}
-.popups .close{
-    position: absolute;
-    right: 0;
-    font-size: 2rem;
-    margin: 10px;
-    cursor: pointer;
-}
-.popups .wrapper{
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    outline: 2px solid rgb(196,168,132);
-    overflow: auto;
-}
-.popups .popup__heading{
-    font-size: 1.3rem;
-    position: relative;
-    margin: 2.5rem 0;
-}
-.popups .data{
-    /*background: red;*/
-    text-align: center;
-    font-size: 1.4rem;
-    line-height: 1.8em;
-    padding: 0 2em 0 2em;
+
+    .close{
+        position: absolute;
+        right: 0;
+        font-size: 2rem;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .wrapper{
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: 2px solid rgb(196,168,132);
+        overflow: auto;
+    }
+
+    &__heading{
+        font-size: 1.3rem;
+        position: relative;
+        margin: 2.5rem 0;
+        padding: 0 1rem;
+        text-align: left;
+    }
+
+    .data{
+        /*background: red;*/
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 1.8em;
+        padding: 0 1em;
+    }
+
 }
 
+#helpbox .subject .helpFor{
+    color:rgb(119,119,119);
+    font-size: .6em;
+    position: absolute;
+    /*right: 100%;*/
+    bottom: 100%;
+    /*left: 0;*/
+}
 
 /* 
 
@@ -108,14 +141,6 @@
 */
 
 
-#helpbox .subject .helpFor{
-    color:rgb(119,119,119);
-    font-size: .6em;
-    position: absolute;
-    /*right: 100%;*/
-    bottom: 100%;
-    /*left: 0;*/
-}
 
 
 /*
@@ -214,6 +239,12 @@
     transform:rotateY(-90deg);
     transform-origin: 100% 50%;
     width: 70vh;
+}
+
+.helpbox__subject{
+    max-width: 70%;
+    padding-right: 2px;
+    vertical-align: middle;
 }
 
 .open__helpbox{
@@ -373,10 +404,34 @@ a:not(.link):hover:before{
 blockquote{
     display: block;
     font-size: 1.15em;
-    padding: 0 6px;
-    border-left: 1px solid $rusty;
-    border-bottom: 1px solid $rusty;
+    // border-left: 1px solid $rusty;
+    // border-bottom: 1px solid $rusty;
+    background: linear-gradient(to right, 
+                  $shiny,
+                  transparent
+                );
+    color: lighten(black, 15%);
+    padding: 10px 15px;
     margin: 0;
     margin: 0.625rem 1.875rem 0.625rem 3.75rem;
     
+}
+
+
+
+@media all and (min-width: 768px) {
+    
+    .popup{
+        
+
+
+        .data{
+            /*background: red;*/
+            text-align: center;
+            font-size: 1.4rem;
+            line-height: 1.8em;
+            padding: 0 2em 0 2em;
+        }
+
+    }
 }

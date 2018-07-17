@@ -39,7 +39,7 @@
 
 	 helpboxBtn,
 
-	 helpboxTemplate, modalTemplate;
+	 helpboxTemplate, modalTemplate, notiTemplate;
 
 
 	skillsListToggleStatus = {};
@@ -129,6 +129,7 @@
 
 	helpboxTemplate = $("script#helpboxTemplate");
 	modalTemplate = $("script#modalTemplate");
+	notiTemplate = $("script#notificationTemplate");
 	
 		// font sizes and all  other rigid values that we need to get or set
 	listContainerDefaultHeight = 150;
@@ -206,6 +207,9 @@
 	$(window).on("resize",debounce(function(){handleResize();},1000));
 
 	function handleResize(){
+		windowWidth = $(window).width();
+		windowHeight = $(window).height();
+
 		checkBreakpoints();
 	}
 
@@ -762,12 +766,29 @@
 	}()); /*hashScroll function*/
 
 
+			// modal handler
+	var model_objects_proto = function(obj){
+		var type = obj.type;
+		this.type = type;
+	};
+	var model = {};
+
+	model.getAQuote = new model_objects_proto({
+		type: "html"
+	});
+	model.getAQuote.content = "getAQuoteTemplate";
+
+	model.viewCaseStudy = new model_objects_proto({type:"html"});
+	model.viewCaseStudy.content = '<div class="message message--sorry">sorry case studies are not added yet. I am working on it but it will take time as i am working with my team on some other projects. Check back soon in a couple weeks. :></div>';
+	model.getAQuote.content = '<div class="message message--sorry">sorry this part is being developed. For now youcan head over to the contact section to get a quote directly from me.</div>';
+
+
 			// helpbox handler
 	(function helpboxHandler(){
 		var model = {
 			skillsImprovingUpon: "These are the skills which i would say that i am still grasping on while working with them on real projects to be if not perfect, atleast be very comfortable with them "
 		,	futureSkills: "These are the technologies which i have an eye on and as soon as my scheduled allows me for it i'll be picking up from one of these to learn & work on. "
-		}
+		};
 		var lightboxForHelpbox;
 		var template;
 		var templateCounter = 0;
@@ -900,27 +921,12 @@
 		}
 
 		helpboxBtn.on("click",helpAdder.init);
+
 	}());
 
 
-			// modal handler
-	var model_objects_proto = function(obj){
-		var type = obj.type;
-		this.type = type;
-	};
-
 	(function modalHandler(){
-		var model = {};
-
-		model.getAQuote = new model_objects_proto({
-			type: "html"
-		});
-		model.getAQuote.content = "getAQuoteTemplate";
-
-		model.viewCaseStudy = new model_objects_proto({type:"html"});
-		model.viewCaseStudy.content = '<div class="message message--sorry">sorry case studies are not added yet. I am working on it but it will take time as i am working with my team on some other projects. Check back soon in a couple weeks. :></div>'
-		model.getAQuote.content = '<div class="message message--sorry">sorry this part is being developed. For now youcan head over to the contact section to get a quote directly from me.</div>'
-
+		
 
 		var lightboxForModal;
 		var template;
@@ -1025,6 +1031,7 @@
                         z:100
                     });
                 }
+
                 function animateIn(){
                     var tl = new TimelineLite();
                     tl.to(self.lightbox,.3,{
@@ -1073,8 +1080,622 @@
 
 		modalLinks.on("click",modalAdder.init);
 	}());
+	
+	function generalModalHandler(){
+	
+		var _lightbox, _container, _modal, _oldModal, _template, initialized
+		;
+
+		// var templateCounter = 0;
+
+		var modalAdder = {
+			init:function(obj){
+				var self = modalAdder;
+				self.$this = $(this); // event target
+
+				//options 
+				self.contextEl = obj.el.context; // *context in which we start looking the outer most element when added
+				self.parentEl = obj.el.parent; // parent in which we append the outer most element
+				
+				self.template = obj.template; //* template for the modal 
+				self.content = obj.content; // content (if you need to replace the content inside)
+
+				if (obj.el.lightbox) {
+					self.lightboxOn = obj.el.lightbox.on; // lightbox is on or not
+					self.lightboxClass = obj.el.lightbox.class; // lightbox's class (* if lightbox on)		
+				}
+
+				if (obj.el.container) {
+					self.containerOn = obj.el.container.on; // container is on or not
+					self.containerClass = obj.el.container.class; // container's class (* if lightbox on)	
+				}
+
+				// modal is the actual thing that you provide from template (the actual popup or alert)
+				if (obj.el.modal) {
+					self.modalSelector = obj.el.modal.selector; //* the actual modal's selector class inside the template you provide
+					self.modalAutoHide = obj.el.modal.autoHide; 
+					self.modalFadeOutBuffer = obj.el.modal.fadeOutBuffer; 
+					self.modalMultipleOn = obj.el.modal.multipleOn; // if we need multiple modals to be shown at the same time (for eg: toasts)
+				}
+
+				if (obj.setCss) {
+
+					self.setCssForLightBox = obj.setCss.lightbox; // css rules to be set for the lightbox before we start animating
+					self.setCssForContainer = obj.setCss.container; // css rules to be set for the container before we start animating
+					self.setCssForModal = obj.setCss.modal; // css rules to be set for modal before we start animating
+					
+				}
+
+				self.animateInProps = obj.animateIn.modal.props; //* properties to be animated in for the modal if we need them
+				self.animateInDuration = obj.animateIn.modal.duration; //* modal duration to be used for animating in
+				self.animateOutProps = obj.animateOut.modal.props; //* properties to be animated out for the actual modal
+				self.animateOutDuration = obj.animateOut.modal.duration; //* modal duration to be used for animating out
+				
+				if (obj.animateIn.lightbox) {
+					self.lightboxAnimateInProps = obj.animateIn.lightbox.props; 
+					self.lightboxAnimateInDuration = obj.animateIn.lightbox.duration; //*
+				}
+				if (obj.animateOut.lightbox) {
+					self.lightboxAnimateOutProps = obj.animateOut.lightbox.props;
+					self.lightboxAnimateOutDuration = obj.animateOut.lightbox.duration; //*
+				}
+
+				if (obj.animateIn.container) {
+					self.containerAnimateInProps = obj.animateIn.container.props; 
+					self.containerAnimateInDuration = obj.animateIn.container.duration; //*
+				}
+				if (obj.animateOut.container) {
+					self.containerAnimateOutProps = obj.animateOut.container.props;
+					self.containerAnimateOutDuration = obj.animateOut.container.duration; //*
+				}
+
+				self.depOnChild = obj.animateOut.depOnChild;
+				self.parentFadeDelay = obj.animateOut.parentFadeDelay;  
+
+				// replace the data which is received
+				self.replaceData.call(self);
+
+				// add box/modal
+				self.addModal.call(self);
+
+				// set tweens for everything
+				self.setTweens();
+				
+				// animate in the box/modal
+				self.animateIn();
+				
+				// add removing functionality	            
+				self.attachFadeOutListeners.call(self); // call removeBox in order to attach handler to remove the modal
+				
+				initialized = true; // to not run specific things after the first time
+			},
+
+			replaceData:function(){
+				var self = this,
+				template = self.template,
+				content = self.content;
+
+				if (!template || !content) {    
+                    return;
+                }else{
+                    template = template.html();
+                    // templateCounter++;
+                }
+
+                // loop over the contents properties and replace em in the template
+                Object.keys(content).forEach(function(el){
+                	template = template.replace('%' + el + '%',content[el]);
+                });
+
+				self.modal = $(template); // the DOM node for the modal with whole content stored in	
+			},
+			addModal: function(){
+				var self = this,
+				contextEl = self.contextEl,
+				lightboxClass = self.lightboxClass,
+				containerClass = self.containerClass,
+				lightboxOn = self.lightboxOn,
+				containerOn = self.containerOn,
+				setCssForModal = self.setCssForModal,
+				setCssForContainer = self.setCssForContainer,
+				setCssForLightBox = self.setCssForLightBox,
+				modal = self.modal,
+				modalSelector = self.modalSelector,
+				modalMultipleOn = self.modalMultipleOn,
+				parentEl = self.parentEl || self.contextEl;
+
+				// var lightbox; // these gets assigned below
+
+				if (!contextEl || contextEl.length == 0) {
+					contextEl = $('body');
+				}
+
+                // we'll use these to check to see if these elements are already created in the DOM
+                // var lightboxInDOM = contextEl.find('.' + lightboxClass);
+				// var containerInDOM = contextEl.find('.' + containerClass);
+
+				if (!initialized) {
+					// make these objects as jQuery objects so we don't have to refind it in DOM
+					var lightboxElement = $("<div></div>",{
+	                    "class": "lightbox " + (lightboxClass || "")
+	                });
+
+	                var containerElement = $("<div></div>",{
+	                    "class": "container " + (containerClass || "")
+	                });
+				}
+
+				if (lightboxOn && containerOn) {
+
+					if (!_lightbox || (_lightbox && !_lightbox[0].isConnected)) {
+
+	                    // appending elements on top of each other using appendElementsInQ func
+	                    appendElementsInQ([ // need to be in 'ancestor-first' order
+	                    	parentEl,
+	                    	lightboxElement || _lightbox,
+	                    	containerElement || _container,
+	                    	modal
+	                    ]);
+
+
+
+					}else if (_lightbox.length == 1) {
+	                   
+	                    if (!modalMultipleOn) {
+	                    	if (modal.length == 1) {
+			                    removeOldModal();
+							}
+	                    }
+	                    // using the global scope variables cuz it is available now
+	                    appendElementsInQ([ // need to be in 'ancestor-first' order
+	                    	_container,
+	                    	modal
+	                    ]);
+
+					}else{
+	                    alert("Dev Note: we are adding duplicate HTML");
+	                }
+				}else if (lightboxOn){
+					if (!_lightbox || (_lightbox && !_lightbox[0].isConnected)) {
+
+	                    // appending elements on top of each other using appendElementsInQ func
+	                    appendElementsInQ([ // need to be in 'ancestor-first' order
+	                    	parentEl,
+	                    	lightboxElement || _lightbox,
+	                    	modal
+	                    ]);
+
+					}else if (_lightbox.length == 1) {
+
+	                	if (!modalMultipleOn) {
+	                    	if (modal.length == 1) {
+			                    removeOldModal();
+							}
+	                    }
+
+	                    appendElementsInQ([ // need to be in 'ancestor-first' order
+	                    	_lightbox,
+	                    	modal
+	                    ]);
+
+					}else{
+	                    alert("Dev Note: we are adding duplicate HTML");
+	                }
+				}else if (containerOn) {
+					console.log('----------------');
+					if (!_container || (_container && !_container[0].isConnected)) {
+	                 	console.log('no container found in DOM');
+	            
+	                    // appending elements on top of each other using appendElementsInQ func
+	                    appendElementsInQ([ // need to be in 'ancestor-first' order
+	                    	parentEl,
+	                    	containerElement || _container,
+	                    	modal
+	                    ]);
+
+					}else if (_container.length == 1) {
+	               		console.log('append to exisiting container');
+	                    // appending elements on top of each other using appendElementsInQ func
+	                    if (!modalMultipleOn) {
+	                    	if (modal.length == 1) {
+			                    removeOldModal();
+							}
+	                    }
+
+	                    appendElementsInQ([ // need to be in 'ancestor-first' order
+	                    	_container,
+	                    	modal
+	                    ]);
+
+					}else{
+	                    alert("Dev Note: we are adding duplicate HTML");
+	                }
+				}else{
+					if (!modalMultipleOn && _modal.length == 1) { // modal variable is set below
+		                removeOldModal();
+					}
+
+					// appending elements on top of each other using appendElementsInQ func
+                    appendElementsInQ([ // need to be in order of 'ancestor-first' order
+                    	parentEl,
+                    	modal
+                    ]);
+				
+				}
+
+                
+                if (!initialized) {
+                	// saving to the outer scope which will be in closure when it is invoked
+	                // * must be below the if checks 
+		            _lightbox = lightboxElement; 
+		            _container = containerElement;
+	                
+                }
+                // modal is updated each time to the recent modal that was added
+                _modal = modal;
+
+
+                function appendElementsInQ(elementsArray){
+                	/* running over the array appending elements functioning as if
+                		the last element provided is the innermost element you want 
+                		in the tree
+                	*/
+                	for (var i = elementsArray.length - 1; i >= 0; i--) {
+                		
+                		if (i) {
+                			$(elementsArray[i]).appendTo(elementsArray[i-1]);
+                		}
+                	}
+
+                	// converts like so...
+            		/*
+            		modalHTML.appendTo(containerForModal); // add modal html to container
+                	containerForModal.appendTo(lightboxForModal); // add container to lightbox
+                	lightboxForModal.appendTo(parentEl); // add lightbox to document
+                	
+                	*/
+                }
+
+                function removeOldModal(){
+	            	_oldModal.remove();
+	            }
+
+                
+                _oldModal = _modal; // saving it atlast if we need it on later invoking
+			},
+			setTweens: function(){
+				var self = this,
+				lightboxOn = self.lightboxOn,
+				containerOn = self.containerOn,
+				setCssForModal = self.setCssForModal,
+				setCssForContainer = self.setCssForContainer,
+				setCssForLightBox = self.setCssForLightBox;
+
+
+				if ((lightboxOn && !initialized) || (_lightbox.is(':visible') || !_lightbox[0].isConnected)) {
+					console.log('hey setting tweens for LB');
+                	_lightbox.css('display','none'); // doing this imp
+                	TweenLite.set(_lightbox,setCssForLightBox); // set css for the lightbox
+                }
+                if ((containerOn && !initialized) || (_container.is(':visible') || !_container[0].isConnected)) {
+                	_container.css('display','none'); // doing this imp
+                	TweenLite.set(_container,setCssForContainer); // set css for the container
+                }
+
+                // set base tweens/css for modal before animating
+                TweenLite.set(_modal,setCssForModal);
+			},
+			animateIn: function(){
+				var self = this,
+
+				lightboxOn = self.lightboxOn,
+				containerOn = self.containerOn,
+
+				lightboxAnimateInProps = self.lightboxAnimateInProps,
+				lightboxAnimateInDuration = self.lightboxAnimateInDuration,
+				containerAnimateInProps = self.containerAnimateInProps,
+				containerAnimateInDuration = self.containerAnimateInDuration,
+				animateInDuration = self.animateInDuration,
+				animateInProps = self.animateInProps,
+
+				modalFadeOutBuffer = self.modalFadeOutBuffer,
+				modalAutoHide = self.modalAutoHide
+				;
+
+				var tm = new TimelineMax();
+
+				if (lightboxOn && containerOn) {
+					if (!initialized || _lightbox.is(':hidden')) {
+						_lightbox.add(_container).css('display','initial'); // doing this imp
+						tm.to(_lightbox,lightboxAnimateInDuration/1000,lightboxAnimateInProps)
+						.set(_container,containerAnimateInProps);
+
+						console.log('this will aniamte in the lightbox');
+					}
+
+                	tm.to(_modal,animateInDuration/1000,animateInProps,'done');
+
+				}else if (lightboxOn) {
+					if (!initialized || _lightbox.is(':hidden')) {
+						_lightbox.css('display','initial'); // doing this imp
+						tm.to(_lightbox,lightboxAnimateInDuration/1000,lightboxAnimateInProps);
+					}
+                	
+                	tm.to(_modal,animateInDuration/1000,animateInProps,'done');
+
+				}else if (containerOn) {
+
+					if (!initialized || _container.is(':hidden')) {
+						_container.css('display','initial'); // doing this imp
+						tm.to(_container,containerAnimateInDuration/1000,containerAnimateInProps);
+					}
+
+                	tm.to(_modal,animateInDuration/1000,animateInProps,'done');
+				
+				}else{
+				
+					tm.to(_modal,animateInDuration/1000,animateInProps,'done');
+				
+				}
+
+				if (modalAutoHide) {
+					// if modal auto hide is on then hide the modal after the buffer provided
+
+					/* tm.addCallback(self.animateOut.bind(self),'done'); if we use addCallback at a label it executes right after the start of the label we want it to start in the end...*/
+					tm.addCallback(self.animateOut.bind(self,_modal,self),'+=' + modalFadeOutBuffer/1000);
+					
+				}
+			},
+			attachFadeOutListeners: function(){
+				var self = this,
+
+				containerOn = self.containerOn,
+				lightboxOn = self.lightboxOn,
+
+				modalAutoHide = self.modalAutoHide,
+				containerAutoHide = self.containerAutoHide,
+				lightboxAutoHide = self.lightboxAutoHide,
+
+				close = _modal.find(".close");
+
+
+				if (lightboxOn) {
+					_lightbox.add(close).on("click",self.animateOut.bind(self,_modal,self,true) ); // fadeout the lightbox and fadeout + remove on click (both lightbox and close)
+					
+				}else{
+					close.on("click",self.animateOut.bind(self,_modal,self,true));	// fadeout + remove the modal on click
+					
+				}
+
+				// disabling any outside handler/s inside the modal itself
+				_modal.on("click",function(e){	
+					e.stopPropagation();	
+				}); 
+
+			},
+			animateOut: function (modal,self,forceRemoveParent){
+				
+				var
+				containerOn = self.containerOn,
+				lightboxOn = self.lightboxOn,
+
+				depOnChild = self.depOnChild,
+				parentFadeDelay = self.parentFadeDelay,
+
+				modalSelector = self.modalSelector,
+				modalMultipleOn = self.modalMultipleOn,
+
+				animateOutProps = self.animateOutProps,
+				containerAnimateOutProps = self.containerAnimateOutProps,
+				lightboxAnimateOutProps = self.lightboxAnimateOutProps,
+
+				animateOutDuration = self.animateOutDuration,
+				containerAnimateOutDuration = self.containerAnimateOutDuration,
+				lightboxAnimateOutDuration = self.lightboxAnimateOutDuration
+
+				;
 
 				
+                var tm = new TimelineMax();
+                var obj = {};
+
+                if (lightboxOn && containerOn) {
+
+                	if (depOnChild || modalMultipleOn) {
+                		tm.to(modal,animateOutDuration/1000,animateOutProps);
+
+						obj.elem = _lightbox;
+						obj.duration = lightboxAnimateOutDuration;
+						obj.props = lightboxAnimateOutProps;
+
+                	}else{
+                		
+                		tm.to(modal,animateOutDuration/1000,animateOutProps);
+						tm.to(_lightbox,animateOutDuration/1000,lightboxAnimateOutProps);
+                	}
+                	
+
+				}else if (lightboxOn) {
+
+					if (depOnChild || modalMultipleOn) {
+						
+                		tm.to(modal,animateOutDuration/1000,animateOutProps);
+
+						obj.elem = _lightbox;
+						obj.duration = lightboxAnimateOutDuration;
+						obj.props = lightboxAnimateOutProps;
+
+                	}else{
+                		tm.to(modal,animateOutDuration/1000,animateOutProps);
+						tm.to(_lightbox,animateOutDuration/1000,lightboxAnimateOutProps);
+                	}
+                	
+
+				}else if (containerOn) {
+					
+					if (depOnChild || modalMultipleOn) {
+
+                		tm.to(modal,animateOutDuration/1000,animateOutProps);
+
+						obj.elem = _container;
+						obj.duration = containerAnimateOutDuration;
+						obj.props = containerAnimateOutProps;
+
+                	}else{
+                		tm.to(modal,animateOutDuration/1000,animateOutProps);
+						tm.to(_container,animateOutDuration/1000,containerAnimateOutProps);
+                	}
+
+				}else{
+					tm.to(modal,animateOutDuration/1000,animateOutProps);
+				}
+				
+				obj.fadeDelay = parentFadeDelay || 0;
+
+				// adding callback after the label 'done'
+				tm.addCallback(callbackFunction.bind(self,obj,forceRemoveParent));
+
+				// callback function which runs after animating out each modal to remove it...
+				function callbackFunction(obj,force){
+
+					modal.remove();
+
+					if (!obj.elem){ console.log('no container element to remove'); return; }
+
+					if (!force){
+						if (modalMultipleOn && obj.elem.find(modalSelector).length) {
+							console.log('mutliple modals and there are still modals present'); return;
+						}
+					}
+					
+
+					obj.props.onComplete = function(){
+						obj.elem.remove();
+
+						console.log('obj.elem');
+                		console.log(obj.elem);
+                		console.log(obj.elem[0].isConnected);
+					};
+
+					
+
+					TweenLite.to(obj.elem, obj.duration/1000, obj.props, "+=" + obj.fadeDelay);
+
+				}
+
+			}
+
+		}
+
+		// modalLinks.on("click",modalAdder.init);
+		return modalAdder;
+	}
+	
+
+
+	
+	var nCounter = 1;
+	var notifications = new generalModalHandler();
+
+	var makeNotification = notifications.init;
+	var notificationOptions = {
+		template: notiTemplate,
+		content: {
+			'message': 'hi there this is a notification',
+			'newthing': 'old shite',
+			'nice': 'maybe nice',
+			'number': nCounter
+		},
+		el:{
+			lightbox: {
+				on: true,
+				class: 'noti-lightbox'
+			},
+			container: {
+				on: true,
+				class: 'notification-container'
+			},
+			modal: {
+				selector: '.notification',
+				multipleOn: true,
+				autoHide: true,
+				fadeOutBuffer: 5000
+			},
+			context: wrap,
+			parent: undefined
+		},
+		animateIn: {
+			modal:{
+				props:{
+					visibility: 'visible',
+					opacity: 1
+				},
+				duration: 500
+			},
+			container: {
+				props:{
+					autoAlpha: 1
+				},
+				duration: 0
+			},
+			lightbox: {
+				props:{
+					autoAlpha: 1
+				},
+				duration: 500
+			}
+		},
+		
+		animateOut: {
+			modal:{
+				props:{
+					autoAlpha: 0,
+					Y: 0
+				},
+				duration: 500
+			},
+			container: {
+				props:{
+					autoAlpha: 0
+				},
+				duration: 0
+			},
+			lightbox: {
+				props:{
+					autoAlpha: 0
+				},
+				duration: 300
+			},
+			depOnChild: true,
+			parentFadeDelay: 2000
+		},
+
+		setCss:{
+			container:{
+				autoAlpha: 0
+			},
+			modal:{
+				autoAlpha: 0
+			}
+		}
+	};
+
+	makeNotification(notificationOptions);
+
+	
+	setInterval(function(){
+		notificationOptions.content.number = ++nCounter;
+		makeNotification(notificationOptions);
+	},6000);
+
+
+		
+
+
+	
+	
+
+
 				/****************************
 
 						=integral functions (for essential functionalities and UX)
@@ -1091,19 +1712,23 @@
 
 		// checkBreakpoints function to run on resize and load
 	var smBreakpointInitiated = false,	mdBreakpointInitiated = false,	lgBreakpointInitiated = false;
+	
 	function checkBreakpoints(){
 
-		if (windowWidth >= 768 && !smBreakpointInitiated) {
-			smBreakpointInitiated = true;
+		if (windowWidth >= 768) {
+			// smBreakpointInitiated = true;
 			smBreakpoint();
+			console.log('sm breakpoint reached');
 
-			if (windowWidth >= 992 && !mdBreakpointInitiated) {
-				mdBreakpointInitiated = true;
+			if (windowWidth >= 992) {
+				// mdBreakpointInitiated = true;
 				mdBreakpoint();
+				console.log('md breakpoint reached');
 
-				if (windowWidth >= 1200 && !lgBreakpointInitiated) {
-					lgBreakpointInitiated = true;
+				if (windowWidth >= 1200) {
+					// lgBreakpointInitiated = true;
 					lgBreakpoint();	
+					console.log('lg breakpoint reached');
 
 				}/* check if window is larger than 1200 and if lg breakpoint has ran earlier*/
 
