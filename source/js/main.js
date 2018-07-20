@@ -181,12 +181,15 @@
 				
 				***********************/
 
+						/*
+							major handlers
+						*/
 
-		// major handlers
-
-		// run these when dom ready (and elements cached)
+		// run these when dom ready (and elements are cached)
 	doSessionWorkOnLoad();
 	checkBreakpoints();
+
+
 
 			// unload hander
 	$(window).on("unload",function(){
@@ -200,18 +203,12 @@
 		
 	});
 
-
-
 			// resize handler
 
 	$(window).on("resize",debounce(function(){handleResize();},1000));
 
-	function handleResize(){
-		windowWidth = $(window).width();
-		windowHeight = $(window).height();
+	
 
-		checkBreakpoints();
-	}
 
 			// scroll handler
 	$(scrollingContainer).on("scroll",function(){
@@ -219,411 +216,12 @@
 		requestAnimationFrame(onScroll);
 	});
 
-	
 
+						/*
+							minor handlers
+						*/
 
-			/**************************************
-
-				Event Handling =callback functions
-			
-			**************************************/
-
-
-			// onScroll function to be invoked when scroll container is scrolled
-	function onScroll(){
-		var sp = scrollPos;
-		var scArr = scrollPositionOfHashLinks;
-		var hScrlinks = headerScrollLinks;
-		
-		hScrlinks.removeClass("navActiveEffect");
-
-		$.each(scArr,function(i,hashLinkPos){
-
-			if ( (sp >= hashLinkPos && sp < scArr[i+1]) ||  (sp >= hashLinkPos && scArr[scArr.length - 1] == hashLinkPos )) {
-				
-				$(hScrlinks[i]).addClass("navActiveEffect");
-			}
-
-		});
-
-	}
-
-	toggleMobMainNav();
-
-			// responsive handlers
-	function smBreakpoint(){	
-		toggleMainNav();
-		toggleFooterMenus();
-	}
-
-	function mdBreakpoint(){
-		
-	}
-
-	function lgBreakpoint(){
-		
-	}
-
-
-
-			/****************************
-
-				=self attaching (invoking themselves and the functions) handlers
-			
-			****************************/
-			// contact form
-
-	function contact(){
-		var cf = contactForm, cfFields = cfAllFields;
-		/* FORM FOCUS EVENTS  */
-
-		cfFields.on("focus",function(e){
-			var $this = $(this),
-			placeholderText = $this.attr("data-placeholder");
-
-			$this.addClass("focused");
-			
-
-			if (e.target.tagName=="SELECT") {
-				var itsSelect = true;
-				var option = $this.find('.default');
-				var customText = option.data("custom-text");
-				var selectText;
-
-				if (customText && customText != "") {
-					selectText = customText + selectHelpText;	
-				}else{
-					selectText = selectDefaultText + selectHelpText;	
-				}
-				option.html(selectText);
-
-			}else{
-				$this.attr('placeholder',placeholderText );
-			}
-			
-			// on focus out
-
-			$this.one('blur',function(e){
-				var value = $.trim($this.val());		
-
-				if (value == "") {
-					$this.removeClass("focused");
-				}
-
-				if (itsSelect) {
-					option.html(selectNullText);
-				}else{
-					$this.attr('placeholder',placeHolderDefault);
-				}
-
-			});
-
-		});
-
-
-		// on change 
-		cfFields.on('change',function(e){
-			var $this = $(this);
-			var pick, pickFrom, pickDefault, textareaPlaceholder, submitBtnText,
-			selectedOption, itsSelect;
-
-			if (e.target.tagName=="SELECT") {
-				itsSelect = true;
-			}
-			
-			if (itsSelect && $this.attr('id') == 'purposeC') {
-				selectedOption = $.trim($this.val());
-				pick = selectedOption ? selectedOption : 'default'; // select default prop inside purposeAlts if nothing is selected
-				pickFrom = purposeAlts[pick] || purposeAlts['default']; // pick the prop (object) from purposeAlts
-				pickDefault = purposeAlts['default'];// pick the default prop from purposeAlts
-				
-				textareaPlaceholder = pickFrom['textareaPlaceholder'] || pickDefault['textareaPlaceholder']; // if textarea placeholder is not given in one of them use from the default prop
-				submitBtnText = pickFrom['submitBtnText']; // select the submit button text
-
-
-				// change textarea placeholder (data attribute which is used when it's focused)
-				cfTextarea.attr('data-placeholder',textareaPlaceholder);
-									
-				// change submit button text
-				cfSubmit.text(submitBtnText);
-				
-			} // if block ENDS -> if( itsSelect && $this.attr('id') == 'purposeC' )
-		});
-
-
-
-		/* FORM FOCUS EVENTS END */
-	
-		/* FORM SUBMISSION AND VALIDATION */
-
-		function contactFormSubmission(){
-
-			var cfEmail = cfInput.filter('[type="email"]');
-
-				
-				// change validation messages and other options 
-			
-			cf.parsley({
-				requiredMessage: cfReqText
-				
-			});
-
-			cfFields.each(function(){
-				var $this = $(this),
-				closestFieldBlock = $this.closest('.field-block');
-
-				$this.parsley({
-					errorsContainer: function () {
-						return closestFieldBlock; // change validation message container 
-					}
-				});
-			});
-
-						
-			cfEmail.parsley({
-				typeMessage: cfMailText
-	        	// noFocus: true
-			});
-
-
-			// act to validation errors and success on submission
-
-			cf.parsley().on('form:error',function(){
-
-			    console.log('validation errors');  
-
-			}).on('form:submit',function(e){
-
-			    console.log('Contact Form Submitted');
-
-
-			    // write code below  to submit to DB for contact form
-			    // tip: contact popup is cached in variable 
-			    // above like this ` var contactPopup = $('#contact__popup'); ` 
-			    // so we can find the form fields like var formField = contactPopup.find('something');
-
-			    
-			    /*
-				    var subjectCF = $('#subjectCF').val();
-				    var nameCF = $('#nameCF').val();
-				    var emailCF = $('#emailCF').val();
-				    var detailsCF = $('#detailsCF').val();
-
-				     $.post("sp-submit.php",{subjectCF:subjectCF,nameCF:nameCF,emailCF:emailCF,detailsCF:detailsCF},function(data){
-				        if(data==1)
-				        {
-				          alert("Thank you !");
-				        }
-				        else{
-				          alert("Some error !");
-				        }
-				      });
-
-			     */
-			               
-
-			    return false;  
-			    
-			});
-
-		}
-
-		contactFormSubmission();
-
-		/* FORM SUBMISSION AND VALIDATION ENDS*/
-	}
-	
-	contact();
-
-
-	function toggleMainNav(){
-		// toggle header menus : main--nav
-		toggle({
-			nav: headerNavMain,
-			openButton: headerPullIcons,
-			closeButton: headerPushIcons,
-			events:'click',
-			inverseButtonAppearance: true,
-			effects: {
-				open: function(elements){
-
-					TweenLite.to(elements.nav,.7,{
-						yPercent: "0",
-						ease: Power4.easeOut
-					});
-					TweenLite.to(elements.$this,.3,{
-						autoAlpha: 0
-					});
-					TweenLite.to(elements.visibleBtn.add(elements.listContainer),.3,{
-						autoAlpha: 1
-					});
-					
-				},
-				close: function(elements){
-
-					TweenLite.to(elements.nav,.7,{
-						yPercent:"-105",
-						ease: Bounce.easeOut
-					});
-
-					TweenLite.to(elements.$this.add(elements.listContainer),.3,{
-						autoAlpha:0
-					});
-
-					TweenLite.to(elements.visibleBtn,.3,{
-						autoAlpha: 1
-					});
-					
-				}
-			}
-		});
-	}
-
-	function toggleMobMainNav(){
-		// toggle header menus : main-nav--mob
-		toggle({
-			nav: headerMobNavMain,
-			openButton: headerMobPullIcons,
-			closeButton: headerMobPushIcons,
-			events:'click',
-			inverseButtonAppearance: false,
-			closeOnLinkClick: true,
-			effects: {
-				open: function(elements){
-					console.log(elements);
-					TweenLite.to(elements.el,.7,{
-						autoAlpha: 1,
-						ease: Power4.easeOut
-					});
-					TweenLite.to(elements.$this,.3,{
-						autoAlpha: 0
-					});
-					TweenLite.to(elements.visibleBtn,.3,{
-						autoAlpha: 1
-					});
-					
-				},
-				close: function(elements){
-					console.log(elements);
-					TweenLite.to(elements.el,.7,{
-						autoAlpha: 0,
-						ease: Power4.easeOut
-					});
-
-					if(!elements.anchorPressed){
-						TweenLite.to(elements.$this,.3,{
-							autoAlpha:0
-						});
-					}
-
-					TweenLite.to(elements.visibleBtn,.3,{
-						autoAlpha: 1
-					});
-					
-				}
-			}
-		});
-	}
-	
-
-	function toggleFooterMenus(){
-		// toggle footer menu - secondary nav
-		
-
-		toggle({
-			nav: secondaryNav,
-			openButton: secondaryNavOpen,
-			closeButton: secondaryNavClose,
-			events:'click',
-
-			effects: {
-				open: function(elements){
-					console.log(elements);
-					TweenLite.to(elements.nav,.7,{
-						yPercent: "-105",
-						ease: Power4.easeOut
-					});
-					TweenLite.to(elements.$this,.3,{
-						autoAlpha: 0
-					});
-					TweenLite.to(elements.visibleBtn.add(elements.list),.3,{
-						autoAlpha: 1
-					});
-					
-				},
-				close: function(elements){
-
-					TweenLite.to(elements.nav,.7,{
-						yPercent:"0",
-						ease: Bounce.easeOut
-					});
-					TweenLite.to(elements.$this.add(elements.list),.3,{
-						autoAlpha:0
-					});
-
-					
-					TweenLite.to(elements.visibleBtn,.3,{
-						autoAlpha: 1
-					});
-
-					
-					
-				}
-			}
-
-		});
-
-		// toggle footer menus - social nav
-
-		toggle({
-
-			nav: socialNav,
-			openButton: socialNavOpen,
-			closeButton: socialNavClose,
-			events:'click',
-			effects: {
-				open: function(elements){
-					console.log('elements');
-					console.log(elements);
-					TweenLite.to(elements.nav,.7,{
-						yPercent: "-105",
-						ease: Power4.easeOut
-					});
-					TweenLite.to(elements.$this,.3,{
-						autoAlpha: 0
-					});
-					TweenLite.to(elements.visibleBtn.add(elements.list),.3,{
-						autoAlpha: 1
-					});
-					
-				},
-				close: function(elements){
-
-					TweenLite.to(elements.nav,.7,{
-						yPercent:"0",
-						ease: Bounce.easeOut
-					});
-					TweenLite.to(elements.$this.add(elements.list),.3,{
-						autoAlpha:0
-					});
-
-					
-					TweenLite.to(elements.visibleBtn,.3,{
-						autoAlpha: 1
-					});
-
-					
-					
-				}
-			}
-		});
-
-	}
-
-	
-
-
-			// technologyList toggle handler (inside the skills section) */
+	// technologyList toggle handler (inside the skills section) 
 	function technologyListToggleHandler(){
 		var setTimeoutDelayForSettingHeights = 600;
 
@@ -741,29 +339,594 @@
 	technologyListToggleHandler();
 
 
+
+
+			/**************************************
+
+				Event Callback functions
+			
+			**************************************/
+
+
+
+						/*
+							major callbacks
+						*/
+
+
+			// onScroll function to be invoked when scroll container is scrolled
+	function onScroll(){
+		var sp = scrollPos;
+		var scArr = scrollPositionOfHashLinks;
+		var hScrlinks = headerScrollLinks;
+		
+		hScrlinks.removeClass("navActiveEffect");
+
+		$.each(scArr,function(i,hashLinkPos){
+
+			if ( (sp >= hashLinkPos && sp < scArr[i+1]) ||  (sp >= hashLinkPos && scArr[scArr.length - 1] == hashLinkPos )) {
+				
+				$(hScrlinks[i]).addClass("navActiveEffect");
+			}
+
+		});
+
+	}
+
+			// responsive handlers
+
+	function handleResize(){
+		windowWidth = $(window).width();
+		windowHeight = $(window).height();
+
+		checkBreakpoints();
+	}
+
+	function smBreakpoint(){	
+		toggleMainNav();
+		toggleFooterMenus();
+	}
+
+	function mdBreakpoint(){
+		
+	}
+
+	function lgBreakpoint(){
+		
+	}
+
+
+		// doSessionWorkOnLoad function to do some stuff based on what's stored in the session storage
+
+	function doSessionWorkOnLoad(){
+		reopenSkillsLists();
+		if(!location.hash.length){
+			scrollBackToLastPosition();
+		}
+
+	}
+
+
+
+						/*
+							minor callbacks
+						*/
+
+		// function to expand skills list
+	function expandListFunc(args){
+		var $this = $(this);
+		
+		var listOrderDesc = args.listOrderDesc,
+			listContainer = args.listContainer,
+			listHeight = args.listHeight,
+			arrow = args.arrow,
+			initialHeightOfListOrderDesc = args.initialHeightOfListOrderDesc;
+
+
+		TweenLite.to(listContainer,1,{
+			height: (listHeight + 100) + "px",
+			onComplete: completed
+			
+		});
+
+		function completed(){
+			TweenLite.set(listContainer,{
+				'will-change': 'auto'
+			});
+
+			setTimeout(function(){
+				getTopOffsetsForHeaderScrollLinks();
+			},500);
+		}
+
+		/*TweenLite.to(listContainer,0,{
+			height: (listHeight + 100) + "px",
+			ease: Power2.easeOut,
+			onComplete: getTopOffsetsForHeaderScrollLinks
+			
+		},"listExpanded");*/
+
+		/* ---------------------- */
+
+		// var tl = new TimelineLite();
+		if (listOrderDesc.length) {
+			TweenLite.set(listOrderDesc,{
+				autoAlpha: 1,
+				height: initialHeightOfListOrderDesc
+			});
+		}
+
+		TweenLite.set(listContainer,{
+			className: '+=expanded'
+		});
+		/*TweenLite.fromTo(arrow,.9,{
+			autoAlpha:.5,
+			scaleY: 0
+		},{
+			autoAlpha:1,
+			scaleY: 1
+		}); */
+
+		if (arrow.length) {
+			TweenLite.fromTo(arrow,.9,{
+				autoAlpha:.5,
+				scaleY: 0
+			},{
+				autoAlpha:1,
+				scaleY: 1
+			}); 
+		}
+
+		TweenLite.to($this,.3,{
+			rotation: 180
+		});	
+	}	
+
+		// function to collapse skills list
+	function collapseListFunc(args){
+		var $this = $(this);
+
+		var listOrderDesc = args.listOrderDesc,
+			listContainer = args.listContainer,
+			listHeight = args.listHeight,
+			arrow = args.arrow;
+
+
+		TweenLite.to(listContainer,.3,{
+			height: listHeight + "px",
+			ease: Power2.easeOut,
+			onComplete: completed
+		});
+
+		function completed(){
+			TweenLite.set(listContainer,{
+				'will-change': 'auto'
+			});
+
+			setTimeout(function(){
+				getTopOffsetsForHeaderScrollLinks();
+			},500);
+		}			
+
+		/* -------------------- */
+		if (listOrderDesc.length) {
+			TweenLite.set(listOrderDesc,{
+				autoAlpha: 0,
+				height: 0
+			});
+		}
+
+		TweenLite.set(listContainer,{
+			className: '-=expanded'
+		});
+
+		
+		if (arrow.length) {
+			TweenLite.to(arrow,.4,{
+				autoAlpha:0,
+				scaleY: 0
+			}); 
+		}
+
+		TweenLite.to($this,.2,{
+			rotation:0
+		})
+	}
+
+
+	function toggleMainNav(){
+		// toggle header menus : main--nav
+		toggle({
+			nav: headerNavMain,
+			openButton: headerPullIcons,
+			closeButton: headerPushIcons,
+			events:'click',
+			inverseButtonAppearance: true,
+			effects: {
+				open: function(elements){
+
+					TweenLite.to(elements.nav,.7,{
+						yPercent: "0",
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleBtn.add(elements.listContainer),.3,{
+						autoAlpha: 1
+					});
+					
+				},
+				close: function(elements){
+
+					TweenLite.to(elements.nav,.7,{
+						yPercent:"-105",
+						ease: Bounce.easeOut
+					});
+
+					TweenLite.to(elements.$this.add(elements.listContainer),.3,{
+						autoAlpha:0
+					});
+
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+					
+				}
+			}
+		});
+	}
+
+	function toggleFooterMenus(){
+		// toggle footer menu - secondary nav
+
+		toggle({
+			nav: secondaryNav,
+			openButton: secondaryNavOpen,
+			closeButton: secondaryNavClose,
+			events:'click',
+
+			effects: {
+				open: function(elements){
+					console.log(elements);
+					TweenLite.to(elements.nav,.7,{
+						yPercent: "-105",
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleBtn.add(elements.list),.3,{
+						autoAlpha: 1
+					});
+					
+				},
+				close: function(elements){
+
+					TweenLite.to(elements.nav,.7,{
+						yPercent:"0",
+						ease: Bounce.easeOut
+					});
+					TweenLite.to(elements.$this.add(elements.list),.3,{
+						autoAlpha:0
+					});
+
+					
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+
+					
+					
+				}
+			}
+
+		});
+
+		// toggle footer menus - social nav
+
+		toggle({
+
+			nav: socialNav,
+			openButton: socialNavOpen,
+			closeButton: socialNavClose,
+			events:'click',
+			effects: {
+				open: function(elements){
+					console.log('elements');
+					console.log(elements);
+					TweenLite.to(elements.nav,.7,{
+						yPercent: "-105",
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleBtn.add(elements.list),.3,{
+						autoAlpha: 1
+					});
+					
+				},
+				close: function(elements){
+
+					TweenLite.to(elements.nav,.7,{
+						yPercent:"0",
+						ease: Bounce.easeOut
+					});
+					TweenLite.to(elements.$this.add(elements.list),.3,{
+						autoAlpha:0
+					});
+
+					
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+
+					
+					
+				}
+			}
+		});
+	}
+
+
+
+
+
+			/****************************
+
+				=self attaching (invoking themselves and the functions) handlers
+			
+			****************************/
+
+			
+			// primary contact form
+	function contact(){
+
+		var 
+		cf = contactForm, 
+		fields = cfAllFields, // all form fields
+		inputs = cfInput, // all inputs
+		selects = cfSelectBoxes, // all selects
+		purpose = cfPurpose, // purpose select box
+		textareas = cfTextarea, // all textareas
+		submit = cfSubmit // submit button
+		;
+
+
+
+		/* FORM FOCUS EVENTS  */
+
+		fields.on("focus",function(e){
+			var $this = $(this),
+			placeholderText = $this.attr("data-placeholder");
+
+			$this.addClass("focused");
+			
+
+			if (e.target.tagName=="SELECT") {
+				var itsSelect = true;
+				var option = $this.find('.default');
+				var customText = option.data("custom-text");
+				var selectText;
+
+				if (customText && customText != "") {
+					selectText = customText + selectHelpText;	
+				}else{
+					selectText = selectDefaultText + selectHelpText;	
+				}
+				option.html(selectText);
+
+			}else{
+				$this.attr('placeholder',placeholderText );
+			}
+			
+			// on focus out
+
+			$this.one('blur',function(e){
+				var value = $.trim($this.val());		
+
+				if (value == "") {
+					$this.removeClass("focused");
+				}
+
+				if (itsSelect) {
+					option.html(selectNullText);
+				}else{
+					$this.attr('placeholder',placeHolderDefault);
+				}
+
+			});
+
+		});
+
+		// on change 
+		purpose.on('change',function(e){
+			var $this = $(this);
+			var pick, pickFrom, pickDefault, textareaPlaceholder, submitBtnText,
+			selectedOption;
+
+			/*if (e.target.tagName=="SELECT") {
+				var itsSelect = true;
+			}else{ return;  } // return early*/
+			
+			selectedOption = $.trim($this.val());
+			pick = selectedOption ? selectedOption : 'default'; // select default prop inside purposeAlts if nothing is selected
+			pickFrom = purposeAlts[pick] || purposeAlts['default']; // pick the prop (object) from purposeAlts
+			pickDefault = purposeAlts['default'];// pick the default prop from purposeAlts
+			
+			textareaPlaceholder = pickFrom['textareaPlaceholder'] || pickDefault['textareaPlaceholder']; // if textarea placeholder is not given in one of them use from the default prop
+			submitBtnText = pickFrom['submitBtnText']; // select the submit button text
+
+			// change textarea placeholder (data attribute which is used when it's focused)
+			textareas.eq(0).attr('data-placeholder',textareaPlaceholder);
+								
+			// change submit button text
+			submit.text(submitBtnText);
+				
+		});
+
+		/* FORM FOCUS EVENTS END */
+
+
+
+	
+		/* FORM SUBMISSION AND VALIDATION */
+
+		function contactFormSubmission(){
+
+			var email = inputs.filter('[type="email"]');
+
+				
+				// change validation messages and other options 
+			
+			cf.parsley({
+				requiredMessage: cfReqText
+				
+			});
+
+			fields.each(function(){
+				var $this = $(this),
+				closestFieldBlock = $this.closest('.field-block');
+
+				$this.parsley({
+					errorsContainer: function () {
+						return closestFieldBlock; // change validation message container 
+					}
+				});
+
+			});
+
+						
+			email.parsley({
+				typeMessage: cfMailText
+	        	// noFocus: true
+			});
+
+
+			// act to validation errors and success on submission
+
+			cf.parsley().on('form:error',function(){
+
+			    console.log('validation errors');  
+
+			}).on('form:submit',function(e){
+
+			    console.log('Contact Form Submitted');
+
+
+			    // write code below  to submit to DB for contact form
+			    // tip: contact popup is cached in variable 
+			    // above like this ` var contactPopup = $('#contact__popup'); ` 
+			    // so we can find the form fields like var formField = contactPopup.find('something');
+
+
+			     $.ajax({
+			        url: 'controller/cf-submit.php',
+			        type: 'post',
+			        // dataType: 'json',
+			        data: cf.serialize(),
+			        success: function(data, textStatus, jqXHR) {
+	                   console.log( '-------  success -------');
+	                	console.log(data);
+	                	console.log('textStatus: ' + textStatus);
+	                	// console.log(jqXHR);
+	                },
+	                error: function(jqXHR, textStatus, error){
+	                	console.log( '-------  error -------');
+	                	// console.log(jqXHR);
+	                	console.log('textStatus: ' + textStatus);
+	                	console.log('error' + error);
+	                }
+			    });
+			               
+
+			    return false;  
+			    
+			});
+
+		}
+
+		contactFormSubmission();
+
+		/* FORM SUBMISSION AND VALIDATION ENDS*/
+	}
+
+			// toggle mobile nav menu
+	function toggleMobMainNav(){
+		// toggle header menus : main-nav--mob
+		toggle({
+			nav: headerMobNavMain,
+			openButton: headerMobPullIcons,
+			closeButton: headerMobPushIcons,
+			events:'click',
+			inverseButtonAppearance: false,
+			closeOnLinkClick: true,
+			effects: {
+				open: function(elements){
+					console.log(elements);
+					TweenLite.to(elements.el,.7,{
+						autoAlpha: 1,
+						ease: Power4.easeOut
+					});
+					TweenLite.to(elements.$this,.3,{
+						autoAlpha: 0
+					});
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+					
+				},
+				close: function(elements){
+					console.log(elements);
+					TweenLite.to(elements.el,.7,{
+						autoAlpha: 0,
+						ease: Power4.easeOut
+					});
+
+					if(!elements.anchorPressed){
+						TweenLite.to(elements.$this,.3,{
+							autoAlpha:0
+						});
+					}
+
+					TweenLite.to(elements.visibleBtn,.3,{
+						autoAlpha: 1
+					});
+					
+				}
+			}
+		});
+	}
+
 			// hash scrolling handlers
-	(function hashScroll(){
+	function hashScroll(){
 		scrollingLinks.on("click",function(){
 			var $this = $(this),
 			duration = 1,
 			easing = 'Power2.easeOut', 
 			scrollToPoint = $this.data("hash_scroll_to");
 
-			if ($this.hasClass("link--go__to__top")) {
-				var maxScrollTop = documentHeight - windowHeight,
-				scrollFactor = (maxScrollTop / scrollPos).toFixed(2);
+			if ($this.hasClass("link--go-to-top")) {
+				duration = 5;
 
-				duration *= 5 / scrollFactor;
+				var maxScrollTop = documentHeight - windowHeight,
+				scrollFactor = (scrollPos / maxScrollTop).toFixed(2);
+
+				duration *= scrollFactor;
 				easing = "Linear.easeNone";
 
 			}
-			console.log(scrollToPoint);
 			// var toPoint = type of ($this.data("hashScrollTo")) ? 
 			TweenLite.to(scrollingContainer, duration, {scrollTo:scrollToPoint,ease:'Power2.easeOut'});
 			
 			if (scrollToPoint == undefined) { console.log("data-hash_scroll_to is not defined")}
 		});
-	}()); /*hashScroll function*/
+	}
+	
+
+
+	
 
 
 			// modal handler
@@ -784,7 +947,7 @@
 
 
 			// helpbox handler
-	(function helpboxHandler(){
+	function helpbox(){
 		var model = {
 			skillsImprovingUpon: "These are the skills which i would say that i am still grasping on while working with them on real projects to be if not perfect, atleast be very comfortable with them "
 		,	futureSkills: "These are the technologies which i have an eye on and as soon as my scheduled allows me for it i'll be picking up from one of these to learn & work on. "
@@ -792,6 +955,7 @@
 		var lightboxForHelpbox;
 		var template;
 		var templateCounter = 0;
+
 		var helpAdder = {
 			init:function(){
 				var self = helpAdder;
@@ -922,10 +1086,9 @@
 
 		helpboxBtn.on("click",helpAdder.init);
 
-	}());
+	}
 
-
-	(function modalHandler(){
+	function modal(){
 		
 
 		var lightboxForModal;
@@ -1079,14 +1242,403 @@
 		}
 
 		modalLinks.on("click",modalAdder.init);
-	}());
+	}
 	
+	function notifications(){
+		var notifications = new generalModalHandler();
+
+		var notificationOptions = {
+			template: notiTemplate,
+			content: {
+				'message': 'hi there this is a notification',
+				'newthing': 'old shite',
+				'nice': 'maybe nice',
+				'number': 3
+			},
+			el:{
+				lightbox: {
+					on: true,
+					class: 'noti-lightbox'
+				},
+				container: {
+					on: true,
+					class: 'notification-container'
+				},
+				modal: {
+					selector: '.notification',
+					multipleOn: true,
+					autoHide: true,
+					fadeOutBuffer: 5000
+				},
+				context: wrap,
+				parent: undefined
+			},
+			animateIn: {
+				modal:{
+					props:{
+						visibility: 'visible',
+						opacity: 1
+					},
+					duration: 500
+				},
+				container: {
+					props:{
+						autoAlpha: 1
+					},
+					duration: 0
+				},
+				lightbox: {
+					props:{
+						autoAlpha: 1
+					},
+					duration: 500
+				}
+			},
+			
+			animateOut: {
+				modal:{
+					props:{
+						autoAlpha: 0,
+						Y: 0
+					},
+					duration: 500
+				},
+				container: {
+					props:{
+						autoAlpha: 0
+					},
+					duration: 0
+				},
+				lightbox: {
+					props:{
+						autoAlpha: 0
+					},
+					duration: 300
+				},
+				depOnChild: true,
+				parentFadeDelay: 2000
+			},
+
+			setCss:{
+				container:{
+					autoAlpha: 0
+				},
+				modal:{
+					autoAlpha: 0
+				}
+			}
+		};
+
+		notifications.init(notificationOptions);
+	}
+	
+
+	
+
+
+	toggleMobMainNav();
+	contact();
+	hashScroll();
+	helpbox();
+	modal();
+	notifications();
+
+
+
+
+				/****************************
+
+						=integral functions	(used internally from other functions or used for some integral feature)
+						 
+						 // just need to be called again when we need it without any params
+
+				****************************/
+
+		// scrollBackToLastPosition function to scroll back to the last cached function
+	function scrollBackToLastPosition(){
+		var scrollToDefault = sessionStorage.getItem("lastScrollPos");
+		if (scrollToDefault) {
+			TweenLite.to(scrollingContainer, 1, {scrollTo:{y:scrollToDefault},ease:Power2.easeOut});	
+		}
+	}
+
+		// reopenSkillsLists function to open the last opened skills lists 
+	function reopenSkillsLists(){
+
+		if (!sessionStorage.getItem("skillsListToggleStatus")) { return; }
+
+		skillsListToggleStatus = JSON.parse(sessionStorage.getItem("skillsListToggleStatus"));
+		// var OpenSkillsListFor = [];
+
+		Object.keys(skillsListToggleStatus).forEach(function(id){
+
+			if (!skillsListToggleStatus[id]) {
+
+			}else{
+
+			}
+			console.log('skillsListToggleStatus[id]');
+			console.log(skillsListToggleStatus[id]);
+			var element = $("#"+id),
+				expand = element.find(".expand"),
+				arrow = element.find(".arrow"),
+				listOrderDesc = element.find(".list__order__desc"),
+				initialHeightOfListOrderDesc = listOrderDesc.outerHeight(),
+				technologyList = element.find(".technologyList"),
+				listHeight = technologyList.height();
+
+		
+			// alert(technologyList.height());
+			if (!initialHeightOfListOrderDesc) {
+				initialHeightOfListOrderDesc = 0;
+			}
+
+			expandListFunc.call(expand,{
+				listContainer: element,
+				listHeight: (listHeight + initialHeightOfListOrderDesc),
+				listOrderDesc: listOrderDesc,
+				arrow: arrow,
+				initialHeightOfListOrderDesc: initialHeightOfListOrderDesc
+			});
+
+		});
+	}
+
+		// checkBreakpoints function to run on resize and load
+	var smBreakpointInitiated = false,	mdBreakpointInitiated = false,	lgBreakpointInitiated = false;
+	
+	function checkBreakpoints(){
+
+		if (windowWidth >= 768) {
+			// smBreakpointInitiated = true;
+			smBreakpoint();
+			console.log('sm breakpoint reached');
+
+			if (windowWidth >= 992) {
+				// mdBreakpointInitiated = true;
+				mdBreakpoint();
+				console.log('md breakpoint reached');
+
+				if (windowWidth >= 1200) {
+					// lgBreakpointInitiated = true;
+					lgBreakpoint();	
+					console.log('lg breakpoint reached');
+
+				}/* check if window is larger than 1200 and if lg breakpoint has ran earlier*/
+
+			}/* check if window is larger than 992 and if md breakpoint has ran earlier*/
+
+		}/* check if window is larger than 768 and if sm breakpoint has ran earlier*/
+	}	/* checkBreakpoints function */
+
+
+	function getTopOffsetsForHeaderScrollLinks(){
+		scrollPositionOfHashLinks = [];
+		var headerScrollLinks = $(headerNavMain[0]).find('.link--scroll');
+
+		headerScrollLinks.each(function(i,elem){
+			var $this = $(elem),
+			scrollsToElementId = $this.data("hash_scroll_to");
+		
+			var elementItself = $(scrollsToElementId);
+
+			var offsetTopForElement= Number((elementItself.offset().top - 30).toFixed(2)); // -1 for fixing the precision error
+			scrollPositionOfHashLinks.push(offsetTopForElement);
+
+			// console.log(elementItself);
+	
+		});
+	}
+
+	getTopOffsetsForHeaderScrollLinks();
+
+
+
+
+				/****************************
+						=utility functions 
+
+				(callables to make use of a functionality using different params, using plugin like api)
+				
+				****************************/
+
+
+		// toggle function to toggle menus in header and footer menus
+	function toggle(options){
+		var openBtn, closeBtn;
+
+		if (!options.openButton && !options.closeButton) {
+			return console.log('no toggle buttons provided');
+		}
+
+		options.effects.defaults = {};
+		openBtn = options.openButton;
+		closeBtn = options.closeButton;	
+
+		
+
+		if (options.inverseButtonAppearance) {
+			TweenLite.set(openBtn,{autoAlpha:0});
+
+		}else{
+			TweenLite.set(closeBtn,{autoAlpha:0});
+
+		}
+
+
+		if (!options.events) {
+			options.events = 'click';
+		}
+
+		var dataToggle = openBtn.data("toggle") ||  closeBtn.data("toggle");
+		var el = wrap.find(dataToggle);
+		var nav = options.nav; 
+		var listContainer = nav.find('.list-container');
+		var list = nav.find('.list');
+		var anchors = options.closeOnLinkClick ? options.nav.find('a') : undefined;
+
+		
+
+		openBtn.on(options.events,function(){
+			var $this = $(this);
+			var visibleBtn = $this.attr("data-function") != 'close' ? closeBtn : openBtn;		
+			console.log('obbject');
+			console.log({
+				dataToggle: dataToggle,
+				el: el,
+				nav: nav,
+				listContainer: listContainer,
+				list: list,
+				anchors: anchors
+			});
+
+			options.effects.defaults.open = function(){
+				var tl = new TimelineLite();
+
+				tl.set(listContainer,{
+					"display":"block"
+				}).to($this,.3,{
+					autoAlpha: 0
+				});
+
+				TweenLite.to(visibleBtn.add(listContainer),.3,{
+					autoAlpha: 1
+				});
+			}
+
+			if (options.effects) {
+				if (options.effects.open && typeof options.effects.open == 'function') {
+					options.effects.open({
+						nav: nav,
+						el: el,
+						list: list,
+						visibleBtn: visibleBtn,
+						$this: $this,
+						listContainer: listContainer
+					});
+
+				}else{
+					console.log("No function passed for effects.open, running the defaults");
+					options.effects.defaults.open();
+				}
+			
+			}else{
+				console.log("No object passed for effects");
+				options.effects.defaults.open();
+			
+			}
+
+		});
+
+
+		closeBtn.on(options.events,function(){
+			var $this = $(this);
+			var visibleBtn = $this.attr("data-function") != 'open' ? openBtn : closeBtn;
+
+			console.log('obbject');
+			console.log({
+				dataToggle: dataToggle,
+				el: el,
+				nav: nav,
+				listContainer: listContainer,
+				list: list,
+				anchors: anchors
+			});
+
+
+			options.effects.defaults.close = function(){
+				var tl = new TimelineLite();
+				tl.to($this.add(listContainer),.3,{
+					autoAlpha:0
+				}).set(listContainer,{
+					"display":"none"
+				});
+
+				TweenLite.to(visibleBtn,.3,{
+					autoAlpha: 1
+				});
+			}
+
+			if (options.effects) {
+				if (options.effects.close && typeof options.effects.close == 'function') {
+					options.effects.close({
+						nav: nav,
+						el:el,
+						list: list,
+						visibleBtn: visibleBtn,
+						$this: $this,
+						listContainer: listContainer
+					});
+				}else{
+					console.log("No function passed for effects.close, running the defaults");			
+					options.effects.defaults.close();
+				}
+			}else{
+				console.log("No object passed for effects");	
+				options.effects.defaults.close();
+			}
+	
+		});
+
+
+		if (options.closeOnLinkClick) {
+
+			anchors.on(options.events,closeWithLink);
+			
+			function closeWithLink(){
+				var $this = $(this);
+				var visibleBtn = $this.attr("data-function") != 'open' ? openBtn : closeBtn;
+
+				
+				if (options.effects) {
+					if (options.effects.close && typeof options.effects.close == 'function') {
+						options.effects.close({
+							nav: nav,
+							el:el,
+							list: list,
+							anchorPressed: true,
+							visibleBtn: visibleBtn,
+							listContainer: listContainer
+						});
+
+					}else{
+						console.log("No function passed for effects.close, running the defaults");			
+						// options.effects.defaults.close();
+					}
+				}else{
+					console.log("No object passed for effects");	
+					// options.effects.defaults.close();
+				}
+			}
+
+		}
+	}
+
+		// function to create any kind of popup / modal / notification / alert (depends on jq and gsap)
 	function generalModalHandler(){
 	
 		var _lightbox, _container, _modal, _oldModal, _template, initialized
 		;
-
-		// var templateCounter = 0;
 
 		var modalAdder = {
 			init:function(obj){
@@ -1590,540 +2142,8 @@
 		// modalLinks.on("click",modalAdder.init);
 		return modalAdder;
 	}
-	
-
 
 	
-	var nCounter = 1;
-	var notifications = new generalModalHandler();
-
-	var makeNotification = notifications.init;
-	var notificationOptions = {
-		template: notiTemplate,
-		content: {
-			'message': 'hi there this is a notification',
-			'newthing': 'old shite',
-			'nice': 'maybe nice',
-			'number': nCounter
-		},
-		el:{
-			lightbox: {
-				on: true,
-				class: 'noti-lightbox'
-			},
-			container: {
-				on: true,
-				class: 'notification-container'
-			},
-			modal: {
-				selector: '.notification',
-				multipleOn: true,
-				autoHide: true,
-				fadeOutBuffer: 5000
-			},
-			context: wrap,
-			parent: undefined
-		},
-		animateIn: {
-			modal:{
-				props:{
-					visibility: 'visible',
-					opacity: 1
-				},
-				duration: 500
-			},
-			container: {
-				props:{
-					autoAlpha: 1
-				},
-				duration: 0
-			},
-			lightbox: {
-				props:{
-					autoAlpha: 1
-				},
-				duration: 500
-			}
-		},
-		
-		animateOut: {
-			modal:{
-				props:{
-					autoAlpha: 0,
-					Y: 0
-				},
-				duration: 500
-			},
-			container: {
-				props:{
-					autoAlpha: 0
-				},
-				duration: 0
-			},
-			lightbox: {
-				props:{
-					autoAlpha: 0
-				},
-				duration: 300
-			},
-			depOnChild: true,
-			parentFadeDelay: 2000
-		},
-
-		setCss:{
-			container:{
-				autoAlpha: 0
-			},
-			modal:{
-				autoAlpha: 0
-			}
-		}
-	};
-
-	makeNotification(notificationOptions);
-
-	
-	setInterval(function(){
-		notificationOptions.content.number = ++nCounter;
-		makeNotification(notificationOptions);
-	},6000);
-
-
-		
-
-
-	
-	
-
-
-				/****************************
-
-						=integral functions (for essential functionalities and UX)
-				
-				****************************/
-
-		// scrollBackToLastPosition function to scroll back to the last cached function
-	function scrollBackToLastPosition(){
-		var scrollToDefault = sessionStorage.getItem("lastScrollPos");
-		if (scrollToDefault) {
-			TweenLite.to(scrollingContainer, 1, {scrollTo:{y:scrollToDefault},ease:Power2.easeOut});	
-		}
-	}
-
-		// checkBreakpoints function to run on resize and load
-	var smBreakpointInitiated = false,	mdBreakpointInitiated = false,	lgBreakpointInitiated = false;
-	
-	function checkBreakpoints(){
-
-		if (windowWidth >= 768) {
-			// smBreakpointInitiated = true;
-			smBreakpoint();
-			console.log('sm breakpoint reached');
-
-			if (windowWidth >= 992) {
-				// mdBreakpointInitiated = true;
-				mdBreakpoint();
-				console.log('md breakpoint reached');
-
-				if (windowWidth >= 1200) {
-					// lgBreakpointInitiated = true;
-					lgBreakpoint();	
-					console.log('lg breakpoint reached');
-
-				}/* check if window is larger than 1200 and if lg breakpoint has ran earlier*/
-
-			}/* check if window is larger than 992 and if md breakpoint has ran earlier*/
-
-		}/* check if window is larger than 768 and if sm breakpoint has ran earlier*/
-
-	}	/* checkBreakpoints function */
-
-
-		// reopenSkillsLists function to open the last opened skills lists 
-	function reopenSkillsLists(){
-
-		if (!sessionStorage.getItem("skillsListToggleStatus")) { return; }
-
-		skillsListToggleStatus = JSON.parse(sessionStorage.getItem("skillsListToggleStatus"));
-		// var OpenSkillsListFor = [];
-
-		Object.keys(skillsListToggleStatus).forEach(function(id){
-
-			if (!skillsListToggleStatus[id]) {
-
-			}else{
-
-			}
-			console.log('skillsListToggleStatus[id]');
-			console.log(skillsListToggleStatus[id]);
-			var element = $("#"+id),
-				expand = element.find(".expand"),
-				arrow = element.find(".arrow"),
-				listOrderDesc = element.find(".list__order__desc"),
-				initialHeightOfListOrderDesc = listOrderDesc.outerHeight(),
-				technologyList = element.find(".technologyList"),
-				listHeight = technologyList.height();
-
-		
-			// alert(technologyList.height());
-			if (!initialHeightOfListOrderDesc) {
-				initialHeightOfListOrderDesc = 0;
-			}
-
-			expandListFunc.call(expand,{
-				listContainer: element,
-				listHeight: (listHeight + initialHeightOfListOrderDesc),
-				listOrderDesc: listOrderDesc,
-				arrow: arrow,
-				initialHeightOfListOrderDesc: initialHeightOfListOrderDesc
-			});
-
-		});
-
-	}
-		// doSessionWorkOnLoad function to do some stuff based on what's stored in the session storage
-	function doSessionWorkOnLoad(){
-		reopenSkillsLists();
-		if(!location.hash.length){
-			scrollBackToLastPosition();
-		}
-
-	}
-
-
-				/****************************
-
-						=utility functions (which we use time-n-time to repeat some functionality for one or many features)
-				
-				****************************/
-
-	function getTopOffsetsForHeaderScrollLinks(){
-		scrollPositionOfHashLinks = [];
-		window.anything = '[ ';
-		var headerScrollLinks = $(headerNavMain[0]).find('.link--scroll');
-
-		headerScrollLinks.each(function(i,elem){
-			var $this = $(elem),
-			scrollsToElementId = $this.data("hash_scroll_to");
-		
-			var elementItself = $(scrollsToElementId);
-
-			var offsetTopForElement= Number((elementItself.offset().top - 30).toFixed(2)); // -1 for fixing the precision error
-			scrollPositionOfHashLinks.push(offsetTopForElement);
-
-			window.anything += scrollsToElementId + ': '+ offsetTopForElement + ', '
-			// console.log(elementItself);
-	
-		});
-		window.anything += ']';
-		// console.log(scrollPositionOfHashLinks);
-		// console.log(window.anything);
-	}
-	getTopOffsetsForHeaderScrollLinks();
-
-
-		// toggle function to toggle menus in header and footer
-	function toggle(options){
-		var openBtn, closeBtn;
-
-		if (!options.openButton && !options.closeButton) {
-			return console.log('no toggle buttons provided');
-		}
-
-		options.effects.defaults = {};
-		openBtn = options.openButton;
-		closeBtn = options.closeButton;	
-
-		
-
-		if (options.inverseButtonAppearance) {
-			TweenLite.set(openBtn,{autoAlpha:0});
-
-		}else{
-			TweenLite.set(closeBtn,{autoAlpha:0});
-
-		}
-
-
-		if (!options.events) {
-			options.events = 'click';
-		}
-
-		var dataToggle = openBtn.data("toggle") ||  closeBtn.data("toggle");
-		var el = wrap.find(dataToggle);
-		var nav = options.nav; 
-		var listContainer = nav.find('.list-container');
-		var list = nav.find('.list');
-		var anchors = options.closeOnLinkClick ? options.nav.find('a') : undefined;
-
-		
-
-		openBtn.on(options.events,function(){
-			var $this = $(this);
-			var visibleBtn = $this.attr("data-function") != 'close' ? closeBtn : openBtn;		
-			console.log('obbject');
-			console.log({
-				dataToggle: dataToggle,
-				el: el,
-				nav: nav,
-				listContainer: listContainer,
-				list: list,
-				anchors: anchors
-			});
-
-			options.effects.defaults.open = function(){
-				var tl = new TimelineLite();
-
-				tl.set(listContainer,{
-					"display":"block"
-				}).to($this,.3,{
-					autoAlpha: 0
-				});
-
-				TweenLite.to(visibleBtn.add(listContainer),.3,{
-					autoAlpha: 1
-				});
-			}
-
-			if (options.effects) {
-				if (options.effects.open && typeof options.effects.open == 'function') {
-					options.effects.open({
-						nav: nav,
-						el: el,
-						list: list,
-						visibleBtn: visibleBtn,
-						$this: $this,
-						listContainer: listContainer
-					});
-
-				}else{
-					console.log("No function passed for effects.open, running the defaults");
-					options.effects.defaults.open();
-				}
-			
-			}else{
-				console.log("No object passed for effects");
-				options.effects.defaults.open();
-			
-			}
-
-		});
-
-
-		closeBtn.on(options.events,function(){
-			var $this = $(this);
-			var visibleBtn = $this.attr("data-function") != 'open' ? openBtn : closeBtn;
-
-			console.log('obbject');
-			console.log({
-				dataToggle: dataToggle,
-				el: el,
-				nav: nav,
-				listContainer: listContainer,
-				list: list,
-				anchors: anchors
-			});
-
-
-			options.effects.defaults.close = function(){
-				var tl = new TimelineLite();
-				tl.to($this.add(listContainer),.3,{
-					autoAlpha:0
-				}).set(listContainer,{
-					"display":"none"
-				});
-
-				TweenLite.to(visibleBtn,.3,{
-					autoAlpha: 1
-				});
-			}
-
-			if (options.effects) {
-				if (options.effects.close && typeof options.effects.close == 'function') {
-					options.effects.close({
-						nav: nav,
-						el:el,
-						list: list,
-						visibleBtn: visibleBtn,
-						$this: $this,
-						listContainer: listContainer
-					});
-				}else{
-					console.log("No function passed for effects.close, running the defaults");			
-					options.effects.defaults.close();
-				}
-			}else{
-				console.log("No object passed for effects");	
-				options.effects.defaults.close();
-			}
-	
-		});
-
-
-		if (options.closeOnLinkClick) {
-
-			anchors.on(options.events,closeWithLink);
-			
-			function closeWithLink(){
-				var $this = $(this);
-				var visibleBtn = $this.attr("data-function") != 'open' ? openBtn : closeBtn;
-
-				
-				if (options.effects) {
-					if (options.effects.close && typeof options.effects.close == 'function') {
-						options.effects.close({
-							nav: nav,
-							el:el,
-							list: list,
-							anchorPressed: true,
-							visibleBtn: visibleBtn,
-							listContainer: listContainer
-						});
-
-					}else{
-						console.log("No function passed for effects.close, running the defaults");			
-						// options.effects.defaults.close();
-					}
-				}else{
-					console.log("No object passed for effects");	
-					// options.effects.defaults.close();
-				}
-			}
-
-		}
-
-		
-
-	};
-
-		// function to expand skills list
-	function expandListFunc(args){
-		var $this = $(this);
-		
-		var listOrderDesc = args.listOrderDesc,
-			listContainer = args.listContainer,
-			listHeight = args.listHeight,
-			arrow = args.arrow,
-			initialHeightOfListOrderDesc = args.initialHeightOfListOrderDesc;
-
-
-		TweenLite.to(listContainer,1,{
-			height: (listHeight + 100) + "px",
-			onComplete: completed
-			
-		});
-
-		function completed(){
-			TweenLite.set(listContainer,{
-				'will-change': 'auto'
-			});
-
-			setTimeout(function(){
-				getTopOffsetsForHeaderScrollLinks();
-			},500);
-		}
-
-		/*TweenLite.to(listContainer,0,{
-			height: (listHeight + 100) + "px",
-			ease: Power2.easeOut,
-			onComplete: getTopOffsetsForHeaderScrollLinks
-			
-		},"listExpanded");*/
-
-		/* ---------------------- */
-
-		// var tl = new TimelineLite();
-		if (listOrderDesc.length) {
-			TweenLite.set(listOrderDesc,{
-				autoAlpha: 1,
-				height: initialHeightOfListOrderDesc
-			});
-		}
-
-		TweenLite.set(listContainer,{
-			className: '+=expanded'
-		});
-		/*TweenLite.fromTo(arrow,.9,{
-			autoAlpha:.5,
-			scaleY: 0
-		},{
-			autoAlpha:1,
-			scaleY: 1
-		}); */
-
-		if (arrow.length) {
-			TweenLite.fromTo(arrow,.9,{
-				autoAlpha:.5,
-				scaleY: 0
-			},{
-				autoAlpha:1,
-				scaleY: 1
-			}); 
-		}
-
-		TweenLite.to($this,.3,{
-			rotation: 180
-		});
-	
-	}	
-		// function to collapse skills list
-	function collapseListFunc(args){
-		var $this = $(this);
-
-		var listOrderDesc = args.listOrderDesc,
-			listContainer = args.listContainer,
-			listHeight = args.listHeight,
-			arrow = args.arrow;
-
-
-		TweenLite.to(listContainer,.3,{
-			height: listHeight + "px",
-			ease: Power2.easeOut,
-			onComplete: completed
-		});
-
-		function completed(){
-			TweenLite.set(listContainer,{
-				'will-change': 'auto'
-			});
-
-			setTimeout(function(){
-				getTopOffsetsForHeaderScrollLinks();
-			},500);
-		}			
-
-		/* -------------------- */
-		if (listOrderDesc.length) {
-			TweenLite.set(listOrderDesc,{
-				autoAlpha: 0,
-				height: 0
-			});
-		}
-
-		TweenLite.set(listContainer,{
-			className: '-=expanded'
-		});
-
-		/*var tl = new TimelineLite();
-		tl.to(listOrderDesc,.2,{
-			autoAlpha: 0,
-			height: 0
-		}).to(arrow,.4,{
-			autoAlpha:0,
-			scaleY: 0
-		},"-=.2"); */
-		if (arrow.length) {
-			TweenLite.to(arrow,.4,{
-				autoAlpha:0,
-				scaleY: 0
-			}); 
-		}
-
-		TweenLite.to($this,.2,{
-			rotation:0
-		})
-	
-	}
 	
 
 	// Returns a function, that, as long as it continues to be invoked, will not

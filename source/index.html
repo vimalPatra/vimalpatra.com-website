@@ -162,9 +162,6 @@
             </div>
         </script>
 
-        <button id="notify">
-            notify
-        </button>
         
         <!-- Add your site or application content here -->
         <div id="wrap">
@@ -782,37 +779,40 @@
             </span>
         </h3>
         <form id="contactForm" action="" class="row " data-parsley-trigger="focusout" data-parsley-trigger-after-failure="input" data-valid-email-text="I'll a valid e-mail address" data-required-text="Oops, You can't leave this field blank">
+
             <div class="col-xs-12 field-block">
                 <div class="formFieldWrapper">
-                    <input required id="nameC" class="text-shadow-2" data-placeholder="what's your full name" type="text">
+                    <input required id="nameC" name="name" class="text-shadow-2" data-placeholder="what's your full name" type="text">
                     <div class="element element--1"></div>
                     <div class="element element--2"></div>
                     <label for="nameC">name</label>
                 </div>
             </div>
+
             <div class="col-xs-12 field-block">
                 
                 <div class="formFieldWrapper">
-                    <input required id="mailC" class="text-shadow-2" type="email" data-placeholder="type down your official/go-to e-mail address" data-parsley-trigger="focusout input"> 
+                    <input required id="mailC" name="email" class="text-shadow-2" type="email" data-placeholder="type down your official/go-to e-mail address" data-parsley-trigger="focusout input"> 
                     <div class="element element--1"></div>
                     <div class="element element--2"></div>
                     <label for="mailC">e-mail address</label>
                 </div>
             </div>
+
             <div class="col-xs-12 field-block">
                 <div class="formFieldWrapper">
                     
-                    <select class="text-shadow-2" name="" id="sourceC">
+                    <select class="text-shadow-2" name="source" id="sourceC">
                         <option class="default" value="" data-custom-text="Don't wanna answer">
                             
                         </option>
-                        <option value="search_engine">
+                        <option value="search engine">
                             Google or other Search Engine (MSN, Bing)
                         </option>
-                        <option value="freelance_website">
+                        <option value="freelance website">
                             A Freelance site (Freelancer, Upwork, etc.)
                         </option>
-                        <option value="social_media">
+                        <option value="social media">
                             A social media link (Facebook, twitter, codepen, etc.)
                         </option>
                         <option value="url">
@@ -834,10 +834,11 @@
                 </div>
 
             </div>
+
             <div class="col-xs-12 field-block">
                 <div class="formFieldWrapper">
                     
-                    <select required class="text-shadow-2" name="" id="purposeC">
+                    <select required class="text-shadow-2" name="purpose" id="purposeC">
                         <option class="default" value=""></option>
                         <option value="hello">I just wanted to say hello</option>
                         <option value="hire">I want to hire you</option>
@@ -855,7 +856,7 @@
 
             <div class="col-xs-12 field-block">
                 <div required class="formFieldWrapper">
-                    <textarea class="text-shadow-2" name="" id="elaborate" data-placeholder="give full details elaborating your purpose" ></textarea>
+                    <textarea class="text-shadow-2" name="description" id="elaborate" data-placeholder="give full details elaborating your purpose" ></textarea>
                     <label for="elaborate">
                         Please <span class="change">describe</span>
                     </label>
@@ -870,6 +871,7 @@
                     <span class="change">send</span>
                 </button>
             </div>
+
         </form>
     </div>
                                     </section>

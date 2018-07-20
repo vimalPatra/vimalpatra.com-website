@@ -225,15 +225,6 @@ function swallowError (error) {
         .pipe( gulp.dest('./dist/'));
 	});
 
-	gulp.task('root:watch',function(){
-		var sourceFile = 
-		['./source/*'];
-
-		return gulp.src(sourceFile)
-        .pipe( gulp.dest('./dist/'))
-        .pipe( browserSync.reload({stream:true}) );
-	});
-
 
 
 
@@ -263,10 +254,11 @@ function swallowError (error) {
 		['./source/**/*',
 		'!./source/*',
 		'!./source/img/#extras/**/*',
+		'!./source/img/#extras',
 		'!./source/js/**/*',
 		'!./source/css/**/*',
 		'!./source/sass/**/*',
-		'!./source/controller/**/*'];
+		'!./source/php/**/*'];
 
 		return gulp.src(sourceFile)
         .pipe( gulp.dest('./dist/') );
@@ -279,10 +271,11 @@ function swallowError (error) {
 		['./source/**/*',
 		'!./source/*',
 		'!./source/img/#extras/**/*',
+		'!./source/img/#extras',
 		'!./source/js/**/*',
 		'!./source/css/**/*',
 		'!./source/sass/**/*',
-		'!./source/controller/**/*'];
+		'!./source/php/**/*'];
 
 		return gulp.src(sourceFile)
         .pipe( gulp.dest('./dist/') )
@@ -438,68 +431,51 @@ function swallowError (error) {
 
 
 
+// --------------------------------------------------------------------------------------------
+
+	/*
+		=php task
+	*/
+
+	gulp.task('php',function(){
+		var sourceFile = 
+		['./source/php/**/*'];
+
+		return gulp.src(sourceFile)
+        .pipe( gulp.dest('./dist/') );
+        // .pipe( browserSync.reload(/*{stream:true}*/) );
+	});
+
+
 
 
 // --------------------------------------------------------------------------------------------
-
-
-
-
-
-
 
 
 	/************
-	********		=php
+	*******			=watch task
 	************/
 
+	gulp.task('watch', function(){
 
-
-		/*********
-
-			=General Task for both development and distribution builds
+		gulp.watch(['./source/*'],['root:watch']);
+		gulp.watch(['./source/js/**/*.js'],['js:watch']);
+		gulp.watch(['./source/css/*.css','./source/css/**/*.scss'],['css:watch']);
 		
-		*********/	
 
-	gulp.task('clean:php',function(cb){
+		gulp.watch(['./source/php/**/*'],['php']);
 
-		return del([
-			'./dist/controller'
-		], cb);
+		gulp.watch(['./source/**/*',
+					'!./source/*',
+					'!./source/img/#extras/**/*',
+					'!./source/js/**/*',
+					'!./source/css/**/*',
+					'!./source/sass/**/*',
+					'!./source/php/**/*'], ['folders:watch']);
+
+		
+
 	});
-
-
-
-	gulp.task('php',['clean:php'],function(){
-		var sourceFile = ['./source/controller/**/*.php'];
-
-		return gulp.src(sourceFile)
-  		.pipe( gulp.dest('./dist/controller/'));
-	});
-
-
-
-
-	gulp.task('php:watch',function(){
-		var sourceFile = ['./source/controller/**/*.php'];
-
-		return gulp.src(sourceFile)
-  		.pipe( gulp.dest('./dist/controller/'))
-  		.pipe( browserSync.reload({stream:true}) );
-	});
-
-
-
-
-
-
-
-
-
-// --------------------------------------------------------------------------------------------
-
-
-
 
 
 	/***********
@@ -518,33 +494,6 @@ function swallowError (error) {
 	});
 
 
-	/************
-	*******			=watch task
-	************/
-
-	gulp.task('watch', function(){
-
-		gulp.watch(['./source/*'],['root:watch']);
-		gulp.watch(['./source/js/**/*.js'],['js:watch']);
-		gulp.watch(['./source/css/*.css','./source/css/**/*.scss'],['css:watch']);
-		gulp.watch(['./source/controller/**/*.php','./source/Controller/**/*.php'],['php:watch']);
-
-		gulp.watch(['./source/**/*',
-					'!./source/*',
-					'!./source/img/#extras/**/*',
-					'!./source/js/**/*',
-					'!./source/css/**/*',
-					'!./source/sass/**/*',
-					'!./source/controller/**/*'], ['folders:watch']);
-
-		
-
-	});
-
-
-
-
-
 
 
 
@@ -561,13 +510,12 @@ function swallowError (error) {
 	******/
 
 
-
 	
 				//	DEV BUILDS
 	
 
 	/* =default task : execute for development builds*/
-	gulp.task('default', ['root','js','css','php','folders'],function(cb){
+	gulp.task('default', ['folders','php','js','css'],function(cb){
 		cb();
 	});
 
@@ -580,7 +528,7 @@ function swallowError (error) {
 				//	DIST BUILDS
 
 	/* build task : execute for distribution build only*/
-	gulp.task('build', ['root','js:dist','css:dist','php','folders'],function(cb){
+	gulp.task('build', ['folders','php','js:dist','css:dist'],function(cb){
 		cb();
 	});
 

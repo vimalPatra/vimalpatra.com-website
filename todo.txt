@@ -2,11 +2,33 @@
 -- To do --
 
 
-* build toasts notifications
-* and similar tooltips
-* submit form and send a mail.. with jQuery
-* add mouse effects/ scroll fx / other special fx
+* add a common function and call if for both of the mails that we send in the cf-submit.php
+* remove the bug on chrome for android where when the url bar scrolls up, every fix thing still works on the original place (on interacting)
+
 * add loader
+
+
+
+
+---------- LAUNCH
+
+* add work section
+	
+	-- add images
+	-- add details
+	-- add popup
+	-- make popup with an image, url, descritpion and title
+
+* add get a quote form
+	-- think over the content
+	-- design it
+	-- send mails
+* add mouse effects/ scroll fx / other special fx
+
+
+* setup databases
+
+
 
 
 --------------------------------------------------
@@ -21,9 +43,10 @@
 5. design special links for both mob+desktop nav
 6. make logo shine a bit..
 7. type down content
+* build toasts notifications
+* and similar tooltips
 
-
-
+* submit form and send a mail.. with jQuery
 
 
 

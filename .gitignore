@@ -38,10 +38,16 @@ bower_components/
 build/
 dist/
 maps/
+
+
+# Private Folders # 
 extras/
 $extras/
+php/
 controller/
 Controller/
+includes/
+Includes/
 
 # Packages #
 ############
