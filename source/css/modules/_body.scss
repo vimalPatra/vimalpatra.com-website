@@ -29,7 +29,7 @@ body{
     font-size: 1rem;
     position: relative;
     line-height: 1.618em;
-    font-family: "Alegreya Sans","Lucida Sans","Times New Roman",sans-serif;
+    font-family: $fontPrimary, $fontSecondary;
     font-weight: 400;
     color: #000;
     background: #fff;

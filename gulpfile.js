@@ -219,10 +219,23 @@ function swallowError (error) {
 
 	gulp.task('root',['clean:root'],function(){
 		var sourceFile = 
-		['./source/*'];
+		[
+			'./source/*.*'
+		]; // './source/*' brings empty folders as well
 
 		return gulp.src(sourceFile)
         .pipe( gulp.dest('./dist/'));
+	});
+
+	gulp.task('root:watch',function(){
+		var sourceFile = 
+		[
+			'./source/*.*'
+		]; // './source/*' brings empty folders as well
+
+		return gulp.src(sourceFile)
+        .pipe( gulp.dest('./dist/'))
+        .pipe( browserSync.reload({stream:true}) );
 	});
 
 
@@ -258,7 +271,8 @@ function swallowError (error) {
 		'!./source/js/**/*',
 		'!./source/css/**/*',
 		'!./source/sass/**/*',
-		'!./source/php/**/*'];
+		'!./source/php/**/*'
+		];
 
 		return gulp.src(sourceFile)
         .pipe( gulp.dest('./dist/') );
@@ -275,7 +289,8 @@ function swallowError (error) {
 		'!./source/js/**/*',
 		'!./source/css/**/*',
 		'!./source/sass/**/*',
-		'!./source/php/**/*'];
+		'!./source/php/**/*'
+		];
 
 		return gulp.src(sourceFile)
         .pipe( gulp.dest('./dist/') )
@@ -365,6 +380,8 @@ function swallowError (error) {
 		        .pipe(gulp.dest('dist/css/'));	
 	});
 
+
+
 	/* task for prefixing and moving the main.css file to dist folder, On modifying the main.css file */
 	gulp.task('css:watch',['sass'], function(){ 
 				var postcssPlugins = [
@@ -439,11 +456,11 @@ function swallowError (error) {
 
 	gulp.task('php',function(){
 		var sourceFile = 
-		['./source/php/**/*'];
+		['./source/php/**'];
 
 		return gulp.src(sourceFile)
-        .pipe( gulp.dest('./dist/') );
-        // .pipe( browserSync.reload(/*{stream:true}*/) );
+        .pipe( gulp.dest('./dist/') )
+        .pipe( browserSync.reload({stream:true}) );
 	});
 
 

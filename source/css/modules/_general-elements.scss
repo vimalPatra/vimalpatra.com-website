@@ -30,11 +30,46 @@
     z-index: 105;
 }
 
-.notification{
-    width: 250px;
-    padding: 10px;
-    background: black;
-    color: white;
+.alert{
+    display: block;
+    position: fixed;
+    bottom: 25%;
+    width: 90%;
+    left: 5%;
+    max-height: 90%;
+    padding: 2rem;
+    font-family: $fontSecondary;
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    font-weight: 100;
+    line-height: 1.4em;
+    color: lighten($black,25%);
+    background: lighten($bg1,25%);
+    box-shadow: 0 0 60px 10px rgba(0,0,0,.2);
+    border: 5px solid lighten($bg1,10%);
+    overflow-y: auto;
+
+    &--form{
+
+        &.success{
+            .highlight{
+                color: darken($rusty,30%);
+            }
+            
+        }
+        &.error{
+            .highlight{
+                color: $warning;
+            }
+        }
+        a{
+           color: $accent;
+           text-decoration: underline;
+           text-transform: lowercase;
+        }    
+    }
+
+    
 }
 
 
@@ -93,85 +128,13 @@
     /*left: 0;*/
 }
 
-/* 
-
-#helpbox{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 70vh;
-    transform: translate3d(-50%,-50%,0);
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0px 5px 20px rgba(0,0,0,.3);
-    padding: 1rem;
-} 
-
-*/
-
-/*
-
-#helpbox .close{
-    position: absolute;
-    right: 0;
-    font-size: 2rem;
-    margin: 10px;
-    cursor: pointer;
-}
-
- #helpbox .wrapper{
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    outline: 2px solid rgb(196,168,132);
-    overflow: auto;
-} 
-
-*/
-
-/*
-
-#helpbox .subject{
-    font-size: 1.3rem;
-    position: relative;
-    margin: 2.5rem 0;
-}
-
-*/
-
-
-
-
-/*
-
-#helpbox .data{
-    text-align: center;
-    font-size: 1.4rem;
-    line-height: 1.8em;
-    padding: 0 2em 0 2em;
-}
-
-*/
-
 
 
 #modal{ 
     transform-style: preserve-3d;
 }
 
-/* 
 
-#modal .wrapper{
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    outline: 2px solid rgb(196,168,132);
-    overflow: auto;
-}
-
-*/
 
 #modal .face{
     position: absolute;
@@ -281,7 +244,7 @@
 
 
 
-a:not(.link){
+a.hover-effect{
     line-height: 1em;
 
     position: relative;
@@ -297,9 +260,6 @@ a:not(.link){
     border-radius: 3px 3px 0 0;
     background: hsl(34, 35%, 100%);
     text-shadow: none;
-    // border-bottom: 2px solid hsl(34, 35%, 69%);
-    /*background: rgb(196,168,132);*/
-    /*text-shadow: .5px .5px 0px rgba(0,0,0,.3);*/
     
     transform: rotateX(0deg);
     transform-origin: 50% 0%;
@@ -309,7 +269,7 @@ a:not(.link){
 }
 
 
-a:not(.link) strong{
+a.hover-effect strong{
     box-shadow: none !important;
     padding: 0;
     line-height: inherit;
@@ -324,8 +284,8 @@ a:not(.link) strong{
 
 */
 
-a:not(.link):after,
-a:not(.link):before{
+a.hover-effect:after,
+a.hover-effect:before{
     content: "";
     position: absolute;
     line-height: inherit;
@@ -339,7 +299,7 @@ a:not(.link):before{
 }
 
 
-a:not(.link):after{
+a.hover-effect:after{
     content: attr(data-hover);
     top: 0;
     height: calc(100% + 2px);
@@ -356,7 +316,7 @@ a:not(.link):after{
     z-index: 3;
     transition: transform 0.4s, background 0.4s , border-width .2s .2s;
 }
-a:not(.link):hover:after{
+a.hover-effect:hover:after{
     // transform: rotateX(0deg);
     transform: scaleY(1);
     background: white;
@@ -366,7 +326,7 @@ a:not(.link):hover:after{
 
 
 
-a:not(.link):before{
+a.hover-effect:before{
     content: attr(data-hover);
 
     top: 0;
@@ -380,7 +340,7 @@ a:not(.link):before{
 }
 
 
-a:not(.link):hover:before{
+a.hover-effect:hover:before{
     transform: scaleY(0);
     // transform: rotateX(-90deg);
     // transition: transform 0.4s 0.2s;
@@ -423,8 +383,6 @@ blockquote{
     
     .popup{
         
-
-
         .data{
             /*background: red;*/
             text-align: center;
@@ -434,4 +392,15 @@ blockquote{
         }
 
     }
+
+    .alert{
+        width: 70%;
+        bottom: 15%;
+        left: 15%;
+        max-height: 70%;
+        padding: 2rem;
+        font-size: 1.5rem;
+        
+    }
+
 }

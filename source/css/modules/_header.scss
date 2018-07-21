@@ -115,7 +115,7 @@ footer{
         text-align: center;
         display: block;
 
-        &:not(.link){
+        &.hover-effect{
             border: none;
             
             &:after,
@@ -193,8 +193,8 @@ footer{
             word-spacing: -.1em;
             border: 1px solid lighten($rusty,30%);
 
-            &:not(.link):before,
-            &:not(.link):after{
+            &.hover-effect:before,
+            &.hover-effect:after{
                 border: 1px solid lighten($rusty,30%);
             }
         }

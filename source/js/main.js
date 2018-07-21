@@ -29,7 +29,7 @@
 
 	 contactLayer, contactForm, 
 	 cfInput, cfTextarea, cfSelectBoxes, cfPurpose, cfAllFields, cfSubmit, 
-	 selectHelpText, cfReqText, cfMailText, 
+	 selectHelpText, cfReqText, cfMailText, cfSubmitWaitText, 
 
 	 placeHolderDefault, selectDefaultText, selectNullText, purposeAlts, 
 	 
@@ -39,7 +39,7 @@
 
 	 helpboxBtn,
 
-	 helpboxTemplate, modalTemplate, notiTemplate;
+	 helpboxTemplate, modalTemplate, alertTemplate;
 
 
 	skillsListToggleStatus = {};
@@ -129,11 +129,13 @@
 
 	helpboxTemplate = $("script#helpboxTemplate");
 	modalTemplate = $("script#modalTemplate");
-	notiTemplate = $("script#notificationTemplate");
+	alertTemplate = $("script#alertTemplate");
 	
 		// font sizes and all  other rigid values that we need to get or set
 	listContainerDefaultHeight = 150;
 
+
+	cfSubmitWaitText = 'Wait please',
 	placeHolderDefault = "";
 	selectDefaultText = "not selected";
 	selectNullText = "";
@@ -693,6 +695,8 @@
 		submit = cfSubmit // submit button
 		;
 
+		var submitSpinner = cf.find('.cf-spinner');
+
 
 
 		/* FORM FOCUS EVENTS  */
@@ -811,43 +815,268 @@
 			    console.log('validation errors');  
 
 			}).on('form:submit',function(e){
-
-			    console.log('Contact Form Submitted');
-
-
-			    // write code below  to submit to DB for contact form
-			    // tip: contact popup is cached in variable 
-			    // above like this ` var contactPopup = $('#contact__popup'); ` 
-			    // so we can find the form fields like var formField = contactPopup.find('something');
-
-
-			     $.ajax({
-			        url: 'controller/cf-submit.php',
-			        type: 'post',
-			        // dataType: 'json',
-			        data: cf.serialize(),
-			        success: function(data, textStatus, jqXHR) {
-	                   console.log( '-------  success -------');
-	                	console.log(data);
-	                	console.log('textStatus: ' + textStatus);
-	                	// console.log(jqXHR);
-	                },
-	                error: function(jqXHR, textStatus, error){
-	                	console.log( '-------  error -------');
-	                	// console.log(jqXHR);
-	                	console.log('textStatus: ' + textStatus);
-	                	console.log('error' + error);
-	                }
-			    });
-			               
-
-			    return false;  
+			    // write code below to process contact form on server side 
 			    
+			    // tip: form element is cached in variable (and every field as well)
+			    // above as ` var cf  `
+
+			    var formData = cf.serialize();
+
+			    if ($.trim(formData) == '') {
+			    	alert('error occured in script');
+			    }else{
+
+				     $.ajax({
+				        url: 'controller/cf-submit.php',
+				        type: 'post',
+				        dataType: 'json',
+				        data: formData
+				    }).done(success).fail(fail);
+			    	
+			    }
+
+			               
+			    disableFormForProcessing();	// give user feedback to let them wait
+
+			    return false;  // stop page reload 
 			});
 
+
+			var formAlert = new generalModalHandler();
+
+			var formAlertOpts = {
+				template: alertTemplate,
+				content: {
+					'message': '',
+					'highlight': ''
+				},
+				el:{
+					lightbox: {
+						on: true,
+						class: 'lightbox--form-alert'
+					},/*
+					container: {
+						on: true,
+						class: 'alert-container'
+					},*/
+					modal: {
+						class: 'alert alert--form ',
+						selector: '.alert',
+						autoHide: true,
+						fadeOutBuffer: 5000
+					},
+					context: wrap
+				},
+				animateIn: {
+					modal:{
+						props:{
+							autoAlpha: 1,
+							scale: 1,
+							rotationX: 0,
+							ease: Back.easeOut.config(1.4)
+						},
+						duration: 600
+					},/*
+					container: {
+						props:{
+							autoAlpha: 1
+						},
+						duration: 0
+					},*/
+					lightbox: {
+						props:{
+							autoAlpha: 1
+						},
+						duration: 300
+					}
+				},
+				
+				animateOut: {
+					modal:{
+						props:{
+							autoAlpha: 0,
+							scale: .7,
+							rotationX: 50,
+							ease: Power2.easeIn
+						},
+						duration: 500
+					},
+					lightbox: {
+						props:{
+							autoAlpha: 0
+						},
+						duration: 200
+					},
+					depOnChild: true
+				},
+
+				setCss:{
+					container:{
+						autoAlpha: 0
+					},
+					modal:{
+						autoAlpha: 0,
+						scale: .8,
+						rotationX: 50,
+						transformOrigin: "50% 50%"
+					}
+				}
+			};
+
+
+
+			// success callback
+			function success(response, textStatus, jqXHR){
+            	console.log(response);
+
+            	if (response.status) {
+            		console.log('data submitted');
+            		showDataSent();// run when emails were sent successfully
+            	}else{
+            		showDataProcessError(); // run this if emails were not sent
+            	}
+	          
+			}
+
+
+
+				// user response on success 
+
+			function showDataSent(){
+				var opts = $.extend({},formAlertOpts); // make a new copy of the object
+
+				// change the message 
+				opts.content.highlight = '<span class="highlight">data submitted!</span>';
+				opts.content.message = 'thanks for getting in touch.<br> You will receive a confirmation mail from me in a few seconds! <br> You can also reach me through the social media channels mentioned here in the website.';
+				
+				// add class of success
+				opts.el.modal.class += ' success';
+
+				opts.el.modal.fadeOutBuffer = 10000;
+				// show the alert
+				formAlert.init(opts);
+				reenableFormForProcessing();
+
+			
+			}
+
+				// user response on success but data processing error in the backend
+			
+			function showDataProcessError(){
+
+				var opts = $.extend({},formAlertOpts); // make a new copy of the object
+
+				// change the message
+
+				opts.content.highlight = '<span class="highlight">processing error!</span>';
+				opts.content.message = 'please contact me directly on my email-address, <a href="mailto:contact@vimalpatra.com"> contact@vimalpatra.com </a> or through my social media channels.';
+				
+				// add class of success
+				opts.el.modal.class += ' error';
+				
+				opts.el.modal.fadeOutBuffer = 10000;
+
+				// show the alert
+				formAlert.init(opts);
+				reenableFormForProcessing();
+
+			}
+
+
+
+			// fail callback
+			function fail(jqXHR, textStatus, error){
+            	console.log(error);
+            	showSubmitFailed();
+			}
+
+
+				// user response on failure 
+
+			// run if the form was not submitted
+			function showSubmitFailed(){
+
+				var opts = $.extend({},formAlertOpts); // make a new copy of the object
+
+				// change the message 
+				
+				opts.content.highlight = '<span class="highlight">error occured!</span>';
+				opts.content.message = 'please contact me directly on my email-address, <a href="mailto:contact@vimalpatra.com"> contact@vimalpatra.com </a>.<br> you can also take a screenshot of the error and attach that in your mail';
+
+				// add class of success
+				opts.el.modal.class += ' error';
+				
+				opts.el.modal.fadeOutBuffer = 12000;
+
+				// show the alert
+				formAlert.init(opts);
+
+				reenableFormForProcessing();
+
+			}
+
+
+			var changeText, tm;
+
+
+			// user response - form disabled for processing
+			function disableFormForProcessing(){
+
+				// disable the form
+				TweenLite.set(fields.add(submit).add(submitSpinner),{
+					attr: {
+						'disabled': 'true'
+					},
+					className: '+=disabled'
+				});
+				
+				// change the button text and
+				changeText = TweenLite.to(submit,.5,{
+					text: {
+						value: cfSubmitWaitText,
+						delimiter: ''
+					}
+				});
+
+				console.log(submitSpinner);
+				// animate the spinner
+				tm = TweenMax.to(submitSpinner,1.2,{
+					rotation: 360,
+					repeat: -1
+				});
+
+			}
+
+
+				// user response - form disabled for processing
+			function reenableFormForProcessing(){
+
+				cf[0].reset();
+
+				fields.removeClass('focused');
+
+				// disable the form
+				TweenLite.set(fields.add(submit).add(submitSpinner),{
+					className: '-=disabled'
+				});
+
+				fields.add(submit).add(submitSpinner).removeAttr('disabled');
+				
+				// Revert to the original button text
+				if(changeText){
+					changeText.progress(0).pause();
+				}
+
+				tm.kill();
+
+			}
+			
 		}
 
 		contactFormSubmission();
+
+
+		
 
 		/* FORM SUBMISSION AND VALIDATION ENDS*/
 	}
@@ -948,6 +1177,7 @@
 
 			// helpbox handler
 	function helpbox(){
+
 		var model = {
 			skillsImprovingUpon: "These are the skills which i would say that i am still grasping on while working with them on real projects to be if not perfect, atleast be very comfortable with them "
 		,	futureSkills: "These are the technologies which i have an eye on and as soon as my scheduled allows me for it i'll be picking up from one of these to learn & work on. "
@@ -1244,7 +1474,7 @@
 		modalLinks.on("click",modalAdder.init);
 	}
 	
-	function notifications(){
+	/*function notifications(){
 		var notifications = new generalModalHandler();
 
 		var notificationOptions = {
@@ -1330,7 +1560,7 @@
 		};
 
 		notifications.init(notificationOptions);
-	}
+	}*/
 	
 
 	
@@ -1341,7 +1571,7 @@
 	hashScroll();
 	helpbox();
 	modal();
-	notifications();
+	// notifications();
 
 
 
@@ -1665,6 +1895,7 @@
 				// modal is the actual thing that you provide from template (the actual popup or alert)
 				if (obj.el.modal) {
 					self.modalSelector = obj.el.modal.selector; //* the actual modal's selector class inside the template you provide
+					self.modalClass  = obj.el.modal.class;
 					self.modalAutoHide = obj.el.modal.autoHide; 
 					self.modalFadeOutBuffer = obj.el.modal.fadeOutBuffer; 
 					self.modalMultipleOn = obj.el.modal.multipleOn; // if we need multiple modals to be shown at the same time (for eg: toasts)
@@ -1725,7 +1956,8 @@
 			replaceData:function(){
 				var self = this,
 				template = self.template,
-				content = self.content;
+				content = self.content,
+				modalClass = self.modalClass;
 
 				if (!template || !content) {    
                     return;
@@ -1739,7 +1971,9 @@
                 	template = template.replace('%' + el + '%',content[el]);
                 });
 
-				self.modal = $(template); // the DOM node for the modal with whole content stored in	
+				self.modal = $(template); // the DOM node for the modal with whole content stored in
+
+				self.modal.addClass(modalClass); // add extra classes that were passed
 			},
 			addModal: function(){
 				var self = this,
@@ -1752,7 +1986,6 @@
 				setCssForContainer = self.setCssForContainer,
 				setCssForLightBox = self.setCssForLightBox,
 				modal = self.modal,
-				modalSelector = self.modalSelector,
 				modalMultipleOn = self.modalMultipleOn,
 				parentEl = self.parentEl || self.contextEl;
 
@@ -2025,7 +2258,7 @@
 				}); 
 
 			},
-			animateOut: function (modal,self,forceRemoveParent){
+			animateOut: function (modal,self,forceRemove){
 				
 				var
 				containerOn = self.containerOn,
@@ -2105,7 +2338,7 @@
 				obj.fadeDelay = parentFadeDelay || 0;
 
 				// adding callback after the label 'done'
-				tm.addCallback(callbackFunction.bind(self,obj,forceRemoveParent));
+				tm.addCallback(callbackFunction.bind(self,obj,forceRemove));
 
 				// callback function which runs after animating out each modal to remove it...
 				function callbackFunction(obj,force){
@@ -2177,7 +2410,7 @@
 			// assigning data-hover attributes to the anchor tags that are inline
 	redirLinks.each(function(i,elem){
 		var $this = $(elem);
-		var dataHover = $this.text();
+		var dataHover = $this.addClass('hover-effect').text();
 
 		$this.attr("data-hover",dataHover);
 	});
