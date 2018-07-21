@@ -9,7 +9,7 @@
 	
 
 		// decaring variables
-	 var skillsListToggleStatus, 
+	 var skillsListToggleStatus,  touchJustEnded, touchendTimeout,
 	 documentHeight, windowHeight, windowWidth,
 	 icons,
 	 header, headerNavMain, headerMobNavMain, headerNavToggleIcons, headerMobNavToggleIcons,
@@ -22,7 +22,8 @@
 	 links, redirLinks,
 	 modalLinks, disabledLinks, headerScrollLinks, scrollingLinks, scrollToTop,
 	 scrollingContainer, scrollPos,
-	 html, wrap, header, parallaxGroup, mainSection,
+
+	 $window, html, wrap, header, parallaxGroup, mainSection, fixedElements,
 
 	 		/*parallaxLayers,*/ 
 	 skillsLayer, technologies, listContainer, expandListContainer, technologyList, 
@@ -42,23 +43,28 @@
 	 helpboxTemplate, modalTemplate, alertTemplate;
 
 
+
 	skillsListToggleStatus = {};
 
+	$window = $(window);
+
 	 	// scroller
-	scrollingContainer = $(window);
+	scrollingContainer = $window;
 	scrollPos = 0;
 
 		// get dimensions of the window in js
-	windowWidth = $(window).width();
-	windowHeight = $(window).height();
+	windowWidth = $window.width();
+	windowHeight = $window.height();
 	
 
 
 		// elements
 
+
 	html = $("html");
 	documentHeight = html.height();
 
+	fixedElements = html.find('.pos-fixed-bug');
 	wrap = $("#wrap");
 	header = $("#header");
 	parallaxGroup = wrap.find(".parallax__group");
@@ -194,20 +200,26 @@
 
 
 			// unload hander
-	$(window).on("unload",function(){
+	$window.on("unload",function(){
 		window.sessionStorage.setItem("lastScrollPos",scrollingContainer.scrollTop());
 	});
 
 
 			// load handler
-	$(window).on("load",function(){
+	$window.on("load",function(){
 		// getDimensions();
 		
 	});
 
+			// touchend handler
+
+	$window.on("touchend",throttle(handleTouchend,10));
+
+
 			// resize handler
 
-	$(window).on("resize",debounce(function(){handleResize();},1000));
+	$window.on("resize",debounce(handleResize,50));
+
 
 	
 
@@ -222,6 +234,8 @@
 						/*
 							minor handlers
 						*/
+
+
 
 	// technologyList toggle handler (inside the skills section) 
 	function technologyListToggleHandler(){
@@ -378,10 +392,12 @@
 			// responsive handlers
 
 	function handleResize(){
-		windowWidth = $(window).width();
-		windowHeight = $(window).height();
+		windowWidth = $window.width();
+		windowHeight = $window.height();
 
 		checkBreakpoints();
+
+		
 	}
 
 	function smBreakpoint(){	
@@ -408,6 +424,25 @@
 
 	}
 
+	function handleTouchend(){
+
+		rerenderFixedElements();
+
+		return;
+
+		touchJustEnded = true;
+
+		if(touchendTimeout){
+			clearTimeout(touchendTimeout);
+		}
+
+		var touchendTimeout = setTimeout(function(){
+			touchJustEnded = false;
+		},2000);
+
+
+
+	}
 
 
 						/*
@@ -1031,7 +1066,7 @@
 				});
 				
 				// change the button text and
-				changeText = TweenLite.to(submit,.5,{
+				changeText = TweenLite.to(submit,1,{
 					text: {
 						value: cfSubmitWaitText,
 						delimiter: ''
@@ -1040,7 +1075,7 @@
 
 				console.log(submitSpinner);
 				// animate the spinner
-				tm = TweenMax.to(submitSpinner,1.2,{
+				tm = TweenMax.to(submitSpinner,.4,{
 					rotation: 360,
 					repeat: -1
 				});
@@ -1578,9 +1613,9 @@
 
 				/****************************
 
-						=integral functions	(used internally from other functions or used for some integral feature)
+				=integral functions	(used internally from other functions or used for some integral feature)
 						 
-						 // just need to be called again when we need it without any params
+				// just need to be called again when we need it without any params
 
 				****************************/
 
@@ -1683,6 +1718,13 @@
 	getTopOffsetsForHeaderScrollLinks();
 
 
+	
+
+	function rerenderFixedElements(){		
+		var fixed = fixedElements;
+		fixed.replaceWith(fixed);
+			
+	}
 
 
 				/****************************
@@ -2377,26 +2419,48 @@
 	}
 
 	
-	
+// Returns a function, that, when invoked, will only be triggered at most once
+  // during a given window of time.
+  function throttle(func, wait) {
+    var context, args, timeout, throttling, more, result;
+    var whenDone = debounce(function(){ more = throttling = false; }, wait);
+    return function() {
+      context = this; args = arguments;
+      var later = function() {
+        timeout = null;
+        if (more) func.apply(context, args);
+        whenDone();
+      };
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (throttling) {
+        more = true;
+      } else {
+        result = func.apply(context, args);
+      }
+      whenDone();
+      throttling = true;
+      return result;
+    };
+  };
 
-	// Returns a function, that, as long as it continues to be invoked, will not
-	// be triggered. The function will be called after it stops being called for
-	// N milliseconds. If `immediate` is passed, trigger the function on the
-	// leading edge, instead of the trailing.
-	function debounce(func, wait, immediate) {
-		var timeout;
-		return function() {
-			var context = this, args = arguments;
-			var later = function() {
-				timeout = null;
-				if (!immediate) func.apply(context, args);
-			};
-			var callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) func.apply(context, args);
-		};
-	};
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      if (immediate && !timeout) func.apply(context, args);
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+	
 
 
 

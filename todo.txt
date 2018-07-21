@@ -5,15 +5,15 @@
 
 * remove the bug on chrome for android where when the url bar scrolls up, every fix thing still works on the original place (on interacting)
 
+* content finalize
+
 * add loader
-
-
-
-
 
 
 ---------- LAUNCH
 
+
+* document all javascript
 
 
 * add work section
@@ -22,6 +22,15 @@
 	-- add details
 	-- add popup
 	-- make popup with an image, url, descritpion and title
+
+* minify all files
+
+---------- UPLOAD
+
+
+* add defering logic for pictures and extra js files
+
+* make js and css manageable (optimize code structure)
 
 * add get a quote form
 	-- think over the content
