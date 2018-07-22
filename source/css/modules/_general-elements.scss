@@ -266,6 +266,9 @@ a.hover-effect{
     transform-style: preserve-3d;
     transition: transform .5s;
 
+    *{
+        text-shadow: none;
+    }
 }
 
 
@@ -275,54 +278,30 @@ a.hover-effect strong{
     line-height: inherit;
     font-size: inherit;
     margin: 0;
+    text-transform: capitalize;
+    
 }
 
-
-
-/* 
-
-
-*/
 
 a.hover-effect:after,
 a.hover-effect:before{
     content: "";
-    position: absolute;
-    line-height: inherit;
-    padding: inherit;
-    top: 100%;
+    width: 100%;
     height: 100%;
+    position: absolute;
+    top: 100%;
     left: 0;
-    right: 0;
-    transform-origin: 50% 0%;
+    padding: inherit;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    text-transform: capitalize;
+    line-height: inherit;
     color: hsl(34, 35%, 51%);
+    transform-origin: 50% 0%;
 }
 
 
-a.hover-effect:after{
-    content: attr(data-hover);
-    top: 0;
-    height: calc(100% + 2px);
-    
-    background: hsl(34, 35%, 88%);
-    text-shadow: inherit;
-    // transform: rotateX(90deg);
-    border-bottom: 2px solid hsl(34, 35%, 69%);
-    // border-color: transparent;
-    border-bottom-width: 0px;
-
-    transform: scaleY(0);
-    transform-origin: 50% 100%;
-    z-index: 3;
-    transition: transform 0.4s, background 0.4s , border-width .2s .2s;
-}
-a.hover-effect:hover:after{
-    // transform: rotateX(0deg);
-    transform: scaleY(1);
-    background: white;
-    // border-color: hsl(34, 35%, 69%);
-    border-bottom-width: 2px;
-}
 
 
 
@@ -349,6 +328,34 @@ a.hover-effect:hover:before{
 
 
 
+a.hover-effect:after{
+    content: attr(data-hover);
+    top: 0;
+    height: calc(100% + 2px);
+    
+    background: hsl(34, 35%, 88%);
+    text-shadow: inherit;
+    // transform: rotateX(90deg);
+    border-bottom: 2px solid transparent;
+    // border-color: transparent;
+    
+
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    z-index: 3;
+    transition: transform 0.4s, background 0.4s , border-color .2s .2s;
+}
+a.hover-effect:hover:after{
+    // transform: rotateX(0deg);
+    transform: scaleY(1);
+    background: white;
+    // border-color: hsl(34, 35%, 69%);
+    border-bottom-color: hsl(34, 35%, 69%);
+}
+
+
+
+
 .subtitle{
     display: block;
     max-width: 30%;
@@ -361,21 +368,7 @@ a.hover-effect:hover:before{
     margin-bottom: 10px;
 }
 
-blockquote{
-    display: block;
-    font-size: 1.15em;
-    // border-left: 1px solid $rusty;
-    // border-bottom: 1px solid $rusty;
-    background: linear-gradient(to right, 
-                  $shiny,
-                  transparent
-                );
-    color: lighten(black, 15%);
-    padding: 10px 15px;
-    margin: 0;
-    margin: 0.625rem 1.875rem 0.625rem 3.75rem;
-    
-}
+
 
 
 

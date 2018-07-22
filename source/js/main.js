@@ -1,15 +1,10 @@
 (function(){
 	"use strict";
 
-	$(window).on("load",function(){
-		var newDate = Date.now();
-		console.log("time taken to load: "+ (newDate - dateNow));
-		
-	});
-	
+
 
 		// decaring variables
-	 var skillsListToggleStatus,  touchJustEnded, touchendTimeout,
+	 var skillsListToggleStatus, 
 	 documentHeight, windowHeight, windowWidth,
 	 icons,
 	 header, headerNavMain, headerMobNavMain, headerNavToggleIcons, headerMobNavToggleIcons,
@@ -206,10 +201,7 @@
 
 
 			// load handler
-	$window.on("load",function(){
-		// getDimensions();
-		
-	});
+	// $window.on("load",function(){});
 
 			// touchend handler
 

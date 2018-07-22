@@ -76,60 +76,83 @@
 
 @mixin primary-text{
     color: #404040;
-    line-height: 1.5em;
+    line-height: 1.6em;
     font-family: $fontPrimary;
     font-weight: 800;
     letter-spacing: .1em;
     text-transform: capitalize;
-    text-shadow: 5px 5px 3px rgba(0,0,0,.15);
+    text-shadow: 4px 4px 2px rgba(0,0,0,.15);
 }
 
 .font--primary-text{
     @include primary-text;
 
+    &.jagged{
+        text-transform: lowercase;
+
+        &:first-letter{
+            text-transform: uppercase;
+        }
+    }
+
     strong{
         display: inline-block;
+        padding-bottom: 1px;
+        margin: 0 0 3px;
         font-weight: 700;
-        font-size: 1.1em;
-        padding-bottom: 4px;
-        margin: 0.3125rem 0;
-        box-shadow: 0px 12px 10px -10px  rgba(0,0,0,.4);
+        font-size: 1em;
+        text-transform: capitalize;
+        text-shadow: -0px -2px 2px rgba(0,0,0,.2);
+        box-shadow: 0px 12px 10px -10px  rgba(0,0,0,.25);
     }
 
 }
 
 
 .font--secondary-text{
-    color: $lightText;
-
     font-family: $fontSecondary;
     font-weight: 400;
     letter-spacing: .05em;  
     word-spacing: .1em;
-    line-height: 1.5em;
-    font-style: italic;
+    line-height: 1.6em;
+    // text-transform: capitalize;
+    color: $lightText;
+
+    &:first-letter{
+        text-transform: uppercase;
+    }
 
     strong{
         display: inline-block;
-        font-size: 1em;
         font-weight: 700;
-        border-bottom: 1.5px solid $lightest;
-        margin-bottom: 6px;
+        border-bottom: 2px solid $lightest;
+        margin-bottom: 1px;
     }
 
-    
-    
 
     em{
-        font-size: 1.1em;
-        font-style: italic;
-        text-shadow: 5px 5px 3px rgba(0,0,0,.15);
+        text-transform: capitalize;
+        text-decoration: underline;
     }
 
     
 
 }
-
+blockquote{
+    display: block;
+    font-size: 1.15em;
+    // border-left: 1px solid $rusty;
+    // border-bottom: 1px solid $rusty;
+    background: linear-gradient(to right, 
+                  lighten($shiny, 10%),
+                  transparent
+                );
+    color: lighten(black, 15%);
+    padding: 10px 15px;
+    margin: 0;
+    margin: 0.625rem 0 ;
+    
+}
 
 .heading--underlined{
     display: block;
@@ -245,6 +268,8 @@
     &--wip{
         z-index: 10;
 
+        padding-bottom: 100%;
+
         &-container{
             .not-loaded{
                 display: none;
@@ -292,4 +317,14 @@
     bottom: 0;
     z-index: 101;
     perspective: 1280px;
+}
+
+
+@media all and (min-width: 768px){
+    .not-loaded{
+
+        &--wip{
+            padding-bottom: 40%;
+        }
+    }
 }

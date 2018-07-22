@@ -14,12 +14,13 @@
     position: relative;
     width: 100%;
     height: 100%;
+    margin-top: 4rem;
 
     
     &__layer{
 
         .main .sectionDesc{
-            font-size: 1.3em;
+            font-size: 1.3rem;
 
             ul{
                 list-style: circle;
@@ -31,24 +32,25 @@
             }
 
             li{
-                margin-bottom: 0rem;
+                margin-bottom: 1rem;
+                &:first-letter{
+                    text-transform: uppercase;
+                }
             }
 
             .listHeading{
                 margin-left: -($listPaddingLeft * .5);
-            }
-
-            
+            }          
         }
 
 
         .main .detailedDesc{
-                font-size: 1.2em;
+            font-size: 1.2rem;
 
         }
 
         &--base{
-            margin-bottom: 7rem;        
+            margin-bottom: 15rem;        
         }
 
         #introduction &--fore{
@@ -57,9 +59,7 @@
 
         >.title{
             max-width: 180px;
-            // height: auto;
-            
-            margin-bottom: -2rem;
+            margin-bottom: -6rem;
             position: relative;
             padding: 1rem 1.5rem;
             display: inline-block;
@@ -82,7 +82,7 @@
                 right: 0;
                 bottom: 0;
                 padding-bottom: 100%;
-                background: rgba(255,255,255,.4);
+                background: rgba(255,255,255,.7);
                 /*transform: skewX(15deg);*/
                 box-shadow: 0.3125rem 0.3125rem 1.25rem rgba(0,0,0,.4);
                 z-index: -1;
@@ -99,14 +99,14 @@
 
         .main{
             // position: absolute;
-            margin-top: 8rem;
-            font-size: 1em;
+            margin-top: 19rem;
+            font-size: 1rem;
             padding: 1rem 1.5rem;
             z-index: 11;
             /*top: 20%;*/
 
             @media all and (min-width: 768px){
-                    font-size: 1em;
+                    font-size: 1rem;
                     padding: 1rem 2.5rem;
                     /*top: 20%;*/
             }
@@ -116,8 +116,7 @@
 
 
         .background__wrapper{
-            position: relative;
-            padding-bottom: 100%;     
+            position: relative;  
         }
         
         .main:after{
@@ -333,30 +332,26 @@
         margin-bottom: 5rem;
 
         &:nth-child(odd) .parallax__layer .main{
-            float: right;
-            margin-right: 1em;
-            left: -2.5em;
+            // float: right;
+            // margin-right: 1rem;
         }
 
         &:nth-child(even) .parallax__layer .main{
-            float: left;
-            margin-left: 1em;
-            right: -2.5em;
+            // float: left;
+            // margin-left: 1rem;
         }
 
         &#contact .parallax__layer .main{
-            margin-left: 0;
-            right: -1.5em;
+            
         }
 
         &#work .parallax__layer .main{
-            margin-right: 0;
-            left: -1em;
-            padding-bottom: 10%;
-
+            
+            // padding-bottom: 10%;
+/* 
             &:after{
                 padding: 0;
-            }
+            } */
         }
         
 
@@ -367,11 +362,12 @@
 
 @media all and (min-width: 768px){
     .parallax {
+        margin-top: 6rem;
 
         &__layer{
 
             .main .sectionDesc{
-                font-size: 1.3em;
+                font-size: 1.2rem;
 
                 ul,
                 ol{
@@ -380,28 +376,14 @@
             }
 
             .main .detailedDesc{
-                font-size: 1.1em;
+                font-size: 1.1rem;
             }
 
         }
 
         &__group{
 
-            
-            &:nth-child(odd) .parallax__layer .main{
-                margin-right: 1.5em;
-                left: 0;
-            }
-            
-            &:nth-child(even) .parallax__layer .main{
-                margin-left: 1.5em;
-                right: 0;
-            }
-
-            .background__wrapper{
-                padding-bottom: 40%;     
-            }
-            
+       
             .main:after{
                 
                 padding-bottom: 40%;
@@ -416,6 +398,11 @@
 
         }
 
+
+        .main{
+            margin-top: 12rem;
+        }
+
     }
 
 
@@ -425,8 +412,17 @@
 @media all and (min-width: 1200px){
     .parallax {
 
+        &__layer{
+            > .title{
+                margin-bottom: -8rem;
+            }
+        }
+
         &__group{    
             margin-bottom: 2rem;
+        }
+        .main{
+            margin-top: 19rem;
         }
     }
 

@@ -2,11 +2,7 @@
 -- To do --
 
 
-
-* remove the bug on chrome for android where when the url bar scrolls up, every fix thing still works on the original place (on interacting)
-
-* content finalize
-
+* Make text cleaner and check other visual optimizations
 * add loader
 
 
@@ -44,32 +40,29 @@
 
 
 
---------------------------------------------------
 
 
--- Done --
 
-1. responsiveness done (almost).. on mobiles
-2. mobile menu added
-3. all menus working on all screens
-4. add special links to mobile nav
-5. design special links for both mob+desktop nav
-6. make logo shine a bit..
-7. type down content
-* build toasts notifications
-* and similar tooltips
+------------------------ Done ------------------------------
+
+
 
 * submit form and send a mail.. with jQuery
 
 * add a common function and call if for both of the mails that we send in the cf-submit.php
 
+* remove the bug on chrome for android where when the url bar scrolls up, every fix thing still works on the original place (on interacting)
+
+* content finalize
 
 
 
-__________________________________________________________________
 
 
-OLD:
+__________________________________________
+
+
+OLDER:
 
 
 
@@ -88,3 +81,15 @@ OLD:
 4. type down content
 5. build alert messages
 5. make all popups responsive...
+
+-----------------
+
+1. responsiveness done (almost).. on mobiles
+2. mobile menu added
+3. all menus working on all screens
+4. add special links to mobile nav
+5. design special links for both mob+desktop nav
+6. make logo shine a bit..
+7. type down content
+* build toasts notifications
+* and similar tooltips
