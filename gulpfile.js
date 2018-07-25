@@ -414,16 +414,29 @@ function swallowError (error) {
 
 	/* task for concatenating, minifying and moving all css files from vendors to the dist folder */
 
-	gulp.task('cssVendor:dist', function(){ 
-			return gulp.src(['source/css/vendor/normalize.css',
-							'source/css/vendor/**/*.css'])
+
+	gulp.task('css-minify-vendor', function(){ 
+			return gulp.src(['./source/css/vendor/**/*.css',
+							'!./source/css/vendor/**/*.min.css'])
+				.pipe(plumber({
+					errorHandler: onError
+				}))
+		        .pipe(cleanCss())
+		        .pipe(rename({
+					suffix: ".min"
+				}))
+		        .pipe(gulp.dest('./source/css/vendor'));
+	});
+
+	gulp.task('cssVendor:dist',['css-minify-vendor'], function(){ 
+			return gulp.src(['./source/css/vendor/normalize.min.css',
+							'./source/css/vendor/**/*.min.css'])
 				.pipe(plumber({
 					errorHandler: onError
 				}))
 		        .pipe(concat('vendor.css'))
-		        .pipe(cleanCss())
-		        .pipe(gulp.dest('dist/css/'));
-		});
+		        .pipe(gulp.dest('./dist/css/'));
+	});
 
 
 	

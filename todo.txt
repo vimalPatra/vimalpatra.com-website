@@ -3,18 +3,17 @@
 
 
 
+---------- LAUNCH
 
 
-* minify all files
+* manage screenshots 
 
-* manag screenshots 
-
-* plan content
+* plan content for blog
 
 * customize blog
 
+---------- LAUNCH BLOG
 
----------- LAUNCH
 
 
 * document all javascript
@@ -76,7 +75,7 @@
 
 * add shadow to logo
 
-
+* add meta and icon
 
 
 
