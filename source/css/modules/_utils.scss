@@ -131,7 +131,7 @@
 
 
     em{
-        text-transform: capitalize;
+        text-transform: uppercase;
         text-decoration: underline;
     }
 
@@ -199,6 +199,10 @@ blockquote{
     display: block;
     position: relative;
     z-index: 1;
+
+    #footer &{
+        padding: 5px 7px;
+    }
 }
 
 .navHoverEffect:after,
@@ -207,14 +211,17 @@ blockquote{
     z-index: -1;
     opacity: 0;
     background: $navGradient;
-    transition: opacity .2s;
+    transition: opacity .2s, transform .5s;
+
+    #footer &{
+        transform: translateZ(0) scale(0.8);
+    }
+    .nav-main &{
+        transform: translateY(-100%) translateZ(0) scale(.8);
+    }
     
 }
 
-.nav-main .navHoverEffect:after{
-    transform: translateY(-100%) translateZ(0) scale(.8);
-    transition: opacity .2s, transform .5s;
-}
 
 @media all and (min-width:768px){
     .nav-main .navHoverEffect:hover:after{
@@ -222,6 +229,12 @@ blockquote{
         opacity: 1;
         transition: opacity .2s .1s, transform .5s;
 
+    }
+
+    #footer .navHoverEffect:hover:after{
+        opacity: 1;
+        transform: translateZ(0) scale(1);
+        transition: opacity .2s, transform .5s;
     }
 }
 

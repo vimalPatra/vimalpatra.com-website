@@ -2,8 +2,16 @@
 -- To do --
 
 
-* Make text cleaner and check other visual optimizations
-* add loader
+
+
+
+* minify all files
+
+* manag screenshots 
+
+* plan content
+
+* customize blog
 
 
 ---------- LAUNCH
@@ -19,14 +27,17 @@
 	-- add popup
 	-- make popup with an image, url, descritpion and title
 
-* minify all files
+
 
 ---------- UPLOAD
 
+* make modular code with php / angular js
 
 * add defering logic for pictures and extra js files
 
-* make js and css manageable (optimize code structure)
+* make js and css manageable (optimize code + structure)
+
+* inverse button appearance has a bug that it doesn't inverse the menu's appearance just the toggle button is inversed (in toggle function for menus)
 
 * add get a quote form
 	-- think over the content
@@ -36,6 +47,7 @@
 
 
 * setup databases
+
 
 
 
@@ -54,6 +66,15 @@
 * remove the bug on chrome for android where when the url bar scrolls up, every fix thing still works on the original place (on interacting)
 
 * content finalize
+
+* Make text cleaner and check other visual optimizations
+
+
+* add loader
+
+* change links + add design footer area
+
+* add shadow to logo
 
 
 

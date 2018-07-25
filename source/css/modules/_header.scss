@@ -1,6 +1,6 @@
 
 #header,
-footer{
+#footer{
     position: fixed;
     z-index: 100;
     top: auto;
@@ -38,7 +38,7 @@ footer{
                 $lightest,
                 lighten($bg1,25%)
                ); */
-    background: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.9);
 
     padding: .5rem 1rem;
 
@@ -48,7 +48,7 @@ footer{
     font-size: 2rem;
     line-height: 1.5em;
     word-spacing: .3rem;
-    box-shadow: 5px 15px 45px 6px $rusty;
+    box-shadow: 5px 15px 45px 0px rgba(195, 166, 131,.75);
     
     border: 2px solid hsla(34,87%,89%,.8);
     border-top: none;
@@ -147,9 +147,7 @@ footer{
         margin: 0;
 
     }
-    li.special-link-holder{
-        display: none;
-    }
+
     
 
     .icon--toggle{
@@ -208,11 +206,13 @@ footer{
             right: 0;
             position:fixed;
             z-index: 10;
+
         }
 
         .list {
 
             padding-top: 3rem;
+            overflow-y: auto;
 
             li{
                 display: block;
@@ -246,6 +246,20 @@ footer{
             text-shadow: 0.5px 0.5px 0px rgba(0,0,0,.6);
         }
 
+        .nav-social{
+            padding: 0;
+            text-align: center;
+
+            ul{
+                padding: 0;
+            }
+
+            li{
+                display: inline-block;
+                margin: 1rem .25rem 0;
+            }
+        }
+
 
     }
 
@@ -253,8 +267,16 @@ footer{
 }
 
 
+/* 
+.nav-main,
+.nav-sec{
 
+    li.special-link-holder{
+        display: none;
+    }
 
+}
+ */
 
 
 
@@ -284,7 +306,7 @@ footer{
 
 @media all and (min-width: 768px){
     #header,
-    footer{
+    #footer{
         padding: 0 1rem;
     }
 
@@ -303,7 +325,7 @@ footer{
 @media all and (min-width: 1000px){
  
     #header,
-    footer{
+    #footer{
         padding: 0 1.5rem 0 1.5rem;
     }
 
@@ -318,13 +340,28 @@ footer{
    
 }
 
+
+
+
 @media all and (min-width: 1200px){
-    .nav-main{
+
+
+/*     
+
+    .nav-main,
+    .nav-sec{
         
         li.special-link-holder{
             display: block;
         }
 
     }
+
+
+*/
+
+
 }
+
+
 

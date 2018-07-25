@@ -113,7 +113,7 @@
 
 
 		// links
-	redirLinks = $("a").not(".link"), //  anchor tags that redirect to other pages
+	redirLinks = $("a").not(".link").not(".navHoverEffect").not(".noEffect"), //  anchor tags that redirect to other pages
 	links = $(".link"), // all anchors/links that leads to opening a modal or scrolling but not navigating to other page
 	modalLinks = links.filter(".link--open__modal");
 
@@ -197,11 +197,12 @@
 			// unload hander
 	$window.on("unload",function(){
 		window.sessionStorage.setItem("lastScrollPos",scrollingContainer.scrollTop());
+		
 	});
 
 
 			// load handler
-	// $window.on("load",function(){});
+	$window.on("load",onLoad);
 
 			// touchend handler
 
@@ -360,6 +361,19 @@
 						/*
 							major callbacks
 						*/
+
+
+	
+
+	function onLoad(){
+		// should be in the same order
+
+		checkLocalStorage(); // store and check local storage (must be the first thing on load)
+
+		loadingAnimations(); // loader animations
+	
+	}
+
 
 
 			// onScroll function to be invoked when scroll container is scrolled
@@ -1607,9 +1621,143 @@
 
 				=integral functions	(used internally from other functions or used for some integral feature)
 						 
-				// just need to be called again when we need it without any params
+				// just need to be called when we need it without any params
 
 				****************************/
+
+
+
+
+	function checkLocalStorage(){
+
+		var visit = {
+			"count": 1,
+			"time": Date.now()
+		};
+
+		var visitFromLS = localStorage.getItem("visit");
+
+		// if visit has not been set set it as a new visit object 
+		// or else update the count
+
+		if (!visitFromLS) {
+			localStorage.setItem("visit", JSON.stringify(visit));
+
+		}else{
+			visitFromLS = JSON.parse(visitFromLS);
+
+			visitFromLS.count++;
+			localStorage.setItem("visit", JSON.stringify(visitFromLS));
+
+			// if more than a day has passed since the user visited then reset the visit count and third visit thing
+			var storedDate = new Date(visitFromLS.time).getDate(); 
+			var currentDate = new Date().getDate(); 
+
+			if (visitFromLS.count > 2 || storedDate + 1 >= currentDate) {
+				localStorage.setItem("trim-animation","true");
+
+			}else if(storedDate + 1 < currentDate) {
+				
+				localStorage.setItem("trim-animation","false");
+				localStorage.setItem("visit", JSON.stringify(visit));
+			
+			}
+
+
+		}
+
+	}
+
+
+
+	// dealing with the loader
+
+    var 
+    loader = $('#loader'),
+    loaderContainer = loader.find('.container'),
+    loaderContent = loaderContainer.find('.content'),
+    loaderSpinner = loaderContainer.find('.spinner'),
+    loaderMessage = loaderContainer.find('.message'),
+    appendAtLast = loaderContainer.find('.append')
+    ;
+
+    var 
+    tl = new TimelineLite(),
+    tl2 = new TimelineLite()
+    ;
+
+    TweenLite.set(appendAtLast,{
+    	autoAlpha: 0
+    })
+    appendAtLast.html('visit my blog on <a target="_blank" href="http://vimalpatra.com/blog">vimalpatra.com/blog</a> ');
+	
+
+	function loadingAnimations(){
+		var trimAnimation = JSON.parse(localStorage.getItem("trim-animation"));
+		console.log('trimAnimation');
+		console.log(trimAnimation);
+		console.log(typeof trimAnimation);
+
+		var change = [
+			'hire me',
+			'Read My stories'
+		];
+
+		tl.to(loaderContent,.5,{
+			autoAlpha: 0
+		}).to(loaderContent,.5, {
+			height: 0,
+			ease: Power3.easeOut,
+			onComplete: trimAnimation != true ? changeMessage : complete
+		},'-=.2');
+
+
+		var i = 0;
+		
+		function changeMessage(){
+
+			console.log('i before ++');
+			console.log(i);
+
+			tl.set(loaderMessage, {
+				autoAlpha: 0,
+				y: 20
+			}).to(loaderMessage,0,{
+				text: {
+					value: change[i++],
+					delimiter: ' '
+				}
+			}).to(loaderMessage, .65,{
+				autoAlpha: 1,
+				y: 0,
+				ease: Power4.easeOut,
+				onComplete: complete
+			});
+		}
+
+		function complete(){
+			var waitForLoaderToFade = 1;
+
+			if (trimAnimation != true) {
+				waitForLoaderToFade = 1.5;
+			}
+
+			if (i < change.length && trimAnimation != true) {
+				changeMessage();
+			}else{
+				tl2.to(appendAtLast,.5,{
+					autoAlpha: 1
+				}).to(loader,.5,{
+					autoAlpha: 0,
+					y: -50
+				},'+=' + waitForLoaderToFade);
+			}
+		}
+
+		
+	}
+
+
 
 		// scrollBackToLastPosition function to scroll back to the last cached function
 	function scrollBackToLastPosition(){
@@ -1699,12 +1847,16 @@
 		
 			var elementItself = $(scrollsToElementId);
 
-			var offsetTopForElement= Number((elementItself.offset().top - 30).toFixed(2)); // -1 for fixing the precision error
+			var addToOffset = -0; // add further pixels to scroll down to the offset of the element 
+
+			var offsetTopForElement= Number((elementItself.offset().top + addToOffset).toFixed(2)); // -1 for fixing the precision error
 			scrollPositionOfHashLinks.push(offsetTopForElement);
 
 			// console.log(elementItself);
 	
 		});
+		console.log('scrollPositionOfHashLinks-- new');
+		console.log(scrollPositionOfHashLinks);
 	}
 
 	getTopOffsetsForHeaderScrollLinks();
@@ -1759,7 +1911,7 @@
 		var nav = options.nav; 
 		var listContainer = nav.find('.list-container');
 		var list = nav.find('.list');
-		var anchors = options.closeOnLinkClick ? options.nav.find('a') : undefined;
+		var anchors = options.closeOnLinkClick ? options.nav.find('a').not('.stay') : undefined;
 
 		
 

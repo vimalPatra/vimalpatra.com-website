@@ -17,18 +17,119 @@
     display: inline-block;
 }
 
-
-
-.notification-container{
+#loader{
     @include absolute;
+    box-sizing: border-box;
     position: fixed;
-    top: auto;
-    bottom: 10%;
-    left: 3%;
-    right: 3%;
+    top: 0; 
+    left: 0;
+    right: 0;
+    height: 100%;
+    height: 100vh;
+    background: white;
+    color: rgb(50,50,50);
+    z-index: 120;
 
-    z-index: 105;
+    font-size: 3rem;
+    line-height: 1.5em;
+    font-weight: 500;
+    text-align: center;
+    
+    .grayed{
+        color: rgb(100,100,100);
+        text-transform: capitalize;
+    }
+
+    .heading{
+        font-size: 3.5rem;
+        font-weight: 500;
+        margin: 2rem 0;
+    }
+    
+    .branding{
+        margin: 2rem 0;
+        font-size: 3.5rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: hsl(33, 35%, 50%);
+    }
+    .spinner{
+        position: relative;
+        display: block;
+        width: 10em;
+        height: 10em;
+        margin: 5rem auto 4rem;
+        font-size: .1rem;
+        border: 2px solid hsl(33, 35%, 50%);
+        border-radius: 50%;
+        position: relative;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+
+        &:before,
+        &:after {
+            position: absolute;
+            content: '';
+            background: #fff;
+            width: calc(5em + 2px);
+            height: calc(10em + 2px);
+
+        }
+        &:before {
+          border-radius: 10em 0 0 10em;
+          top: -3px;
+          left: -3px;
+          transform-origin: calc(5em + 2px) calc(5em + 1px);
+          animation: spin 1s .6s infinite ease;
+        }
+        &:after {
+          border-radius: 0 10em 10em 0;
+          top: -3px;
+          left: 50%;
+          transform-origin: 0 calc(5em + 1px);
+          animation: spin 1s infinite ease;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+    }
+
+    .message,
+    .append{
+        padding: 1rem;
+        text-transform: capitalize;
+    }
+    
+    a{  
+        display: inline-block;
+        padding: 5px;
+        color: hsl(33, 35%, 50%);
+        text-transform: lowercase;
+        border-bottom: 2px solid hsl(33, 35%, 64%);
+        font-size: 2.5rem;
+        line-height: 1em;
+        letter-spacing: .05em;
+
+        @media (min-width: 768px) {
+            font-size: 3rem;
+        }
+        
+        &:before,
+        &:after{
+            content: none;
+        }
+    }
+
 }
+
 
 .alert{
     display: block;
@@ -67,9 +168,7 @@
            text-decoration: underline;
            text-transform: lowercase;
         }    
-    }
-
-    
+    }  
 }
 
 
